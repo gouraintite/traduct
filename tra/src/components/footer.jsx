@@ -1,15 +1,18 @@
+import Logo from '../assets/logo.png'
 
 const Footer = () => {
     return (
-        <footer className="mt-auto w-full max-w-full py-10 px-4 sm:px-6 lg:px-8 mx-auto bg-tert">
-            <div className="text-center">
+        <footer id='footer' className="mt-auto w-full max-w-full py-10 px-4 sm:px-6 lg:px-8 mx-auto bg-tert">
+            <div className="text-center"> 
                 <div>
-                    <a className="flex-none text-xl font-semibold text-white" href="#" aria-label="Brand">Brand</a>
+                    <a className="flex-none text-xl font-semibold text-white" href="#" aria-label="Brand">
+                        <img src={Logo} alt="" className='mx-auto w-32 rounded' />
+                    </a>
                 </div>
 
                 <div className="mt-3">
-                    <p className="text-white">Were part of the <a className="font-semibold text-blue-600 hover:text-blue-700 dark:text-blue-500 dark:hover:text-blue-400" href="#">Htmlstream</a> family.</p>
-                    <p className="text-white">© Preline. 2022 Htmlstream. All rights reserved.</p>
+                    <p className="text-white">Fière de promouvoir nos cultures <a className="font-semibold text-secondary hover:text-secondary dark:text-secondary dark:hover:text-secondary" href="#">Notre</a> famille.</p>
+                    <p className="text-white">© Traduct. 2023 . Tout droits reservés.</p>
                 </div>
 
                 <div className="mt-3 space-x-2">

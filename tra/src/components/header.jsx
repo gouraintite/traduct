@@ -1,5 +1,5 @@
 import Logo from '../assets/ogo.svg'
- 
+ import doc from '../assets/documents/traduct.pdf'
 
 const HeaderSection = () => {
   return (
@@ -11,16 +11,16 @@ const HeaderSection = () => {
                         <span className='text-tert font-black'> jó</span> et <span className='text-primary font-black'>ŋgə̂mbà</span> 
                 </p>
                 <p className='text-xl'>
-                <br /> de la façon la plus simple possible. Voluptas doloribus asperiores quaerat aperiam. Quidem harum omnis beatae ipsum soluta!
+                <br /> de façon simple et éfficace, apprenez le jó et ŋgə̂mbà. Par du textes, des audios et des exemples qui facilite la compréhension.
                 </p>
                 <br />
                 <div className='flex justify-start space-x-12 w-1/2 lg:mt-12'>
-                    <div className='rounded-full text-white/80 bg-primary py-3 px-5 hover:cursor-pointer hover:text-primary hover:bg-tert/20 easy-in-out duration-300'>
+                    <a href='#start' className='rounded-full text-white/80 bg-primary py-3 px-5 hover:cursor-pointer hover:text-primary hover:bg-tert/20 easy-in-out duration-300'>
                         Commencer
-                    </div>
-                    <div className='rounded-full text-primary bg-tert/20 py-3 px-5 hover:cursor-pointer hover:text-white hover:bg-primary easy-in-out duration-300'>
+                    </a>
+                    <a href={doc} target='_blank' className='rounded-full text-primary bg-tert/20 py-3 px-5 hover:cursor-pointer hover:text-white hover:bg-primary easy-in-out duration-300'>
                         En savoir plus
-                    </div>
+                    </a>
                 </div>
             </div>
         </div>

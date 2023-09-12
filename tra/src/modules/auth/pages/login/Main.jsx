@@ -1,85 +1,62 @@
-import HeaderSection from "../../../../components/header"
-import Nav from "../../../../components/navBar"
-import Footer from "../../../../components/footer"
-import Testimonials from "../../../../components/testimonial"
-import HowToUse from "../../../../components/howToUse"
-import Logo from "../../../../assets/react.svg"
+import Logo from "../../../../assets/logo.png"
 
-const Login = () => {
+
+const Main = () => {
   return (
     <>
-      <Nav />
-      <HeaderSection />
-      <div className="pt-12 text-center h-screen">
-        <h2 className="text-4xl font-bold pb-1">
-          Conçu pour apprendre à l &apos;aise.
-        </h2>
-        <span>
-          apiente optio repellendus atque illum odio! Fugiat at expedita deserunt dolorum molestias.
-        </span>
+      <div className="relative py-16 bg-primary/10 h-screen">
+        <div className="container relative m-auto px-6 text-gray-500 md:px-12 xl:px-40">
+          <div className="m-auto space-y-8 md:w-8/12 lg:w-6/12 xl:w-6/12">
+            <a href="/">
+              <img src={Logo} loading="lazy" className="mx-auto w-40" alt="tailus logo" />
+            </a>
+            <div className="rounded-3xl border border-gray-100 bg-white dark:bg-gray-800 dark:border-gray-700 shadow-2xl shadow-gray-600/10 backdrop-blur-2xl">
+              <div className="p-8 py-12 sm:p-16">
+                  <h2 className="mb-8 text-2xl font-bold text-gray-800 dark:text-white">Connexion</h2>
+                  <form action="" className="space-y-8">
+                    <div className="space-y-2">
+                      <label for="email" className="text-gray-600 dark:text-gray-300">Email</label>
+                      <input
+                        type="email"
+                        placeholder="Nom d'utilisateur"
+                        name="email"
+                        id="email"
+                        autocomplete="username"
+                        className="focus:outline-none block w-full rounded-md border border-gray-200 dark:border-gray-600 bg-transparent px-4 py-3 text-gray-600 transition duration-300 invalid:ring-2 invalid:ring-red-400 focus:ring-2 focus:ring-cyan-300"
+                      />
+                    </div>
 
-        <div className="flex justify-around border rounded-xl w-3/4 mx-auto h-2/3 items-center mt-16">
-          <div className="w-1/2 h-full rounded-xl m-2 flex justify-center items-center text-center">
-              <div className="">
-                <img src={Logo} alt="" className="py-3 mx-auto"/>
-                <p className="text-xl font-bold">User centred</p>
-                <p className="text-center flex mx-auto py-3">
-                  <span className="w-1/2 mx-auto">Lorem ipsum dolor sit amet consectetur adipisicing elit</span>
-                </p>
+                    <div>
+                      <div className="flex items-center justify-between">
+                        <label for="pwd" className="text-gray-600 dark:text-gray-300 py-2">Mot de passe</label>
+                      </div>
+                      <input
+                        type="password"
+                        placeholder="Mot de passe"
+                        name="pwd"
+                        id="pwd"
+                        autocomplete="current-password"
+                        className="focus:outline-none block w-full rounded-md border border-gray-200 dark:border-gray-600 bg-transparent px-4 py-3 text-gray-600 transition duration-300 invalid:ring-2 invalid:ring-red-400 focus:ring-2 focus:ring-cyan-300"
+                      />
+                    </div>
+
+                    <button type="submit" className="mt-16 relative flex h-11 w-full items-center justify-center px-6 before:absolute before:inset-0 before:rounded-full before:bg-primary before:transition before:duration-300 hover:before:scale-105 active:after:bg-secondary active:duration-75 active:before:scale-95">
+                      <span className="relative text-base font-semibold text-white dark:text-dark">Connexion</span>
+                    </button>
+
+                  </form>
               </div>
-
-          </div>
-          <div className="w-1/2 bg-tert/5 flex flex-wrap backdrop-blur-sm h-full rounded-xl p-1">
-            <div className="flex justify-center items-center w-1/2 h-1/2 bg-transparent hover:bg-white duration-300 ease-out rounded-2xl">
-                <div className=" w-full h-3/4 px-4 text-start rounded-2xl">
-                    <img src={Logo} alt="" className="border border-slate-300 rounded-md p-1"/>
-                    <p className="font-bold text-xl mt-3">
-                      Ceci est la sécurité
-                    </p>
-                    <p className="mt-3 text-md">
-                      Lorem, ipsum dolor sit amet consectetur adipisicing elit. Etdo
-                    </p>
-                </div>
             </div>
-            <div className="flex justify-center items-center w-1/2 h-1/2 bg-transparent hover:bg-white duration-300 ease-out rounded-2xl">
-                <div className=" w-full h-3/4 px-4 text-start rounded-2xl">
-                    <img src={Logo} alt="" />
-                    <p className="font-bold text-xl mt-3">
-                      Ceci est la sécurité
-                    </p>
-                    <p className="mt-3 text-md">
-                      Lorem, ipsum dolor sit amet consectetur adipisicing elit. Etdo
-                    </p>
-                </div>
-            </div>            <div className="flex justify-center items-center w-1/2 h-1/2 bg-transparent hover:bg-white duration-300 ease-out rounded-2xl">
-                <div className=" w-full h-3/4 px-4 text-start rounded-2xl">
-                    <img src={Logo} alt="" />
-                    <p className="font-bold text-xl mt-3">
-                      Ceci est la sécurité
-                    </p>
-                    <p className="mt-3 text-md">
-                      Lorem, ipsum dolor sit amet consectetur adipisicing elit. Etdo
-                    </p>
-                </div>
-            </div>            <div className="flex justify-center items-center w-1/2 h-1/2 bg-transparent hover:bg-white duration-300 ease-out rounded-2xl">
-                <div className=" w-full h-3/4 px-4 text-start rounded-2xl">
-                    <img src={Logo} alt="" />
-                    <p className="font-bold text-xl mt-3">
-                      Ceci est la sécurité
-                    </p>
-                    <p className="mt-3 text-md">
-                      Lorem, ipsum dolor sit amet consectetur adipisicing elit. Etdo
-                    </p>
-                </div>
+            <div className="space-x-4 text-center text-gray-500">
+              <span>&copy; Traduct</span>
+              <a href="/#footer" className="text-sm hover:text-primary">Contact</a>
+              <a href="../assets/documents/traduct.pdf" className="text-sm hover:text-primary">Police & confidentiale</a>
             </div>
           </div>
         </div>
-      </div>
-      <HowToUse />
-      <Testimonials />
-      <Footer />
+      </div>                           
     </>
   )
 }
 
-export default Login
+export default Main

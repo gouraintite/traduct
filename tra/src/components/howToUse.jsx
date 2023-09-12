@@ -2,130 +2,94 @@
 const HowToUse = () => {
   return (
     
-    <div className="py-16">
-    <div className="xl:container m-auto px-6 text-gray-500 md:px-12">
-      <div>
-        <h2 className="mt-4 text-2xl font-bold text-gray-700 dark:text-white md:text-4xl text-center">
+    <div className="py-12" id="start">
+    <div className="m-auto px-6 text-gray-500 md:px-12">
+      <div className="text-center">
+        <h2 className="mt-4 text-2xl font-bold text-gray-700 dark:text-white md:text-4xl">
           Comment utiliser Traduct
         </h2>
+        <p className="mt-3 text-md">
+          Appprénez comment tirer le maximum de Traduct.
+        </p>
       </div>
       <div
         className="mt-16 grid divide-x divide-y divide-gray-100 dark:divide-gray-700 overflow-hidden rounded-3xl border border-gray-100 dark:border-gray-700 sm:grid-cols-2 lg:grid-cols-4 lg:divide-y-0 xl:grid-cols-4"
       >
-        <div className="group relative bg-white dark:bg-gray-800 transition hover:z-[1] hover:shadow-2xl hover:shadow-gray-600/10">
-          <div className="relative space-y-8 py-12 p-8">
-            <img
-              src="https://cdn-icons-png.flaticon.com/512/4341/4341139.png"
-              className="w-12"
-              width="512"
-              height="512"
-              alt="burger illustration"
-            />
+        <div className="group bg-white dark:bg-gray-800 transition hover:z-[1] hover:bg-primary/10 hover:shadow-2xl hover:shadow-gray-600/10">
+          <div className=" space-y-8 py-12 p-8">
+            <p className="w-12 h-12 pt-1 rounded-full text-center text-4xl font-black text-white bg-tert group-hover:bg-primary duration-300 ease-in-out">
+              1
+            </p>
   
             <div className="space-y-2">
               <h5
                 className="text-xl font-medium text-gray-700 dark:text-white transition group-hover:text-primary"
               >
-                First feature
+                Aller à la page recherche
               </h5>
               <p className="text-sm text-gray-600 dark:text-gray-300">
-                Neque Dolor, fugiat non cum doloribus aperiam voluptates nostrum.
+                C'est là que vous aurez la vue sur toutes les expressions. Pour y accéder , clickez 
+                <a href="/" className="underline text-secondary pl-2">ici</a>
               </p>
             </div>
-            <a href="#" className="flex items-center justify-between group-hover:text-primary">
-              <span className="text-sm">Read more</span>
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5 -translate-x-4 text-2xl opacity-0 transition duration-300 group-hover:translate-x-0 group-hover:opacity-100">
-                <path  d="M12.97 3.97a.75.75 0 011.06 0l7.5 7.5a.75.75 0 010 1.06l-7.5 7.5a.75.75 0 11-1.06-1.06l6.22-6.22H3a.75.75 0 010-1.5h16.19l-6.22-6.22a.75.75 0 010-1.06z" />
-              </svg>                
-            </a>
           </div>
         </div>
-        <div className="group relative bg-white dark:bg-gray-800 transition hover:z-[1] hover:shadow-2xl hover:shadow-gray-600/10">
-          <div className="relative space-y-8 py-12 p-8">
-            <img
-              src="https://cdn-icons-png.flaticon.com/512/4341/4341134.png"
-              className="w-12"
-              width="512"
-              height="512"
-              alt="burger illustration"
-            />
+        <div className="group bg-white dark:bg-gray-800 transition hover:z-[1] hover:bg-primary/10 hover:shadow-2xl hover:shadow-gray-600/10">
+          <div className="space-y-8 py-12 p-8">
+          <p className="w-12 h-12 pt-1 rounded-full text-center text-4xl font-black text-white bg-tert group-hover:bg-primary duration-300 ease-in-out">
+              2
+            </p>
   
             <div className="space-y-2">
               <h5
                 className="text-xl font-medium text-gray-700 dark:text-white transition group-hover:text-primary"
               >
-                Second feature
+                Trouver votre expressions
               </h5>
               <p className="text-sm text-gray-600 dark:text-gray-300">
-                Neque Dolor, fugiat non cum doloribus aperiam voluptates nostrum.
+                À l'aide de la barre de recherche et des options de filtre, trouver l'élément que vous cherchez.
               </p>
             </div>
-            <a href="#" className="flex items-center justify-between group-hover:text-primary">
-              <span className="text-sm">Read more</span>
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5 -translate-x-4 text-2xl opacity-0 transition duration-300 group-hover:translate-x-0 group-hover:opacity-100">
-                <path  d="M12.97 3.97a.75.75 0 011.06 0l7.5 7.5a.75.75 0 010 1.06l-7.5 7.5a.75.75 0 11-1.06-1.06l6.22-6.22H3a.75.75 0 010-1.5h16.19l-6.22-6.22a.75.75 0 010-1.06z" />
-              </svg>                
-            </a>
           </div>
         </div>
-        <div className="group relative bg-white dark:bg-gray-800 transition hover:z-[1] hover:shadow-2xl hover:shadow-gray-600/10">
-          <div className="relative space-y-8 py-12 p-8">
-            <img
-              src="https://cdn-icons-png.flaticon.com/512/4341/4341160.png"
-              className="w-12"
-              width="512"
-              height="512"
-              alt="burger illustration"
-            />
+        <div className="group bg-white dark:bg-gray-800 transition hover:z-[1] hover:bg-primary/10 hover:shadow-2xl hover:shadow-gray-600/10">
+          <div className="space-y-8 py-12 p-8">
+          <p className="w-12 h-12 pt-1 rounded-full text-center text-4xl font-black text-white bg-tert group-hover:bg-primary duration-300 ease-in-out">
+              3
+            </p>
   
             <div className="space-y-2">
               <h5
                 className="text-xl font-medium text-gray-700 dark:text-white transition group-hover:text-primary"
               >
-                Third feature
+                Sélectionnez-la
               </h5>
               <p className="text-sm text-gray-600 dark:text-gray-300">
-                Neque Dolor, fugiat non cum doloribus aperiam voluptates nostrum.
+                vous pouvez visualiser en détails toutes les informations sur une expréssion en la sélectionnnat.
               </p>
             </div>
-            <a href="#" className="flex items-center justify-between group-hover:text-primary">
-              <span className="text-sm">Read more</span>
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5 -translate-x-4 text-2xl opacity-0 transition duration-300 group-hover:translate-x-0 group-hover:opacity-100">
-                <path  d="M12.97 3.97a.75.75 0 011.06 0l7.5 7.5a.75.75 0 010 1.06l-7.5 7.5a.75.75 0 11-1.06-1.06l6.22-6.22H3a.75.75 0 010-1.5h16.19l-6.22-6.22a.75.75 0 010-1.06z" />
-              </svg>                
-            </a>
           </div>
         </div>
         <div
-          className="group relative bg-gray-50 dark:bg-gray-900 transition hover:z-[1] hover:shadow-2xl hover:shadow-gray-600/10"
+          className="group bg-gray-50 dark:bg-gray-900 transition hover:z-[1] hover:bg-primary/10 hover:shadow-2xl hover:shadow-gray-600/10"
         >
           <div
-            className="relative space-y-8 py-12 p-8 transition duration-300 group-hover:bg-white dark:group-hover:bg-gray-800"
+            className="space-y-8 py-12 p-8 transition duration-300 group-hover:bg-white dark:group-hover:bg-gray-800"
           >
-            <img
-              src="https://cdn-icons-png.flaticon.com/512/4341/4341025.png"
-              className="w-12"
-              width="512"
-              height="512"
-              alt="burger illustration"
-            />
+            <p className="w-12 h-12 pt-1 rounded-full text-center text-4xl font-black text-white bg-tert group-hover:bg-primary duration-300 ease-in-out">
+              4
+            </p>
   
             <div className="space-y-2">
               <h5
                 className="text-xl font-medium text-gray-700 dark:text-white transition group-hover:text-primary"
               >
-                More features
+                Vous savez tout
               </h5>
               <p className="text-sm text-gray-600 dark:text-gray-300">
-                Neque Dolor, fugiat non cum doloribus aperiam voluptates nostrum.
+                La balle est dans votre camp. Apprenez à votre rythme, nous vous souhaitons bonnne apprentissage.
               </p>
             </div>
-            <a href="#" className="flex items-center justify-between group-hover:text-primary">
-              <span className="text-sm">Read more</span>
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5 -translate-x-4 text-2xl opacity-0 transition duration-300 group-hover:translate-x-0 group-hover:opacity-100">
-                <path  d="M12.97 3.97a.75.75 0 011.06 0l7.5 7.5a.75.75 0 010 1.06l-7.5 7.5a.75.75 0 11-1.06-1.06l6.22-6.22H3a.75.75 0 010-1.5h16.19l-6.22-6.22a.75.75 0 010-1.06z" />
-              </svg>                
-            </a>
           </div>
         </div>
       </div>
