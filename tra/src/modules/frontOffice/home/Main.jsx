@@ -19,8 +19,8 @@ const Login = () => {
           Avec des expressions disponibles en texte et en audio, possédant chacune des exemples d'appui.
         </span>
 
-        <div className="flex justify-around border rounded-xl lg:w-3/4 lg:px-0 px-2 mx-auto lg:h-2/3 h-auto items-center mt-16">
-          <div className="w-1/2 h-full rounded-xl m-2 flex justify-center items-center text-center">
+        <div className="lg:flex flex flex-wrap justify-around border rounded-xl lg:w-3/4 w-full lg:px-0 px-2 mx-auto lg:h-2/3 h-auto items-center mt-16">
+          <div className="w-auto  h-full rounded-xl m-2 flex justify-center items-center text-center">
             <div className="">
                 <svg fill="#865e3c" width="52" height="52" version="1.1" x="0px" y="0px" viewBox="0 0 64 64" className="mx-auto my-3">
                 <path d="M56,34.8h-3.9V9.6c0-4.2-3.3-7.6-7.3-7.8l-31.6,0C6.9,1.7,1.8,7,1.8,13.5v4.3c0,2,1.7,3.7,3.7,3.7h6.5v26.7
@@ -40,7 +40,7 @@ const Login = () => {
               </div>
 
           </div>
-          <div className="lg:w-1/2 bg-tert/10 flex flex-wrap h-full rounded-xl lg:p-1">
+          <div className="lg:w-1/2 w-full bg-tert/10 flex flex-wrap h-full rounded-xl lg:p-1">
             <div className="flex justify-center items-center w-1/2 h-1/2 bg-transparent hover:bg-white duration-300 ease-out rounded-2xl">
                 <div className=" w-full h-3/4 px-4 text-start rounded-2xl">
 
