@@ -11,7 +11,7 @@ const Footer = () => {
                 </div>
 
                 <div className="mt-3">
-                    <p className="text-white">Fière de promouvoir nos cultures <span className="font-semibold text-secondary hover:text-secondary">Notre héritage.</span></p>
+                    <p className="text-white">Fière de promouvoir nos cultures, <span className="font-semibold text-secondary hover:text-secondary">Notre héritage.</span></p>
                     <p className="text-white">© Lex SANDEU. 2023 . Tout droits reservés.</p>
                 </div>
 
