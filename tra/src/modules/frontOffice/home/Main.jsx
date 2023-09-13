@@ -19,7 +19,7 @@ const Login = () => {
           Avec des expressions disponibles en texte et en audio, possédant chacune des exemples d'appui.
         </span>
 
-        <div className="flex flex-wrap justify-around border rounded-xl lg:w-3/4 lg:px-0 px-2 mx-auto lg:h-2/3 h-auto items-center mt-16">
+        <div className="flex justify-around border rounded-xl lg:w-3/4 lg:px-0 px-2 mx-auto lg:h-2/3 h-auto items-center mt-16">
           <div className="w-1/2 h-full rounded-xl m-2 flex justify-center items-center text-center">
             <div className="">
                 <svg fill="#865e3c" width="52" height="52" version="1.1" x="0px" y="0px" viewBox="0 0 64 64" className="mx-auto my-3">

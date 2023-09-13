@@ -19,7 +19,7 @@ const Nav = () => {
                   Lex SANDEU
                 </p> */}
               </div>
-              <ul className="lg:flex justify-end ring hidden space-x-3 mx-auto w-1/2">
+              <ul className="lg:flex justify-end hidden space-x-3 mx-auto w-1/2">
                 <li>
                   <a href='#' className='border rounded-full px-3 py-1 duration-200 easy-in-out hover:bg-secondary hover:text-white hover:cursor-pointer'>
                     Trouver une expréssion
