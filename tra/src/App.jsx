@@ -1,12 +1,12 @@
-import { HashRouter } from "react-router-dom";
+import { BrowserRouter } from "react-router-dom";
 import { RecoilRoot } from "recoil";
 import Router from "./router";
 function App() {
   return (
     <RecoilRoot>
-      <HashRouter>
+      <BrowserRouter>
         <Router />
-      </HashRouter>
+      </BrowserRouter>
     </RecoilRoot>
   );
 }

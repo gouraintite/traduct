@@ -6,10 +6,10 @@ const HowToUse = () => {
     <div className="m-auto px-6 text-gray-500 md:px-12">
       <div className="text-center">
         <h2 className="mt-4 text-2xl font-bold text-gray-700 md:text-4xl">
-          Comment utiliser Lex SANDEU
+          Comment utiliser A-frilang
         </h2>
         <p className="mt-3 text-md">
-          Appprénez comment tirer le maximum de Lex SANDEU.
+          Apprenez comment tirer le maximum de A-frilang.
         </p>
       </div>
       <div
@@ -25,10 +25,10 @@ const HowToUse = () => {
               <h5
                 className="text-xl font-medium text-gray-700  transition group-hover:text-primary"
               >
-                Aller à la page recherche
+                Allez à la page recherche
               </h5>
               <p className="text-sm text-gray-600 ">
-                C'est là que vous aurez la vue sur toutes les expressions. Pour y accéder , clickez 
+                C'est là que vous aurez la vue sur toutes les expressions. Pour y accéder , cliquez 
                 <a href="/" className="underline text-secondary pl-2">ici</a>
               </p>
             </div>
@@ -44,7 +44,7 @@ const HowToUse = () => {
               <h5
                 className="text-xl font-medium text-gray-700  transition group-hover:text-primary"
               >
-                Trouver votre expressions
+                Trouvez votre expression
               </h5>
               <p className="text-sm text-gray-600 ">
                 À l'aide de la barre de recherche et des options de filtre, trouver l'élément que vous cherchez.

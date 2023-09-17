@@ -11,8 +11,8 @@ const Footer = () => {
                 </div>
 
                 <div className="mt-3">
-                    <p className="text-white">Fière de promouvoir nos cultures, <span className="font-semibold text-secondary hover:text-secondary">Notre héritage.</span></p>
-                    <p className="text-white">© Lex SANDEU. 2023 . Tout droits reservés.</p>
+                    <p className="text-white">Fière de promouvoir <span className="font-semibold text-secondary hover:text-secondary">nos langues et cutures    .</span></p>
+                    <p className="text-white">© A-frilang. 2023. Tous droits reservés.</p>
                 </div>
 
                 <div className="mt-3 space-x-2">

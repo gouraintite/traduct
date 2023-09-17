@@ -11,7 +11,7 @@ const Login = () => {
       <Nav />
       <HeaderSection />
       <HowToUse />
-      <div className="pt-12 text-center lg:h-screen lg:mb-0 mb-4 h-auto">
+      <div className="pt-12 text-center mb-9 h-auto">
         <h2 className="text-4xl font-bold pb-1 px-1">
           Conçu pour apprendre à l &apos;aise.
         </h2>
@@ -19,7 +19,7 @@ const Login = () => {
           Avec des expressions disponibles en texte et en audio, possédant chacune des exemples d'appui.
         </span>
 
-        <div className="lg:flex flex flex-wrap justify-around border rounded-xl lg:w-3/4 w-full lg:px-0 px-2 mx-auto lg:h-2/3 h-auto items-center mt-16">
+        <div className="flex lg:flex-nowrap flex-wrap justify-around border rounded-xl lg:w-3/4 w-full lg:px-0 px-2 mx-auto lg:h-2/3 h-auto items-center mt-16">
           <div className="w-auto  h-full rounded-xl m-2 flex justify-center items-center text-center">
             <div className="">
                 <svg fill="#865e3c" width="52" height="52" version="1.1" x="0px" y="0px" viewBox="0 0 64 64" className="mx-auto my-3">
@@ -58,7 +58,7 @@ const Login = () => {
 
                     
                     <p className="font-bold text-xl mt-3">
-                      Tout en free 
+                      Offre gratuite 
                     </p>
                     <p className="mt-3 text-md">
                       Vous avez accès à tout sans débourser un sous.
@@ -81,7 +81,7 @@ const Login = () => {
                     </svg>
 
                     <p className="font-bold text-xl mt-3">
-                      Servie sécurisé
+                      Service sécurisé
                     </p>
                     <p className="mt-3 text-md">
                       Baladez-vous sur notre plateforme en toute sécurisé.

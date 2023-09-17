@@ -9,34 +9,34 @@ const Nav = () => {
   return (
     <>
       <div className='fixed ring ring-tert bg-white/5 backdrop-blur-sm w-full'>
-        <div className="py-4 xl:px-24 px-6">
-          <div className="flex justify-between">
-              <div className="flex justify-start items-center w-1/4">
+        <div className="py-4 xl:px-24 px-6 h-auto ring">
+          <div className="flex justify-evenly">
+              <div className="flex justify-start mr-auto items-center w-1/4">
                 <div>
                   <img src={Logo} alt="" className='w-32 rounded-sm' />
                 </div>
                 {/* <p className='font-[900] text-xl pl-4'>
-                  Lex SANDEU
+                  A-frilang
                 </p> */}
               </div>
-              <ul className="lg:flex justify-end hidden space-x-3 mx-auto w-1/2">
+              <ul className="lg:flex justify-end items-center hidden space-x-3 mx-auto w-full max-w-2/3">
                 <li>
-                  <a href='#' className='border rounded-full px-3 py-1 duration-200 easy-in-out hover:bg-secondary hover:text-white hover:cursor-pointer'>
+                  <a href='#' className='border rounded-full px-3 py-2 duration-200 easy-in-out hover:bg-secondary hover:text-white hover:cursor-pointer'>
                     Trouver une expréssion
                   </a>
                 </li>
                 <li>
-                  <a href='#footer' className='border rounded-full px-3 py-1 duration-200 easy-in-out hover:bg-secondary hover:text-white hover:cursor-pointer'>
-                    Nous contacter
+                  <a href='#footer' className='border rounded-full px-3 py-2 duration-200 easy-in-out hover:bg-secondary hover:text-white hover:cursor-pointer'>
+                    Contact
                   </a>
                 </li>
                 <li>
-                  <a href='#start' className='border rounded-full px-3 py-1 duration-200 easy-in-out bg-tert text-white hover:cursor-pointer'>
+                  <a href='#start' className='border rounded-full px-3 py-2 duration-200 easy-in-out bg-tert text-white hover:cursor-pointer'>
                     Commencer
                   </a>
                 </li>
                 <li>
-                  <a href='/login' className='rounded-full px-3 py-1 duration-200 easy-in-out bg-primary border-none text-white hover:cursor-pointer'>
+                  <a href='/login' className='rounded-full px-3 py-2 duration-200 easy-in-out bg-primary border-none text-white hover:cursor-pointer'>
                     Connexion
                   </a>
                 </li>
@@ -50,7 +50,7 @@ const Nav = () => {
                     <path d="M4,17.2h56c1.2,0,2.3-1,2.3-2.3s-1-2.3-2.3-2.3H4c-1.2,0-2.3,1-2.3,2.3S2.8,17.2,4,17.2z"/>
                   </g>
                   </svg> */}
-                  <a href='/login' className='rounded-full px-3 py-1 duration-200 easy-in-out bg-primary border-none text-white hover:cursor-pointer'>
+                  <a href='/login' className='rounded-full px-3 py-1 -mt-1 duration-200 easy-in-out bg-primary border-none text-white hover:cursor-pointer'>
                     Connexion
                   </a>
               </div>

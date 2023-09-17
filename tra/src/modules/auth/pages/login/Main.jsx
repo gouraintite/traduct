@@ -48,7 +48,7 @@ const Main = () => {
               </div>
             </div>
             <div className="space-x-4 text-center text-gray-500">
-              <span>&copy; Lex SANDEU</span>
+              <span>&copy; A-frilang</span>
               <a href="/#footer" className="text-sm hover:text-primary">Contact</a>
               <a href="../assets/documents/Lex SANDEU.pdf" className="text-sm hover:text-primary">Police & confidentiale</a>
             </div>
