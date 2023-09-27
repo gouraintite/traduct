@@ -1,9 +1,9 @@
-import { useState } from 'react'
+// import { useState } from 'react'
 import Logo from '../assets/logo.png'
 
 const Nav = () => {
 
-  const [menu, setmenu] = useState(false)
+  // const [menu, setmenu] = useState(false)
 
 
   return (
@@ -21,7 +21,7 @@ const Nav = () => {
               </div>
               <ul className="lg:flex justify-end items-center hidden space-x-3 mx-auto w-full max-w-2/3">
                 <li>
-                  <a href='#' className='border rounded-full px-3 py-2 duration-200 easy-in-out hover:bg-secondary hover:text-white hover:cursor-pointer'>
+                  <a href='/expressions' className='border rounded-full px-3 py-2 duration-200 easy-in-out hover:bg-secondary hover:text-white hover:cursor-pointer'>
                     Trouver une expréssion
                   </a>
                 </li>

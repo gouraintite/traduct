@@ -6,6 +6,10 @@ export default {
   ],
   theme: {
     extend: {
+      backgroundImage: {
+        'exp': "url('./src/assets/exp1.jpg')",
+        'footer-texture': "url('/img/footer-texture.png')",
+      },
       colors: {
         primary: '#A96F25',
         secondary: '#E4A34A',
