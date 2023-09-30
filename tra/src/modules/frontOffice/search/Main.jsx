@@ -1,5 +1,7 @@
-import React, { useState, useEffect } from "react"
+import { useState, useEffect } from "react"
 import aud from "../../../assets/go.ogg"
+import Nav from "../../../components/navBar"
+import Footer from "../../../components/footer"
 
 export const Search = () => {
 
@@ -81,6 +83,7 @@ export const Search = () => {
 
   return (
     <div className="">
+      <Nav opacity={40} />
       <div className="w-screen min-h-[400px] bg-exp bg-cover bg-no-repeat bg-center text-center flex justify-center mx-auto items-center">
         <div className="h-1/2 w-full">
           <p className="text-white text-4xl font-bold mb-6">Apprenez en ecourtant ou en lisant avec A-frilang</p>
@@ -206,25 +209,26 @@ export const Search = () => {
             <div className="flex justify-start py-1 my-3">
               <p><span className="font-bold pr-2">Jô:</span>{expressions[0].content[0].lang2}</p>
             </div>
-            <figcaption>Audio 1:</figcaption>
+
+            <div className="flex justify-start py-1 my-3">
+              <p><span className="font-bold pr-2">Exemple/Example Ŋgə̂mbà:</span>{expressions[0].content[0].lang1}</p>
+            </div>
+            <div className="flex justify-start py-1 my-3">
+              <p><span className="font-bold pr-2">Exemple/Example Jô:</span>{expressions[0].content[0].lang2}</p>
+            </div>
+            <figcaption>Audio Ŋgə̂mbà:</figcaption>
             <audio controls src={aud} className="w-full rounded">
               <a href={aud}> Download audio </a>
             </audio>
-            <figcaption>Audio 1:</figcaption>
-            <audio controls src={aud} className="w-full mt-2 rounded">
-              <a href={aud}> Download audio </a>
-            </audio>
-            <figcaption>Audio 3:</figcaption>
-            <audio controls src={aud} className="w-full mt-2 rounded">
-              <a href={aud}> Download audio </a>
-            </audio>
-            <figcaption>Audio 4:</figcaption>
+            <figcaption>Audio Jô:</figcaption>
             <audio controls src={aud} className="w-full mt-2 rounded">
               <a href={aud}> Download audio </a>
             </audio>
          </div>
         </div>
       </div>
+       
+       <Footer />
     </div>
   )
 }
