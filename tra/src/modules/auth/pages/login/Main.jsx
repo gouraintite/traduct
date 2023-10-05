@@ -1,7 +1,14 @@
+import { useState } from "react"
+import { handleChangeInput, handleSubmit } from "../../../frontOffice/addExpression/functions"
 import Logo from "../../../../assets/logo.png"
 
-
 const Main = () => {
+
+  const [formData, setFormData] = useState({
+    userName: '',
+    passWord: ''
+  })
+
   return (
     <>
       <div className="relative py-16 bg-primary/10 h-screen">
@@ -13,29 +20,33 @@ const Main = () => {
             <div className="rounded-3xl border border-gray-100 bg-white shadow-2xl shadow-gray-600/10 backdrop-blur-2xl">
               <div className="p-8 py-12 sm:p-16">
                   <h2 className="mb-8 text-2xl font-bold text-gray-800">Connexion</h2>
-                  <form action="" className="space-y-8">
+                  <form action="" className="space-y-8" onSubmit={(e)=>{handleSubmit(e, formData)}}>
                     <div className="space-y-2">
-                      <label for="email" className="text-gray-600">Email</label>
+                      <label className="text-gray-600">Email</label>
                       <input
                         type="email"
                         placeholder="Nom d'utilisateur"
-                        name="email"
-                        id="email"
-                        autocomplete="username"
+                        name="userName"
+                        id="userName"
+                        onChange={(e)=>{handleChangeInput(e, setFormData)}}
+                        value={formData.userName}
+                        required
                         className="focus:outline-none block w-full rounded-md border border-gray-200 bg-transparent px-4 py-3 text-gray-600 transition duration-300 invalid:ring-2 invalid:ring-red-400 focus:ring-2 focus:ring-cyan-300"
                       />
                     </div>
 
                     <div>
                       <div className="flex items-center justify-between">
-                        <label for="pwd" className="text-gray-600 py-2">Mot de passe</label>
+                        <label className="text-gray-600 py-2">Mot de passe</label>
                       </div>
                       <input
                         type="password"
                         placeholder="Mot de passe"
-                        name="pwd"
+                        name="passWord"
                         id="pwd"
-                        autocomplete="current-password"
+                        onChange={(e)=>{handleChangeInput(e, setFormData)}}
+                        value={formData.passWord}
+                        required
                         className="focus:outline-none block w-full rounded-md border border-gray-200 bg-transparent px-4 py-3 text-gray-600 transition duration-300 invalid:ring-2 invalid:ring-red-400 focus:ring-2 focus:ring-cyan-300"
                       />
                     </div>
