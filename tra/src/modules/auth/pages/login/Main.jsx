@@ -11,11 +11,11 @@ const Main = () => {
 
   return (
     <>
-      <div className="relative py-16 bg-primary/10 h-screen">
+      <div className="relative py-12 bg-primary/10 h-screen">
         <div className="container relative m-auto px-6 text-gray-500 md:px-12 xl:px-40">
           <div className="m-auto space-y-8 md:w-8/12 lg:w-6/12 xl:w-6/12">
             <a href="/">
-              <img src={Logo} loading="lazy" className="mx-auto w-40" alt="tailus logo" />
+              <img src={Logo} loading="lazy" className="mx-auto w-28" alt="tailus logo" />
             </a>
             <div className="rounded-3xl border border-gray-100 bg-white shadow-2xl shadow-gray-600/10 backdrop-blur-2xl">
               <div className="p-8 py-12 sm:p-16">
@@ -31,7 +31,7 @@ const Main = () => {
                         onChange={(e)=>{handleChangeInput(e, setFormData)}}
                         value={formData.userName}
                         required
-                        className="focus:outline-none block w-full rounded-md border border-gray-200 bg-transparent px-4 py-3 text-gray-600 transition duration-300 invalid:ring-2 invalid:ring-red-400 focus:ring-2 focus:ring-cyan-300"
+                        className="focus:outline-none block w-full rounded-md border border-gray-200 bg-transparent px-4 py-3 text-gray-600 transition duration-300 focus:ring-2 focus:ring-cyan-300"
                       />
                     </div>
 
@@ -47,7 +47,7 @@ const Main = () => {
                         onChange={(e)=>{handleChangeInput(e, setFormData)}}
                         value={formData.passWord}
                         required
-                          className="focus:outline-none block w-full rounded-md border border-gray-200 bg-transparent px-4 py-3 text-gray-600 transition duration-300 invalid:ring-2 invalid:ring-red-400 focus:ring-2 focus:ring-cyan-300"
+                          className="focus:outline-none block w-full rounded-md border border-gray-200 bg-transparent px-4 py-3 text-gray-600 transition duration-300 focus:ring-2 focus:ring-cyan-300"
                       />
                     </div>
 

@@ -11,7 +11,7 @@ let navigate = useNavigate();
       <header className="mb-auto flex justify-center z-50 w-full py-4">
         <nav className="px-4 sm:px-6 lg:px-8" aria-label="Global">
           <a className="flex justify-center text-xl font-semibold sm:text-3xl" href="#" aria-label="Brand">
-            <img src={Logo} alt=""  className="w-1/2" />
+            <img src={Logo} alt=""  className="w-1/5" />
           </a>
         </nav>
       </header>

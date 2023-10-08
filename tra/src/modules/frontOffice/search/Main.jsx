@@ -1,8 +1,8 @@
-import { useState, useEffect } from "react"
+import { useState } from "react"
 import aud from "../../../assets/go.ogg"
 import Nav from "../../../components/navBar"
 import Footer from "../../../components/footer"
-
+import DetailsModal from "../../../components/details"
 export const Search = () => {
 
   const [show, setShow] = useState(false)
@@ -80,7 +80,6 @@ export const Search = () => {
       content: data
     },
   ]
-
   return (
     <div className="">
       <Nav opacity={40} />
@@ -195,37 +194,7 @@ export const Search = () => {
           className="backdrop-blur-sm bg-tert/40 text-white w-9 h-9 text-center p-2 rounded-full absolute top-20 right-52 cursor-pointer" >
           X
         </div>
-        <div className="w-2/3 min-h-1/2 bg-white rounded-xl shadow-xl">
-         <div className="p-4">
-          <div className="flex justify-start py-1 my-3">
-              <p><span className="font-bold pr-2">Français:</span>{expressions[0].content[0].fr}</p>
-            </div>
-            <div className="flex justify-start py-1 my-3">
-              <p><span className="font-bold pr-2">English:</span>{expressions[0].content[0].en}</p>
-            </div>
-            <div className="flex justify-start py-1 my-3">
-              <p><span className="font-bold pr-2">Ŋgə̂mbà:</span>{expressions[0].content[0].lang1}</p>
-            </div>
-            <div className="flex justify-start py-1 my-3">
-              <p><span className="font-bold pr-2">Jô:</span>{expressions[0].content[0].lang2}</p>
-            </div>
-
-            <div className="flex justify-start py-1 my-3">
-              <p><span className="font-bold pr-2">Exemple/Example Ŋgə̂mbà:</span>{expressions[0].content[0].lang1}</p>
-            </div>
-            <div className="flex justify-start py-1 my-3">
-              <p><span className="font-bold pr-2">Exemple/Example Jô:</span>{expressions[0].content[0].lang2}</p>
-            </div>
-            <figcaption>Audio Ŋgə̂mbà:</figcaption>
-            <audio controls src={aud} className="w-full rounded">
-              <a href={aud}> Download audio </a>
-            </audio>
-            <figcaption>Audio Jô:</figcaption>
-            <audio controls src={aud} className="w-full mt-2 rounded">
-              <a href={aud}> Download audio </a>
-            </audio>
-         </div>
-        </div>
+        <DetailsModal expressions={expressions} />
       </div>
        
        <Footer />

@@ -6,7 +6,8 @@ export function handleChangeInput (e, dataSetter){
     }))
   }
   
-  export function handleSubmit(e, inputData){
+  export function handleSubmit(e, inputData, submitAction){
     e.preventDefault();
+    submitAction(inputData)
     console.log(inputData, 'here are form datas');
   }

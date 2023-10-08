@@ -8,11 +8,11 @@ const Nav = ({opacity}) => {
   return (
     <>
       <div className={`fixed ring ring-tert bg-white/${op} backdrop-blur-sm w-full`}>
-        <div className="py-4 xl:px-24 px-6 h-auto">
+        <div className="py-2 xl:px-24 px-6 h-auto">
           <div className="flex justify-evenly">
               <div className="flex justify-start mr-auto items-center w-1/4">
                 <a href='/'>
-                  <img src={Logo} alt="" className='w-32 rounded-sm' />
+                  <img src={Logo} alt="" className='w-12 rounded-sm' />
                 </a>
                 {/* <p className='font-[900] text-xl pl-4'>
                   A-frilang
