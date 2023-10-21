@@ -1,6 +1,7 @@
 import { useState } from "react"
 import { handleChangeInput, handleSubmit } from "../../../frontOffice/addExpression/functions"
 import Logo from "../../../../assets/logo.png"
+import axios from "axios"
 
 const Main = () => {
 
@@ -9,18 +10,44 @@ const Main = () => {
     passWord: ''
   })
 
+  let data = {
+    "username" : formData.userName,
+    "password" : formData.passWord,
+    "email" : formData.userName
+}
+
+const config = {
+  headers: {
+    'Access-Control-Allow-Origin': '*',
+    'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept'
+    // Add other headers as needed
+  }
+};
+
+const handleLogin = (e)=>{
+  console.log(data, 'dq');
+  e.preventDefault()
+  axios.post('http://localhost:8080/api/users/login', data)
+    .then((response)=>{
+      console.log(response, 'this is the response');
+    })
+    .catch((err)=>{
+      console.log(err, 'this is the error');
+    })
+}
+
   return (
     <>
       <div className="relative py-12 bg-primary/10 h-screen">
         <div className="container relative m-auto px-6 text-gray-500 md:px-12 xl:px-40">
           <div className="m-auto space-y-8 md:w-8/12 lg:w-6/12 xl:w-6/12">
             <a href="/">
-              <img src={Logo} loading="lazy" className="mx-auto w-28" alt="tailus logo" />
+              <img src={Logo} loading="lazy" className="mx-auto w-20" alt="tailus logo" />
             </a>
             <div className="rounded-3xl border border-gray-100 bg-white shadow-2xl shadow-gray-600/10 backdrop-blur-2xl">
               <div className="p-8 py-12 sm:p-16">
                   <h2 className="mb-8 text-2xl font-bold text-gray-800">Connexion</h2>
-                  <form action="" className="space-y-8" onSubmit={(e)=>{handleSubmit(e, formData)}}>
+                  <form action="" className="space-y-8" onSubmit={(e)=>{handleLogin(e)}}>
                     <div className="space-y-2">
                       <label className="text-gray-600">Email</label>
                       <input
