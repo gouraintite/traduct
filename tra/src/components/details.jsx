@@ -1,31 +1,46 @@
 import { FaPen, FaTrash } from "react-icons/fa";
 
-const DetailsModal = ({ expressions, calledByAdmin, handlePassPropToParent }) => {
+const DetailsModal = ({ content, calledByAdmin, handlePassPropToParent }) => {
 
-  
-  console.log(calledByAdmin, 'called by admin');
+  const Ho = ({byte}) =>{
+    const audioData = "data:audio/mpeg;base64," + byte;
+
+    return (
+      <div>
+        <audio controls className="w-full my-2 rounded-lg">
+          <source src={audioData} type="audio/mpeg" />
+          Your browser does not support the audio element.
+        </audio>
+      </div>
+    );
+  };
+
+  console.log(calledByAdmin, content, 'called by admin');
   return (
     <div className="w-2/3 min-h-1/2 bg-white rounded-xl shadow-xl">
       <div className="p-4">
         <div className="flex justify-start py-1 my-3">
-          <p><span className="font-bold pr-2">Français:</span>{expressions[0].content[0].fr}</p>
+          <p><span className="font-bold pr-2">Français:</span>{String(content?.expressions[0].contenu)}</p>
         </div>
         <div className="flex justify-start py-1 my-3">
-          <p><span className="font-bold pr-2">English:</span>{expressions[1].content[0].en}</p>
+          <p><span className="font-bold pr-2">English:</span>{String(content?.expressions[1].contenu)}</p>
         </div>
         <div className="flex justify-start py-1 my-3">
-          <p><span className="font-bold pr-2">Ŋgə̂mbà:</span>{expressions[0].content[0].lang1}</p>
+          <p><span className="font-bold pr-2">Ŋgə̂mbà:</span>{String(content?.translations[0].contenu)}</p>
         </div>
         <div className="flex justify-start py-1 my-3">
-          <p><span className="font-bold pr-2">Jô:</span>{expressions[0].content[0].lang2}</p>
+          <p><span className="font-bold pr-2">Jô:</span>{String(content?.translations[1].contenu)}</p>
         </div>
 
         <div className="flex justify-start py-1 my-3">
-          <p><span className="font-bold pr-2">Exemple/Example Ŋgə̂mbà:</span>{expressions[0].content[0].lang1}</p>
+          <p><span className="font-bold pr-2">Exemple/Example Ŋgə̂mbà:</span>{String(content?.translations[1].example)}</p>
         </div>
         <div className="flex justify-start py-1 my-3">
-          <p><span className="font-bold pr-2">Exemple/Example Jô:</span>{expressions[0].content[0].lang2}</p>
+          <p><span className="font-bold pr-2">Exemple/Example Jô:</span>{String(content?.translations[1].example)}</p>
         </div>
+
+        <Ho byte={String(content.translations[0].audioData)} />
+        <Ho byte={String(content.translations[1].audioData)} />
 
         {calledByAdmin && <>
           <div className="flex space-x-4">

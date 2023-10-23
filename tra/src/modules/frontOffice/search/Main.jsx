@@ -1,16 +1,120 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import aud from "../../../assets/go.ogg"
 import Nav from "../../../components/navBar"
 import Footer from "../../../components/footer"
 import DetailsModal from "../../../components/details"
+import { Byte } from "../../../config/constants"
+//import for requests
+import axiosInstance from '../../../config/axios'
+import { base_url_api } from "@/config/constants"
+ 
+
 export const Search = () => {
 
   const [show, setShow] = useState(false)
-  const [choosed, setChoosed] = useState(0)
+  const [count, setCount] = useState(0)
+  const [dictionaryItems, setDictionaryItems] = useState([]);
+  const [audioData, setAudioData] = useState('')
+  const [detailsExpression, setDetailsExpression] = useState(
+    {
+      "id": 10011,
+      "name": "testItem",
+      "user": 10010,
+      "expressions": [
+        {
+          "id": 10012,
+          "langue": "francais",
+          "contenu": "je mankjadsflkjldafjkdfge une bananne seul",
+          "dictionaryItem": 10011
+        },
+        {
+          "id": 10013,
+          "langue": "en",
+          "contenu": "I eat bana86f6d98nne seul",
+          "dictionaryItem": 10011
+        }
+      ],
+      "translations": [
+        {
+          "id": 10014,
+          "langue": "jô",
+          "contenu": "contMbakaloléǎ mbɔ́ nə́ saŋ mətsʉ pəmbaŋa, pənjwwí, ntǎchyə́... Fɔ́ mphyə ŋkwʉ́ nshòm",
+          "audio": "storage/audio/20231021100452886_1536b03d-62a8-4fb9-9153-1af2fd0b135e.mp3",
+          "example": "Mbakaloléǎ mbɔ́ nə́ saŋ mətsʉ pəmbaŋa, pənjwwí, ntǎchyə́... Fɔ́ mphyə ŋkwʉ́ nshòm",
+          "ditionaryItem": 10011,
+        },
+
+        {
+          "id": 10014,
+          "langue": "jô",
+          "contenu": "contMbakaloléǎ mbɔ́ nə́ saŋ mətsʉ pəmbaŋa, pənjwwí, ntǎchyə́... Fɔ́ mphyə ŋkwʉ́ nshòm",
+          "audio": "storage/audio/20231021100452886_1536b03d-62a8-4fb9-9153-1af2fd0b135e.mp3",
+          "example": "Mbakaloléǎ mbɔ́ nə́ saŋ mətsʉ pəmbaŋa, pənjwwí, ntǎchyə́... Fɔ́ mphyə ŋkwʉ́ nshòm",
+          "ditionaryItem": 10011,
+        }
+      ]
+
+  })
 
   // useEffect(()=>{
   //   show(show=>{setShow(!show)})
   // }, [choosed])
+
+
+
+  useEffect(()=>{
+    handleGetData();
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [count])
+
+  const handleGetData = ()=>{
+    axiosInstance.get(`${base_url_api}dictionaryItems/getAll?page=0`)
+    .then(response=>{
+      setDictionaryItems(response?.data) 
+    })
+    .then((response)=>{
+      response?.data[0]?.translations[0].audioData.arrayBuffer();
+    })
+    .then((AudioData)=>{
+      setAudioData(new Uint8Array(AudioData));
+    })
+    .then((response)=>{
+      console.log(dictionaryItems, 'errer');
+      console.log(response, 'this is the response');
+    })
+    .catch(err=>{
+      console.log(err, 'this is the error');
+    })
+  }
+
+  if (count < 1) {
+    setTimeout(() => {
+      setCount(count+1)
+    }, 6000);
+  }
+
+  const playAudio = () => {
+    if (audioData) {
+      const blob = new Blob([audioData], { type: 'audio/mpeg' }); // Adjust the type as needed
+      const url = URL.createObjectURL(blob);
+      const audio = new Audio(url);
+      audio.play();
+    }
+  };
+
+  const Ho = ({byte}) =>{
+    const audioData = "data:audio/mpeg;base64," + byte;
+
+    return (
+      <div>
+        <audio controls className="w-full my-2 rounded-lg">
+          <source src={audioData} type="audio/mpeg" />
+          Your browser does not support the audio element.
+        </audio>
+      </div>
+    );
+  };
 
   const data = [
     {
@@ -80,6 +184,8 @@ export const Search = () => {
       content: data
     },
   ]
+
+
   return (
     <div className="">
       <Nav opacity={40} />
@@ -141,8 +247,52 @@ export const Search = () => {
           Découvrez et apprennez en toute liberté.
         </p>
       </div>
-
       <div className="">
+        {dictionaryItems && dictionaryItems.map(item => (
+          <div onMouseEnter={()=>{
+            setDetailsExpression(item)
+          }} key={item.id} className="my-16">
+            {/* <p className="text-3xl font-bold bg-tert w-fit p-2 px-4 mx-9 rounded-lg text-white">{item.cat}</p> */}
+            <div className="flex justify-center gap-y-4 gap-x-6 mx-auto w-screen overflow-scroll px-12 my-6">
+                <div className="border-none lg:min-w-[350px]  text-lg bg-tert/10 hover:bg-tert/20 duration-300 ease-in-out rounded-md p-3">
+                  <div className="text-end text-sm cursor-pointer">
+                    <p 
+                      onClick={()=>{
+                        setShow(true)
+                        setDetailsExpression(item)
+                      }}
+                      className="font-bold text-secondary text-lg">
+                      voir plus
+                    </p>
+                  </div>
+                  <div className="flex justify-start py-1">
+                    <p><span className="font-bold pr-2">Fr:</span>{String(item?.expressions[0].contenu).slice(0, 55)}...</p>
+                  </div>
+                  <div className="flex justify-start py-1">
+                    <p><span className="font-bold pr-2">En:</span>{String(item?.expressions[1].contenu).slice(0, 55)}...</p>
+                  </div>
+                  <div className="flex justify-start py-1">
+                    <p><span className="font-bold pr-2">Ŋgə̂mbà:</span>{String(item.translations[1].contenu).slice(0, 55)}...</p>
+                  </div>
+                  <div className="flex justify-start py-1">
+                    <p><span className="font-bold pr-2">Exemple Ŋgə̂mbà:</span>{String(item.translations[1].example).slice(0, 55)}...</p>
+                  </div>
+                  <div className="flex justify-start py-1">
+                    <p><span className="font-bold pr-2">Jô:</span>{String(item.translations[0].contenu).slice(0, 55)}...</p>
+                  </div>
+                  <div className="flex justify-start py-1">
+                    <p><span className="font-bold pr-2">Exemple Jô:</span>{String(item.translations[0].contenu).slice(0, 55)}...</p>
+                  </div>
+                  {/* {String(item.translations[0].audioData)} */}
+                 <Ho byte={String(item.translations[0].audioData)} />
+                 <Ho byte={String(item.translations[1].audioData)} />
+                </div>
+
+            </div>
+          </div>
+        ))}
+      </div>
+      {/* <div className="">
         {expressions.map(item => (
           <div key={item.id} className="my-16">
             <p className="text-3xl font-bold bg-tert w-fit p-2 px-4 mx-9 rounded-lg text-white">{item.cat}</p>
@@ -183,7 +333,7 @@ export const Search = () => {
             </div>
           </div>
         ))}
-      </div>
+      </div> */}
 
       {/* THE MODAL */}
       <div className={`${show ? "" : "hidden"} fixed flex mx-auto justify-center items-center backdrop-blur-sm bg-tert/10 h-screen w-screen top-0`}>
@@ -194,7 +344,7 @@ export const Search = () => {
           className="backdrop-blur-sm bg-tert/40 text-white w-9 h-9 text-center p-2 rounded-full absolute top-20 right-52 cursor-pointer" >
           X
         </div>
-        <DetailsModal expressions={expressions} />
+        <DetailsModal content={detailsExpression} />
       </div>
        
        <Footer />

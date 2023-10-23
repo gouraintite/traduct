@@ -6,14 +6,14 @@ const HeaderSection = () => {
     <div className="flex justify-around space-x-4 lg:py-6 h-screen lg:px-12">
         <div className="lg:w-1/2 w-full flex items-center p-6">
             <div>
-                <p className="font-bold lg:text-6xl text-4xl leading-snug">
+                <p className="font-bold lg:text-6xl text-4  xl leading-snug">
                 J’apprends facilement  <br /> le ghɔmálá’ <span className='text-primary font-bold'>(jó & ŋgə̂mbà)</span> 
                 </p>
-                <p className='text-md'>
+                <p className='text-xl'>
                 <br /> de façon simple et éfficace, apprenez le jó et ŋgə̂mbà. Par des textes, des audios et des exemples qui facilite la compréhension.
                 </p>
                 <br />
-                <p className='border-none bg-primary/10 rounded p-2 lg:text-sm text-xs'>bandjoun – Bafoussam – Baleng – bayangam – Baham – Badenkop – Batié – Bapa – Bahouan – Bamendjou – Bameka – Bansoa – Bamougoum – Bafounda</p>
+                <p className='border-none bg-primary/10 rounded p-2 lg:text-md text-md'>bandjoun – Bafoussam – Baleng – bayangam – Baham – Badenkop – Batié – Bapa – Bahouan – Bamendjou – Bameka – Bansoa – Bamougoum – Bafounda</p>
                 <div className='flex justify-start lg:space-x-12 space-x-6 w-full lg:mt-6 mt-3 lg:text-xl text-sm'>
                     <a href='#start' className='rounded-full text-white/80 bg-primary py-2 px-4 hover:cursor-pointer hover:text-primary hover:bg-tert/20 easy-in-out duration-300'>
                         Commencer
