@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react"
-import aud from "../../../assets/go.ogg"
+import { useRecoilState } from "recoil"
+import { expressionData } from "../../../stores/data"
 import Nav from "../../../components/navBar"
 import Footer from "../../../components/footer"
 import DetailsModal from "../../../components/details"
-import { Byte } from "../../../config/constants"
 //import for requests
 import axiosInstance from '../../../config/axios'
 import { base_url_api } from "@/config/constants"
@@ -13,7 +13,7 @@ export const Search = () => {
 
   const [show, setShow] = useState(false)
   const [count, setCount] = useState(0)
-  const [dictionaryItems, setDictionaryItems] = useState([]);
+  const [dictionaryItems, setDictionaryItems] = useRecoilState(expressionData);
   const [audioData, setAudioData] = useState('')
   const [detailsExpression, setDetailsExpression] = useState(
     {
@@ -94,14 +94,14 @@ export const Search = () => {
     }, 6000);
   }
 
-  const playAudio = () => {
-    if (audioData) {
-      const blob = new Blob([audioData], { type: 'audio/mpeg' }); // Adjust the type as needed
-      const url = URL.createObjectURL(blob);
-      const audio = new Audio(url);
-      audio.play();
-    }
-  };
+  // const playAudio = () => {
+  //   if (audioData) {
+  //     const blob = new Blob([audioData], { type: 'audio/mpeg' }); // Adjust the type as needed
+  //     const url = URL.createObjectURL(blob);
+  //     const audio = new Audio(url);
+  //     audio.play();
+  //   }
+  // };
 
   const Ho = ({byte}) =>{
     const audioData = "data:audio/mpeg;base64," + byte;
@@ -247,13 +247,13 @@ export const Search = () => {
           Découvrez et apprennez en toute liberté.
         </p>
       </div>
-      <div className="">
+      <div className="flex justify-center gap-y-4 gap-x-6 mx-auto w-screen overflow-scroll px-12 my-6">
         {dictionaryItems && dictionaryItems.map(item => (
           <div onMouseEnter={()=>{
             setDetailsExpression(item)
           }} key={item.id} className="my-16">
             {/* <p className="text-3xl font-bold bg-tert w-fit p-2 px-4 mx-9 rounded-lg text-white">{item.cat}</p> */}
-            <div className="flex justify-center gap-y-4 gap-x-6 mx-auto w-screen overflow-scroll px-12 my-6">
+            <div className="">
                 <div className="border-none lg:min-w-[350px]  text-lg bg-tert/10 hover:bg-tert/20 duration-300 ease-in-out rounded-md p-3">
                   <div className="text-end text-sm cursor-pointer">
                     <p 
@@ -266,7 +266,7 @@ export const Search = () => {
                     </p>
                   </div>
                   <div className="flex justify-start py-1">
-                    <p><span className="font-bold pr-2">Fr:</span>{String(item?.expressions[0].contenu).slice(0, 55)}...</p>
+                    <p><span className="font-bold pr-2">Fr:</span>{String(item?.expressions[0].contenu).slice(0, 55)}...</p> 
                   </div>
                   <div className="flex justify-start py-1">
                     <p><span className="font-bold pr-2">En:</span>{String(item?.expressions[1].contenu).slice(0, 55)}...</p>
@@ -287,7 +287,6 @@ export const Search = () => {
                  <Ho byte={String(item.translations[0].audioData)} />
                  <Ho byte={String(item.translations[1].audioData)} />
                 </div>
-
             </div>
           </div>
         ))}

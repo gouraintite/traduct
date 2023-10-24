@@ -3,17 +3,17 @@ import axios from 'axios'
 import { handleChangeInput, handleSubmit } from './functions'
 import { useNavigate } from 'react-router-dom'
 
-const AddExpressionForm = ({ calledToEdit }) => {
+const AddExpressionForm = ({ calledToEdit, autoFill }) => {
 
   let navigator = useNavigate()
 
   const [formData, setFormData] = useState({
-    fr: '',
-    en: '',
-    lang1: '',
-    lang2: '',
-    exemple_lang1: '',
-    exemple_lang2: '',
+    fr: (calledToEdit? String(autoFill?.expressions[0].contenu): ''),
+    en: (calledToEdit? String(autoFill?.expressions[1].contenu) : ''),
+    lang1: (calledToEdit? String(autoFill?.translations[0].contenu) : ''),
+    lang2: (calledToEdit? String(autoFill?.translations[1].contenu) : ''),
+    exemple_lang1: (calledToEdit? String(autoFill?.translations[0].example) : ''),
+    exemple_lang2: (calledToEdit? String(autoFill?.translations[1].example) : ''),
     audio1: null,
     audio2: null
   })
@@ -43,7 +43,7 @@ const AddExpressionForm = ({ calledToEdit }) => {
         setTimeout(() => {
           handleAddFrAndEn()
           handleAddTranslationsFrAndEn()
-        }, 200);
+        }, 1000);
       })
       .catch((error) => {
         console.log(error, 'this is error');
@@ -74,37 +74,42 @@ const AddExpressionForm = ({ calledToEdit }) => {
 
   const handleAddTranslationsFrAndEn = () => {
 
-    const formData = new FormData();
-    formData.append('audio', audioFile); // Add the audio file
+    let formDataContent = new FormData();
 
-    axios.post('http://localhost:8080/api/expressions/add', {
-      "dictionaryItemId": dicos,
-      "langue": "jô",
-      "contenu": formData.lang1,
-      'example': formData.exemple_lang1,
-       audioFile: audioFile
-    }, {headers: {
-      'Content-Type': 'multipart/form-data', // Important for sending form data
-    },}).then((response) => {
-      console.log(response, 'fr done');
+    formDataContent.append('dictionaryItemId', dicos); // Add the name field
+    formDataContent.append('langue', "jô"); // Add the audio file
+    formDataContent.append('contenu', formData.lang1); // Add the name field
+    formDataContent.append('example', formData.exemple_lang1);
+    formDataContent.append('audioFile', audioFile); // Add the audio file
+
+    axios.post('http://localhost:8080/api/translations/add', formDataContent, {
+      headers: {
+        'Content-Type': 'multipart/form-data', // Important for sending form data
+      },
+    }).then((response) => {
+      console.log(response, 'jô translations done');
     }).catch(err => {
-      console.log(err, 'fr failed');
+      console.log(err, 'jô translations failed');
     })
 
 
-    axios.post('http://localhost:8080/api/translations/add', {
-      "dictionaryItemId": dicos,
-      "langue": "Ŋgə̂mbà ",
-      "contenu": formData.lang2,
-      'example': formData.exemple_lang2,
-      audioFile: audioFile
+    let formDataContent2 = new FormData();
 
-    }, {headers: {
-      'Content-Type': 'multipart/form-data', // Important for sending form data
-    },}).then((response) => {
-      console.log(response, 'fr done');
+    formDataContent2.append('dictionaryItemId', dicos); // Add the name field
+    formDataContent2.append('langue', "Ŋgə̂mbà"); // Add the audio file
+    formDataContent2.append('contenu', formData.lang1); // Add the name field
+    formDataContent2.append('example', formData.exemple_lang1);
+    formDataContent2.append('audioFile', audioFile); // Add the audio file
+
+    axios.post('http://localhost:8080/api/translations/add', formDataContent2, {
+      headers: {
+        'Content-Type': 'multipart/form-data', // Important for sending form data
+      },
+    }).then((response) => {
+      console.log(response, 'Ŋgə̂mbà translations done');
+      navigator('/manage_expressions')
     }).catch(err => {
-      console.log(err, 'fr failed');
+      console.log(err, 'Ŋgə̂mbà translations failed');
     })
   }
 
@@ -143,11 +148,8 @@ const AddExpressionForm = ({ calledToEdit }) => {
   calledToEdit ? SentRequest = handleUpdateExpressions : SentRequest = handlePostExpressions
 
   return (<>
-    {localStorage.getItem('userId')}
-    <p onClick={() => {
-      handleCreateDictionnaryItem()
-    }}>create Dic</p>
-    <form action="" className="space-y-6" onSubmit={(e) => { handleSubmit(e, formData, SentRequest) }}>
+
+    <form action="" className="space-y-6" onSubmit={() => { handleCreateDictionnaryItem() }}>
       <div className='flex justify-center mx-auto items-center w-full space-x-6'>
         <div className="w-1/2">
           <label className="text-gray-600">Français</label>
@@ -261,7 +263,7 @@ const AddExpressionForm = ({ calledToEdit }) => {
           <input
             type="file"
             accept='.aac, .ogg, .mpga, .mp3'
-            onChange={(e) => { handleChangeInput(e, handleFileChange(e)) }}
+            onChange={(e) => {handleFileChange(e)}}
             value={formData.audio2}
             name="audio2"
             id="audio2"
@@ -277,11 +279,14 @@ const AddExpressionForm = ({ calledToEdit }) => {
         </div>
       </div>
 
-      <button type="submit" className="relative flex mx-auto h-11 w-1/3 items-center justify-center px-6 before:absolute before:inset-0 before:rounded-full before:bg-primary before:transition before:duration-300 hover:before:scale-105 active:after:bg-secondary active:duration-75 active:before:scale-95">
-        <span className="relative text-base font-semibold text-white">{calledToEdit ? 'valider' : 'Ajouter'}</span>
-      </button>
+
 
     </form>
+    <button onClick={() => {
+      handleCreateDictionnaryItem()
+    }}className="mt-8 relative flex mx-auto h-11 w-1/3 items-center justify-center px-6 before:absolute before:inset-0 before:rounded-full before:bg-primary before:transition before:duration-300 hover:before:scale-105 active:after:bg-secondary active:duration-75 active:before:scale-95">
+        <span className="relative text-base font-semibold text-white">{calledToEdit ? 'valider' : 'Ajouter'}</span>
+      </button>
   </>)
 }
 
