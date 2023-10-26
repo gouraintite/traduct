@@ -2,7 +2,7 @@ import { useState } from "react"
 import { handleChangeInput } from "../../../frontOffice/addExpression/functions"
 import Logo from "../../../../assets/logo.png"
 import axios from 'axios'
-import { base_url_api } from "@/config/constants"
+import { base_url_api2 } from "@/config/constants"
 import { useNavigate } from "react-router-dom"
 const Main = () => {
 
@@ -28,21 +28,21 @@ const Main = () => {
 
 const handleLogin = (e)=>{
   e.preventDefault()
-  axios.post(`${base_url_api}users/login`, data)
+  axios.post(`${base_url_api2}/users/login`, data)
     .then((response)=>{
-      console.log(response, 'this is the response');
+      //console.log(response, 'this is the response');
       localStorage.setItem('userToken', response?.data?.acessToKen)
       localStorage.setItem('userId', response?.data?.id)
-      navigator('/')
+      navigator('/expressions')
     })
-    .catch((err)=>{
-      console.log(err, 'this is the error');
+    .catch(()=>{
+      // console.log(err, 'this is the error');
     })
 }
 
   return (
     <>
-      <div className="relative py-12 bg-primary/10 h-full">
+      <div className="relative py-12 bg-primary/10 lg:h-full h-screen">
         <div className="container relative m-auto px-6 text-gray-500 md:px-12 xl:px-40">
           <div className="m-auto space-y-8 md:w-8/12 lg:w-6/12 xl:w-6/12">
             <a href="/">
@@ -55,7 +55,7 @@ const handleLogin = (e)=>{
                     <div className="space-y-2">
                       <label className="text-gray-600">Email</label>
                       <input
-                        type="email"
+                        type="text"
                         placeholder="Nom d'utilisateur"
                         name="userName"
                         id="userName"

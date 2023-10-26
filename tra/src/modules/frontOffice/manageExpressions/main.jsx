@@ -10,7 +10,7 @@ import { useRecoilValue, useRecoilState } from "recoil"
 import { expressionData } from "../../../stores/data"
 
 // requests imports
-import { base_url_api } from '@/config/constants'
+import { base_url_api2 } from '@/config/constants'
 import axiosInstance from "@/config/axios"
 
 export const ManageExpressions = () => {
@@ -24,7 +24,6 @@ export const ManageExpressions = () => {
 
   const [count, setCount] = useState(0)
   const [dictionaryItems, setDictionaryItems] = useRecoilState(expressionData);
-  const [audioData, setAudioData] = useState('')
   const [detailsExpression, setDetailsExpression] = useState(
     {
       "id": 10011,
@@ -65,7 +64,7 @@ export const ManageExpressions = () => {
       ]
 
   })
-  // console.log(valLog, 'vallog here');
+  // //console.log(valLog, 'vallog here');
 
   let navigator = useNavigate();
 
@@ -76,34 +75,29 @@ export const ManageExpressions = () => {
   }, [count])
 
   const handleGetData = () => {
-    axiosInstance.get(`${base_url_api}dictionaryItems/getAll?page=0`)
+    axiosInstance.get(`${base_url_api2}/dictionaryItems/getAll?page=0`)
       .then(response => {
         setDictionaryItems(response?.data)
+        //console.log(response.data);
       })
       .then((response) => {
-        response?.data[0]?.translations[0].audioData.arrayBuffer();
-      })
-      .then((AudioData) => {
-        setAudioData(new Uint8Array(AudioData));
-      })
-      .then((response) => {
-        console.log(dictionaryItems, 'errer');
-        console.log(response, 'this is the response');
+        //console.log(dictionaryItems, 'errer');
+        //console.log(response, 'this is the response');
       })
       .catch(err => {
-        console.log(err, 'this is the error');
+        //console.log(err, 'this is the error');
       })
   }
 
   const handleDelete = ()=>{
     axiosInstance.delete(`http://localhost:8080/api/dictionaryItems/delete/${isGoingToBeDeleteId}`)
     .then(response=>{
-      console.log(response.data, 'res delete');
+      //console.log(response, 'res delete');
       alert('suppression réussie')
       handleGetData()
     })
     .catch((error)=>{
-      console.log(error, 'while deleting');
+      //console.log(error, 'while deleting');
     })
   }
   if (count < 1) {
@@ -113,7 +107,7 @@ export const ManageExpressions = () => {
   }
 
   const handlePassDataFromDetailModalToParent = (value) => {
-    console.log(value, 'in parent');
+    //console.log(value, 'in parent');
     if (value) {
       setShow(false)
       setShowDeleteModal(true)
@@ -122,7 +116,7 @@ export const ManageExpressions = () => {
 
 
   const handlePassDataFromDetailModalToParentShow = (value) => {
-    console.log(value, 'in parent');
+    //console.log(value, 'in parent');
     if (value) {
       setShow(false)
       setShowForm(true)
@@ -142,13 +136,14 @@ export const ManageExpressions = () => {
           {dictionaryItems && valLog.map((item) => (
             <div key={item.id}>
               <div onMouseEnter={()=>{
-                setIsGoingToBeDeleteId(item.id)
+                setIsGoingToBeDeleteId(item.id) 
                 setDetailsExpression(item)
-                console.log(isGoingToBeDeleteId, 'hover');
+                //console.log(item, 'on hover');
+                //console.log(isGoingToBeDeleteId, 'hover'); 
               }}
                 className="flex justify-around border my-2 py-4 pl-6 overflow-hidden items-center">
                 <div className={`min-w-9/12 w-9/12 overscroll-hidden`}>
-                {String(item?.expressions[0].contenu)  || '---'} {String(item?.name)  || '---'} 
+                {item?.expressions.length > 0 ? String(item?.expressions[1].contenu) : '---'}
                 </div>
                 <div className="px-3">
                   19/20/2023
@@ -164,6 +159,7 @@ export const ManageExpressions = () => {
                   </div>
                   <div
                     onClick={() => {
+                      setDetailsExpression(item)
                       setShowForm(!showForm)
                       setDetailsExpression(item)
                     }} className="text-tert border cursor-pointer p-2 rounded-lg hover:text-white hover:bg-blue-500 duration-300 ease-in-out h-9">
@@ -173,7 +169,7 @@ export const ManageExpressions = () => {
                     onClick={() => {
                       setShowDeleteModal(!showDeleteModal)
                       setIsGoingToBeDeleteId(item.id)
-                      console.log(isGoingToBeDeleteId, 'click');
+                      //console.log(isGoingToBeDeleteId, 'click');
                     }} className="text-tert border cursor-pointer p-2 rounded-lg hover:text-white hover:bg-red-500 duration-300 ease-in-out h-9">
                     <FaTrash size={16} />
                   </div>
@@ -190,7 +186,7 @@ export const ManageExpressions = () => {
           onClick={() => {
             setShow(false)
           }}
-          className="backdrop-blur-sm bg-tert/40 text-white w-9 h-9 text-center p-2 rounded-full absolute top-20 right-52 cursor-pointer" >
+          className="backdrop-blur-sm bg-tert/40 text-white w-9 h-9 text-center p-2 rounded-full absolute top-40 right-52 cursor-pointer" >
           X
         </div>
         <DetailsModal content={detailsExpression} calledByAdmin={true} handlePassPropToParent={handlePassDataFromDetailModalToParent} handleEditMore={handlePassDataFromDetailModalToParentShow} />
@@ -203,7 +199,7 @@ export const ManageExpressions = () => {
           onClick={() => {
             setShowDeleteModal(false)
           }}
-          className="backdrop-blur-sm bg-tert/40 text-white w-9 h-9 text-center p-2 rounded-full absolute top-20 right-52 cursor-pointer" >
+          className="backdrop-blur-sm bg-tert/40 text-white w-9 h-9 text-center p-2 rounded-full absolute top-64 right-96 cursor-pointer" >
           X
         </div>
         <div className="shadow-md bg-white p-4 rounded-lg text-center">
@@ -237,7 +233,7 @@ export const ManageExpressions = () => {
           onClick={() => {
             setShowForm(!showForm)
           }}
-          className="backdrop-blur-sm bg-tert/40 text-white w-9 h-9 text-center p-2 rounded-full absolute top-20 right-20 cursor-pointer" >
+          className="backdrop-blur-sm bg-tert/40 text-white w-9 h-9 text-center p-2 rounded-full absolute top-20 right-80 cursor-pointer" >
           X
         </div>
         <div className="rounded-3xl border border-gray-100 bg-white shadow-2xl shadow-gray-600/10 backdrop-blur-2xl">

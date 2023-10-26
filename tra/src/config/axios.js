@@ -12,8 +12,8 @@ axiosInstance.interceptors.request.use((req) => {
 axiosInstance.interceptors.response.use(
   (res) => res,
   (err) => { 
-    console.log(err.response.data.httpStatus);
-    if (err.response.data.exception === 'BadCredentialsException' || err.response.data.httpStatus === 401) {
+    //console.log(err.response.data.httpStatus);
+    if (err.response.data.exception === 'BadCredentialsException' || err.response.data.exception === 'InsufficientAuthenticationException' || err.response.data.httpStatus === 401) {
       localStorage.removeItem('userToken');
         window.location.href = "/login";
     }

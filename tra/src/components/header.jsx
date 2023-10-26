@@ -3,10 +3,10 @@ import Logo from '../assets/ogo.svg'
 
 const HeaderSection = () => {
   return (
-    <div className="flex justify-around space-x-4 lg:py-6 h-screen lg:px-12">
-        <div className="lg:w-1/2 w-full flex items-center p-6">
+    <div className="flex justify-around space-x-4 lg:py-6 pt-24 lg:pb-0 pb-12 lg:h-screen lg:px-12">
+        <div className="lg:w-1/2 w-full flex items-center lg:p-6 px-4">
             <div>
-                <p className="font-bold lg:text-6xl text-4  xl leading-snug">
+                <p className="font-bold lg:text-6xl text-4xl leading-snug">
                 J’apprends facilement  <br /> le ghɔmálá’ <span className='text-primary font-bold'>(jó & ŋgə̂mbà)</span> 
                 </p>
                 <p className='text-xl'>

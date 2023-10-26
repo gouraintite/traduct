@@ -58,7 +58,7 @@ export const profile = ()=> {
 }
 
 export const update_profile = (client)=> {
-    console.log(root_link + me, client, 'link client');
+    //console.log(root_link + me, client, 'link client');
     return axiosInstance.patch(root_link + me, client, {
         headers: {
           'accept': 'application/json',

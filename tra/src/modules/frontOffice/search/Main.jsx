@@ -6,7 +6,7 @@ import Footer from "../../../components/footer"
 import DetailsModal from "../../../components/details"
 //import for requests
 import axiosInstance from '../../../config/axios'
-import { base_url_api } from "@/config/constants"
+import { base_url_api2 } from "@/config/constants"
  
 
 export const Search = () => {
@@ -69,9 +69,11 @@ export const Search = () => {
   }, [count])
 
   const handleGetData = ()=>{
-    axiosInstance.get(`${base_url_api}dictionaryItems/getAll?page=0`)
+    //console.log(`${base_url_api2}dictionaryItems/getAll`)
+    axiosInstance.get(`${base_url_api2}/dictionaryItems/getAll?page=0`)
     .then(response=>{
       setDictionaryItems(response?.data) 
+      //console.log(response, 'res peekjk');
     })
     .then((response)=>{
       response?.data[0]?.translations[0].audioData.arrayBuffer();
@@ -79,112 +81,34 @@ export const Search = () => {
     .then((AudioData)=>{
       setAudioData(new Uint8Array(AudioData));
     })
-    .then((response)=>{
-      console.log(dictionaryItems, 'errer');
-      console.log(response, 'this is the response');
+    .then(()=>{
+      //console.log(dictionaryItems, 'errer');
+      //console.log(response, 'this is the response');
     })
-    .catch(err=>{
-      console.log(err, 'this is the error');
+    .catch(()=>{
+      //console.log(err, 'this is the error');
     })
   }
 
   if (count < 1) {
     setTimeout(() => {
       setCount(count+1)
-    }, 6000);
+    },100);
   }
 
-  // const playAudio = () => {
-  //   if (audioData) {
-  //     const blob = new Blob([audioData], { type: 'audio/mpeg' }); // Adjust the type as needed
-  //     const url = URL.createObjectURL(blob);
-  //     const audio = new Audio(url);
-  //     audio.play();
-  //   }
-  // };
 
   const Ho = ({byte}) =>{
     const audioData = "data:audio/mpeg;base64," + byte;
 
     return (
       <div>
-        <audio controls className="w-full my-2 rounded-lg">
+        <audio controls className="w-12 mx-2 rounded-full">
           <source src={audioData} type="audio/mpeg" />
           Your browser does not support the audio element.
         </audio>
       </div>
     );
   };
-
-  const data = [
-    {
-      id: 1,
-      fr: "Le baccalauréat est un jeu qui consiste à ressortir les noms des filles, des garçons, des fruits, des animaux, etc. par ordre alphabétique",
-      en: "The baccalaureat is a game that consists in giving names of girls, boys, fruits, animals etc in alphabetic order",
-      lang1: "Mbakaloléǎ mbɔ́ nə́ saŋ mətsʉ pəmbaŋa, pənjwwí, ntǎchyə́... Fɔ́ mphyə ŋkwʉ́ nshòm",
-      lang2: "Mbakaloléǎ mbɔ́ nə́ saŋ mətsʉ pəmbaŋa, pənjwwí, ntǎchyə́... Fɔ́ mphyə ŋkwʉ́ nshòm",
-      collaps: false
-    },
-    {
-      id: 2,
-      fr: "Le baccalauréat est un jeu qui consiste à ressortir les noms des filles, des garçons, des fruits, des animaux, etc. par ordre alphabétique",
-      en: "The baccalaureat is a game that consists in giving names of girls, boys, fruits, animals etc in alphabetic order",
-      lang1: "Mbakaloléǎ mbɔ́ nə́ saŋ mətsʉ pəmbaŋa, pənjwwí, ntǎchyə́... Fɔ́ mphyə ŋkwʉ́ nshòm",
-      lang2: "Mbakaloléǎ mbɔ́ nə́ saŋ mətsʉ pəmbaŋa, pənjwwí, ntǎchyə́... Fɔ́ mphyə ŋkwʉ́ nshòm",
-    },
-    {
-      id: 3,
-      fr: "Le baccalauréat est un jeu qui consiste à ressortir les noms des filles, des garçons, des fruits, des animaux, etc. par ordre alphabétique",
-      en: "The baccalaureat is a game that consists in giving names of girls, boys, fruits, animals etc in alphabetic order",
-      lang1: "Mbakaloléǎ mbɔ́ nə́ saŋ mətsʉ pəmbaŋa, pənjwwí, ntǎchyə́... Fɔ́ mphyə ŋkwʉ́ nshòm",
-      lang2: "Mbakaloléǎ mbɔ́ nə́ saŋ mətsʉ pəmbaŋa, pənjwwí, ntǎchyə́... Fɔ́ mphyə ŋkwʉ́ nshòm",
-    },
-    {
-      id: 4,
-      fr: "Le baccalauréat est un jeu qui consiste à ressortir les noms des filles, des garçons, des fruits, des animaux, etc. par ordre alphabétique",
-      en: "The baccalaureat is a game that consists in giving names of girls, boys, fruits, animals etc in alphabetic order",
-      lang1: "Mbakaloléǎ mbɔ́ nə́ saŋ mətsʉ pəmbaŋa, pənjwwí, ntǎchyə́... Fɔ́ mphyə ŋkwʉ́ nshòm",
-      lang2: "Mbakaloléǎ mbɔ́ nə́ saŋ mətsʉ pəmbaŋa, pənjwwí, ntǎchyə́... Fɔ́ mphyə ŋkwʉ́ nshòm",
-    },
-    {
-      id: 5,
-      fr: "Le baccalauréat est un jeu qui consiste à ressortir les noms des filles, des garçons, des fruits, des animaux, etc. par ordre alphabétique",
-      en: "The baccalaureat is a game that consists in giving names of girls, boys, fruits, animals etc in alphabetic order",
-      lang1: "Mbakaloléǎ mbɔ́ nə́ saŋ mətsʉ pəmbaŋa, pənjwwí, ntǎchyə́... Fɔ́ mphyə ŋkwʉ́ nshòm",
-      lang2: "Mbakaloléǎ mbɔ́ nə́ saŋ mətsʉ pəmbaŋa, pənjwwí, ntǎchyə́... Fɔ́ mphyə ŋkwʉ́ nshòm",
-    },
-    {
-      id: 6,
-      fr: "Le baccalauréat est un jeu qui consiste à ressortir les noms des filles, des garçons, des fruits, des animaux, etc. par ordre alphabétique",
-      en: "The baccalaureat is a game that consists in giving names of girls, boys, fruits, animals etc in alphabetic order",
-      lang1: "Mbakaloléǎ mbɔ́ nə́ saŋ mətsʉ pəmbaŋa, pənjwwí, ntǎchyə́... Fɔ́ mphyə ŋkwʉ́ nshòm",
-      lang2: "Mbakaloléǎ mbɔ́ nə́ saŋ mətsʉ pəmbaŋa, pənjwwí, ntǎchyə́... Fɔ́ mphyə ŋkwʉ́ nshòm",
-    }
-  ]
-
-  const expressions = [
-    {
-      id: 1,
-      cat: "Basique",
-      content: data
-    },
-    {
-      id: 2,
-      cat: "Jour de la semaine",
-      content: data
-    },
-    {
-      id: 3,
-      cat: "Mois de l'année",
-      content: data
-    },
-    {
-      id: 4,
-      cat: "Pronons",
-      content: data
-    },
-  ]
-
 
   return (
     <div className="">
@@ -247,13 +171,11 @@ export const Search = () => {
           Découvrez et apprennez en toute liberté.
         </p>
       </div>
-      <div className="flex justify-center gap-y-4 gap-x-6 mx-auto w-screen overflow-scroll px-12 my-6">
-        {dictionaryItems && dictionaryItems.map(item => (
+      <div className="flex flex-wrap justify-start mx-auto gap-2 px-2 my-6">
+          {dictionaryItems && dictionaryItems.map(item => (
           <div onMouseEnter={()=>{
             setDetailsExpression(item)
-          }} key={item.id} className="my-16">
-            {/* <p className="text-3xl font-bold bg-tert w-fit p-2 px-4 mx-9 rounded-lg text-white">{item.cat}</p> */}
-            <div className="">
+          }} key={item.id} className="my-6 mx-7 w-1/5">
                 <div className="border-none lg:min-w-[350px]  text-lg bg-tert/10 hover:bg-tert/20 duration-300 ease-in-out rounded-md p-3">
                   <div className="text-end text-sm cursor-pointer">
                     <p 
@@ -266,73 +188,27 @@ export const Search = () => {
                     </p>
                   </div>
                   <div className="flex justify-start py-1">
-                    <p><span className="font-bold pr-2">Fr:</span>{String(item?.expressions[0].contenu).slice(0, 55)}...</p> 
+                    <p><span className="font-bold pr-2">Fr:</span>{String(item?.expressions[0]?.contenu).slice(0, 55)}...</p> 
                   </div>
                   <div className="flex justify-start py-1">
-                    <p><span className="font-bold pr-2">En:</span>{String(item?.expressions[1].contenu).slice(0, 55)}...</p>
+                    <p><span className="font-bold pr-2">En:</span>{String(item?.expressions[1]?.contenu).slice(0, 55)}...</p>
                   </div>
-                  <div className="flex justify-start py-1">
-                    <p><span className="font-bold pr-2">Ŋgə̂mbà:</span>{String(item.translations[1].contenu).slice(0, 55)}...</p>
+                  <div className="flex justify-between items-center w-full py-1">
+                    <p className="w-10/12 overflow-scroll"><span className="font-bold pr-2">Ŋgə̂mbà:</span>{String(item.translations[1]?.contenu).slice(0, 55)}...</p>
+                    <div className="w-2/12">
+                      <Ho byte={String(item?.translations[0]?.audioData)} />
+                    </div>
                   </div>
-                  <div className="flex justify-start py-1">
-                    <p><span className="font-bold pr-2">Exemple Ŋgə̂mbà:</span>{String(item.translations[1].example).slice(0, 55)}...</p>
+                  <div className="flex justify-between items-center w-full py-1">
+                    <p className="w-10/12 overflow-scroll"><span className="font-bold pr-2">Jô:</span>{String(item.translations[0]?.contenu).slice(0, 55)}...</p>
+                    <div className="w-2/12">
+                      <Ho byte={String(item?.translations[1]?.audioData)} />
+                    </div>
                   </div>
-                  <div className="flex justify-start py-1">
-                    <p><span className="font-bold pr-2">Jô:</span>{String(item.translations[0].contenu).slice(0, 55)}...</p>
-                  </div>
-                  <div className="flex justify-start py-1">
-                    <p><span className="font-bold pr-2">Exemple Jô:</span>{String(item.translations[0].contenu).slice(0, 55)}...</p>
-                  </div>
-                  {/* {String(item.translations[0].audioData)} */}
-                 <Ho byte={String(item.translations[0].audioData)} />
-                 <Ho byte={String(item.translations[1].audioData)} />
                 </div>
-            </div>
           </div>
         ))}
       </div>
-      {/* <div className="">
-        {expressions.map(item => (
-          <div key={item.id} className="my-16">
-            <p className="text-3xl font-bold bg-tert w-fit p-2 px-4 mx-9 rounded-lg text-white">{item.cat}</p>
-            <div className="flex justify-center gap-y-4 gap-x-6 mx-auto w-screen overflow-scroll px-12 my-6">
-              {item.content.map(content => (
-                <div key={content.id} className="border-none lg:min-w-[350px]  text-lg bg-tert/10 hover:bg-tert/20 duration-300 ease-in-out rounded-md p-3">
-                  <div className="text-end text-sm cursor-pointer">
-                    <p 
-                      onClick={()=>{
-                        setShow(true)
-                      }}
-                      className="border">
-                      voir plus
-                    </p>
-                  </div>
-                  <div className="flex justify-start py-1">
-                    <p><span className="font-bold pr-2">Fr:</span>{String(content.fr).slice(0, 55)}...</p>
-                  </div>
-                  <div className="flex justify-start py-1">
-                    <p><span className="font-bold pr-2">En:</span>{String(content.en).slice(0, 55)}...</p>
-                  </div>
-                  <div className="flex justify-start py-1">
-                    <p><span className="font-bold pr-2">Ŋgə̂mbà:</span>{String(content.lang1).slice(0, 55)}...</p>
-                  </div>
-                  <div className="flex justify-start py-1">
-                    <p><span className="font-bold pr-2">Jô:</span>{String(content.lang2).slice(0, 55)}...</p>
-                  </div>
-                  <figcaption>Listen to the T-Rex:</figcaption>
-                  <audio controls src={aud} className="w-full rounded">
-                    <a href={aud}> Download audio </a>
-                  </audio>
-                  <audio controls src={aud} className="w-full mt-2 rounded">
-                    <a href={aud}> Download audio </a>
-                  </audio>
-                </div>
-              ))}
-
-            </div>
-          </div>
-        ))}
-      </div> */}
 
       {/* THE MODAL */}
       <div className={`${show ? "" : "hidden"} fixed flex mx-auto justify-center items-center backdrop-blur-sm bg-tert/10 h-screen w-screen top-0`}>
@@ -340,7 +216,7 @@ export const Search = () => {
           onClick={()=>{
             setShow(false)
           }}
-          className="backdrop-blur-sm bg-tert/40 text-white w-9 h-9 text-center p-2 rounded-full absolute top-20 right-52 cursor-pointer" >
+          className="backdrop-blur-sm bg-tert/40 text-white w-9 h-9 text-center p-2 rounded-full absolute top-48 right-52 cursor-pointer" >
           X
         </div>
         <DetailsModal content={detailsExpression} />

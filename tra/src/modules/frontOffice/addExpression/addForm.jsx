@@ -2,77 +2,85 @@ import { useState } from 'react'
 import axios from 'axios'
 import { handleChangeInput, handleSubmit } from './functions'
 import { useNavigate } from 'react-router-dom'
+import {base_url_api2} from "@/config/constants"
 
 const AddExpressionForm = ({ calledToEdit, autoFill }) => {
 
   let navigator = useNavigate()
 
   const [formData, setFormData] = useState({
-    fr: (calledToEdit? String(autoFill?.expressions[0].contenu): ''),
-    en: (calledToEdit? String(autoFill?.expressions[1].contenu) : ''),
-    lang1: (calledToEdit? String(autoFill?.translations[0].contenu) : ''),
-    lang2: (calledToEdit? String(autoFill?.translations[1].contenu) : ''),
-    exemple_lang1: (calledToEdit? String(autoFill?.translations[0].example) : ''),
-    exemple_lang2: (calledToEdit? String(autoFill?.translations[1].example) : ''),
+    fr: '',
+    en: '',
+    lang1: '',
+    lang2: '',
+    exemple_lang1: '',
+    exemple_lang2: '',
     audio1: null,
     audio2: null
   })
+  //console.log(autoFill,String(autoFill?.expressions[0]?.contenu), calledToEdit, 'autof');
   const [dicos, setDicos] = useState(null)
   const [audioFile, setAudioFile] = useState(null);
+  const [audioFile2, setAudioFile2] = useState(null);
 
   const handleFileChange = (e) => {
-    // Assuming you have an <input type="file" element
-    
     const file = e.target.files[0];
-    // setFormData((prevFormatData)=>({
-    //   ...prevFormatData,
-    //   audio1: file,
-    // }))
+    //console.log(file, 'file 1');
     setAudioFile(file);
   };
 
+  const handleFileChange2 = (e) => {
+    const file = e.target.files[0];
+    //console.log(file, 'file 2');
+    setAudioFile2(file);
+  };
+
+  // how to verify that the setter of a useState have already change his value to launch and operation depending on the new value
 
   const handleCreateDictionnaryItem = () => {
-    axios.post('http://localhost:8080/api/dictionaryItems/add', {
+    axios.post(`${base_url_api2}/dictionaryItems/add`, {
       "name": "testDicos",
       "user": localStorage.getItem('userId')
     })
       .then((response) => {
-        setDicos(response?.data?.id)
-        console.log(response?.data?.id, 'added');
-        setTimeout(() => {
-          handleAddFrAndEn()
-          handleAddTranslationsFrAndEn()
-        }, 1000);
+        new Promise((res)=>{
+          setDicos(response?.data?.id)
+          //console.log(dicos, response?.data?.id);
+          res(true)
+        }).then(()=>{
+          handleAddFrAndEn(response?.data?.id)
+        }).then(()=>{
+          handleAddTranslationsFrAndEn(response?.data?.id)
+        })
       })
       .catch((error) => {
-        console.log(error, 'this is error');
+        //console.log(error, 'this is error');
       })
   }
-  const handleAddFrAndEn = () => {
-    axios.post('http://localhost:8080/api/expressions/add', {
+  const handleAddFrAndEn = (dicos) => {
+    axios.post(`${base_url_api2}/expressions/add`, {
       "dictionaryItem": dicos,
       "langue": "francais",
       "contenu": formData.fr
     }).then((response) => {
-      console.log(response, 'fr done');
+      //console.log(response, 'fr done');
     }).catch(err => {
-      console.log(err, 'fr failed');
+      //console.log(err, 'fr failed');
     })
 
 
-    axios.post('http://localhost:8080/api/expressions/add', {
+    axios.post(`${base_url_api2}/expressions/add`, {
       "dictionaryItem": dicos,
       "langue": "englais",
       "contenu": formData.en
     }).then((response) => {
-      console.log(response, 'eng done');
+      //console.log(response, 'eng done');
     }).catch(err => {
-      console.log(err, 'fr failed');
+      //console.log(err, 'fr failed');
     })
   }
 
-  const handleAddTranslationsFrAndEn = () => {
+  const handleAddTranslationsFrAndEn = (dicos) => {
 
     let formDataContent = new FormData();
 
@@ -82,14 +90,14 @@ const AddExpressionForm = ({ calledToEdit, autoFill }) => {
     formDataContent.append('example', formData.exemple_lang1);
     formDataContent.append('audioFile', audioFile); // Add the audio file
 
-    axios.post('http://localhost:8080/api/translations/add', formDataContent, {
+    axios.post(`${base_url_api2}/translations/add`, formDataContent, {
       headers: {
         'Content-Type': 'multipart/form-data', // Important for sending form data
       },
     }).then((response) => {
-      console.log(response, 'jô translations done');
+      //console.log(response, 'jô translations done');
     }).catch(err => {
-      console.log(err, 'jô translations failed');
+      //console.log(err, 'jô translations failed');
     })
 
 
@@ -99,53 +107,21 @@ const AddExpressionForm = ({ calledToEdit, autoFill }) => {
     formDataContent2.append('langue', "Ŋgə̂mbà"); // Add the audio file
     formDataContent2.append('contenu', formData.lang1); // Add the name field
     formDataContent2.append('example', formData.exemple_lang1);
-    formDataContent2.append('audioFile', audioFile); // Add the audio file
+    formDataContent2.append('audioFile', audioFile2); // Add the audio file
+    //console.log(audioFile2, 'aud 2');
 
-    axios.post('http://localhost:8080/api/translations/add', formDataContent2, {
+    axios.post(`${base_url_api2}/translations/add`, formDataContent2, {
       headers: {
         'Content-Type': 'multipart/form-data', // Important for sending form data
       },
     }).then((response) => {
-      console.log(response, 'Ŋgə̂mbà translations done');
+      //console.log(response, 'Ŋgə̂mbà translations done');
       navigator('/manage_expressions')
     }).catch(err => {
-      console.log(err, 'Ŋgə̂mbà translations failed');
+      //console.log(err, 'Ŋgə̂mbà translations failed');
     })
   }
 
-  const handlePostExpressions = (data) => {
-    console.log('Posting');
-    axios.post("", data)
-      .then((response) => {
-        console.log(response, 'req response');
-      })
-      .catch((error) => {
-        console.log(error, 'this is error');
-      })
-      .finally(() => {
-        console.log(formData, 'from req');
-        navigator('/manage_expressions')
-      })
-  }
-
-
-  const handleUpdateExpressions = (data) => {
-    console.log('Updating...');
-    axios.patch("", data)
-      .then((response) => {
-        console.log(response, 'req response');
-      })
-      .catch((error) => {
-        console.log(error, 'this is error');
-      })
-      .finally(() => {
-        console.log(formData, 'from req');
-        navigator('/manage_expressions')
-      })
-  }
-
-  var SentRequest;
-  calledToEdit ? SentRequest = handleUpdateExpressions : SentRequest = handlePostExpressions
 
   return (<>
 
@@ -155,7 +131,7 @@ const AddExpressionForm = ({ calledToEdit, autoFill }) => {
           <label className="text-gray-600">Français</label>
           <textarea
             onChange={(e) => { handleChangeInput(e, setFormData) }}
-            value={formData.fr}
+            value={calledToEdit ? String(autoFill?.expressions[1]?.contenu) : formData.en}
             name="fr"
             id="fr"
             required
@@ -169,7 +145,7 @@ const AddExpressionForm = ({ calledToEdit, autoFill }) => {
           <label className="text-gray-600">English</label>
           <textarea
             onChange={(e) => { handleChangeInput(e, setFormData) }}
-            value={formData.en}
+            value={calledToEdit ? String(autoFill?.expressions[0]?.contenu) : formData.en}
             name="en"
             id="en"
             required
@@ -184,7 +160,7 @@ const AddExpressionForm = ({ calledToEdit, autoFill }) => {
           <label className="text-gray-600">Ŋgə̂mbà</label>
           <textarea
             onChange={(e) => { handleChangeInput(e, setFormData) }}
-            value={formData.lang1}
+            value={calledToEdit ? String(autoFill?.translations[0]?.contenu) : formData.lang1}
             name="lang1"
             id="lang1"
             required
@@ -197,7 +173,7 @@ const AddExpressionForm = ({ calledToEdit, autoFill }) => {
           <label className="text-gray-600">Jô</label>
           <textarea
             onChange={(e) => { handleChangeInput(e, setFormData) }}
-            value={formData.lang2}
+            value={calledToEdit ? String(autoFill?.translations[0]?.contenu) : formData.lang2}
             name="lang2"
             id="lang2"
             required
@@ -212,7 +188,7 @@ const AddExpressionForm = ({ calledToEdit, autoFill }) => {
           <label className="text-gray-600">Exemple Ŋgə̂mbà</label>
           <textarea
             onChange={(e) => { handleChangeInput(e, setFormData) }}
-            value={formData.exemple_lang1}
+            value={calledToEdit ? String(autoFill?.translations[0]?.example) : formData.exemple_lang1}
             name="exemple_lang1"
             id="exemple_lang1"
             required
@@ -226,7 +202,7 @@ const AddExpressionForm = ({ calledToEdit, autoFill }) => {
           <label className="text-gray-600">Exemple Jô</label>
           <textarea
             onChange={(e) => { handleChangeInput(e, setFormData) }}
-            value={formData.exemple_lang2}
+            value={calledToEdit ? String(autoFill?.translations[1]?.example) : formData.exemple_lang2}
             name="exemple_lang2"
             id="exemple_lang2"
             required
@@ -243,6 +219,7 @@ const AddExpressionForm = ({ calledToEdit, autoFill }) => {
             type="file"
             accept='.aac, .ogg, .mpga, .mp3'
             onChange={(e) => { handleFileChange(e)}}
+            required
             value={formData.audio1}
             name="audio1"
             id="audio1"
@@ -263,7 +240,8 @@ const AddExpressionForm = ({ calledToEdit, autoFill }) => {
           <input
             type="file"
             accept='.aac, .ogg, .mpga, .mp3'
-            onChange={(e) => {handleFileChange(e)}}
+            onChange={(e) => {handleFileChange2(e)}}
+            required
             value={formData.audio2}
             name="audio2"
             id="audio2"
@@ -279,14 +257,12 @@ const AddExpressionForm = ({ calledToEdit, autoFill }) => {
         </div>
       </div>
 
-
-
-    </form>
-    <button onClick={() => {
+      <button onClick={() => {
       handleCreateDictionnaryItem()
     }}className="mt-8 relative flex mx-auto h-11 w-1/3 items-center justify-center px-6 before:absolute before:inset-0 before:rounded-full before:bg-primary before:transition before:duration-300 hover:before:scale-105 active:after:bg-secondary active:duration-75 active:before:scale-95">
         <span className="relative text-base font-semibold text-white">{calledToEdit ? 'valider' : 'Ajouter'}</span>
       </button>
+    </form>
   </>)
 }
 
