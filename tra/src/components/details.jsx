@@ -26,11 +26,11 @@ const DetailsModal = ({ content, calledByAdmin, handlePassPropToParent, handleEd
           <p><span className="font-bold pr-2">English:</span>{content?.expressions.length > 0 ? String(content?.expressions[1]?.contenu) : '---'}</p>
         </div>
         <div className="flex justify-start items-center py-1 my-3">
-          <p><span className="font-bold pr-2">Ŋgə̂mbà:</span>{content?.translations.length > 0 ? String(content?.translations[0]?.contenu) : '---'}</p>
+          <p><span className="font-bold pr-2">Ŋgə̂mbà:</span>{content?.translations.length > 0 ? String(content?.translations[1]?.contenu) : '---'}</p>
           <Ho byte={String(content?.translations[0]?.audioData) || "---"} />
         </div>
         <div className="flex justify-start items-center py-1 my-3">
-          <p><span className="font-bold pr-2">Jô:</span>{content?.translations.length > 0 ? String(content?.translations[1]?.contenu) : '---'}</p>
+          <p><span className="font-bold pr-2">Jô:</span>{content?.translations.length > 0 ? String(content?.translations[0]?.contenu) : '---'}</p>
         <Ho byte={String(content?.translations[1]?.audioData) || "---"} />
 
         </div>
@@ -39,7 +39,7 @@ const DetailsModal = ({ content, calledByAdmin, handlePassPropToParent, handleEd
           <p><span className="font-bold pr-2">Exemple/Example Ŋgə̂mbà:</span>{String(content?.translations[1]?.example) || '---'}</p>
         </div>
         <div className="flex justify-start py-1 my-3">
-          <p><span className="font-bold pr-2">Exemple/Example Jô:</span>{String(content?.translations[1]?.example) || '---'}</p>
+          <p><span className="font-bold pr-2">Exemple/Example Jô:</span>{String(content?.translations[0]?.example) || '---'}</p>
         </div>
         {calledByAdmin && <>
           <div className="flex space-x-4">

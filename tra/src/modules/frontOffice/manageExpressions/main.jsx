@@ -64,7 +64,7 @@ export const ManageExpressions = () => {
       ]
 
   })
-  // //console.log(valLog, 'vallog here');
+  console.log(valLog, 'vallog here');
 
   let navigator = useNavigate();
 
@@ -131,7 +131,7 @@ export const ManageExpressions = () => {
           className="mt-4 relative flex h-11 w-auto items-center justify-center px-6 before:absolute before:inset-0 before:rounded-full before:bg-primary before:transition before:duration-300 hover:before:scale-105 active:after:bg-secondary active:duration-75 active:before:scale-95">
           <span className="relative text-base font-semibold text-white">Ajouter une expression</span>
         </button> 
-        {/* {valLog.length} */}
+        {valLog.length}
         <div className="my-6 rounded">
           {dictionaryItems && valLog.map((item) => (
             <div key={item.id}>
@@ -143,7 +143,7 @@ export const ManageExpressions = () => {
               }}
                 className="flex justify-around border my-2 py-4 pl-6 overflow-hidden items-center">
                 <div className={`min-w-9/12 w-9/12 overscroll-hidden`}>
-                {item?.expressions.length > 0 ? String(item?.expressions[1].contenu) : '---'}
+                {item?.expressions.length > 0 ? String(item?.expressions[1].contenu) : '---'} {item.id}
                 </div>
                 <div className="px-3">
                   19/20/2023
@@ -186,7 +186,7 @@ export const ManageExpressions = () => {
           onClick={() => {
             setShow(false)
           }}
-          className="backdrop-blur-sm bg-tert/40 text-white w-9 h-9 text-center p-2 rounded-full absolute top-40 right-52 cursor-pointer" >
+          className="backdrop-blur-sm bg-tert/40 z-50 text-white w-9 h-9 text-center p-2 rounded-full absolute top-40 right-52 cursor-pointer" >
           X
         </div>
         <DetailsModal content={detailsExpression} calledByAdmin={true} handlePassPropToParent={handlePassDataFromDetailModalToParent} handleEditMore={handlePassDataFromDetailModalToParentShow} />
@@ -199,7 +199,7 @@ export const ManageExpressions = () => {
           onClick={() => {
             setShowDeleteModal(false)
           }}
-          className="backdrop-blur-sm bg-tert/40 text-white w-9 h-9 text-center p-2 rounded-full absolute top-64 right-96 cursor-pointer" >
+          className="backdrop-blur-sm bg-tert/40 z-50 text-white w-9 h-9 text-center p-2 rounded-full absolute top-64 right-96 cursor-pointer" >
           X
         </div>
         <div className="shadow-md bg-white p-4 rounded-lg text-center">
@@ -228,12 +228,12 @@ export const ManageExpressions = () => {
       </div>
 
       {/* EDIT MODAL */}
-      <div className={`${showForm ? "" : "hidden"} fixed flex mx-auto justify-center items-center backdrop-blur-sm bg-tert/10 h-screen w-screen top-0`}>
+      <div className={`${showForm ? "" : "hidden"} fixed flex flex-row-reverse mx-auto justify-center items-center backdrop-blur-sm bg-tert/10 h-screen w-screen top-0`}>
         <div
           onClick={() => {
             setShowForm(!showForm)
           }}
-          className="backdrop-blur-sm bg-tert/40 text-white w-9 h-9 text-center p-2 rounded-full absolute top-20 right-80 cursor-pointer" >
+          className="backdrop-blur-sm bg-tert/40 z-50 text-white w-9 h-9 text-center p-2 rounded-full absolute top-20 right-80 cursor-pointer" >
           X
         </div>
         <div className="rounded-3xl border border-gray-100 bg-white shadow-2xl shadow-gray-600/10 backdrop-blur-2xl">
