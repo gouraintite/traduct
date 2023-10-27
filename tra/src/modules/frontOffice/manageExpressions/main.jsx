@@ -126,12 +126,12 @@ export const ManageExpressions = () => {
   return (
     <>
       <Nav />
-      <div className="h-auto pt-20 px-6">
+      <div className="h-auto pt-24 px-6">
         <button onClick={() => { navigator('/new_expression') }}
           className="mt-4 relative flex h-11 w-auto items-center justify-center px-6 before:absolute before:inset-0 before:rounded-full before:bg-primary before:transition before:duration-300 hover:before:scale-105 active:after:bg-secondary active:duration-75 active:before:scale-95">
           <span className="relative text-base font-semibold text-white">Ajouter une expression</span>
         </button> 
-        {valLog.length}
+        {/* {valLog.length} */}
         <div className="my-6 rounded">
           {dictionaryItems && valLog.map((item) => (
             <div key={item.id}>
@@ -141,14 +141,14 @@ export const ManageExpressions = () => {
                 //console.log(item, 'on hover');
                 //console.log(isGoingToBeDeleteId, 'hover'); 
               }}
-                className="flex justify-around border my-2 py-4 pl-6 overflow-hidden items-center">
-                <div className={`min-w-9/12 w-9/12 overscroll-hidden`}>
-                {item?.expressions.length > 0 ? String(item?.expressions[1].contenu) : '---'} {item.id}
+                className="flex justify-around border my-2 py-4 pl-6 overflow-scroll items-center">
+                <div className={`w-9/12 h-12 flex items-center overflow-hidden`}>
+                {item?.expressions.length > 0 ? String(item?.expressions[1].contenu) : '---'}
                 </div>
-                <div className="px-3">
+                <div className="px-3 text-sm text-emerald-900 italic">
                   19/20/2023
                 </div>
-                <div className="flex justify-around mx-auto space-x-6">
+                <div className="flex justify-around items-end space-x-6">
                   <div
                     onClick={() => {
                       setShow(!show)
@@ -236,9 +236,9 @@ export const ManageExpressions = () => {
           className="backdrop-blur-sm bg-tert/40 z-50 text-white w-9 h-9 text-center p-2 rounded-full absolute top-20 right-80 cursor-pointer" >
           X
         </div>
-        <div className="rounded-3xl border border-gray-100 bg-white shadow-2xl shadow-gray-600/10 backdrop-blur-2xl">
+        <div className="rounded-3xl relative border border-gray-100 bg-white shadow-2xl shadow-gray-600/10 backdrop-blur-2xl">
           <div className="pt-8 py-2 sm:p-16">
-            <h2 className="mb-6 text-2xl font-bold text-gray-800">Modification d'une expréssion</h2>
+            <h2 className="mb-6 text-2xl lg:text-start text-center font-bold text-gray-800">Modification d'une expréssion</h2>
             <AddExpressionForm calledToEdit={true} autoFill={detailsExpression} />
           </div>
         </div>

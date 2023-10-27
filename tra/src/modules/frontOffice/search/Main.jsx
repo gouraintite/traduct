@@ -7,7 +7,7 @@ import DetailsModal from "../../../components/details"
 //import for requests
 import axiosInstance from '../../../config/axios'
 import { base_url_api2 } from "@/config/constants"
- 
+import { FaEye } from "react-icons/fa"
 
 export const Search = () => {
 
@@ -118,10 +118,9 @@ export const Search = () => {
           <p className="text-white text-4xl font-bold mb-6">Apprenez en ecourtant ou en lisant avec A-frilang</p>
 
           <form action="" className="mt-9">
-            <div className="flex justify-center bg-white w-2/3 mx-auto rounded-md">
-
+            <div className="flex justify-center bg-white w-11/12 md:w-2/3 mx-auto rounded-md">
               <input type="text"
-                className="w-8/12 py-3 px-3 mt-0 outline-none rounded-l-md"
+                className="w-7/12 py-3 px-3 mt-0 outline-none rounded-l-md"
               />
               <select name="" id="" className="px-4 w-3/12">
                 <option value="">Catégories</option>
@@ -155,7 +154,7 @@ export const Search = () => {
                 <option value="conversation_3">Conversation type 3</option>
                 <option value="conversation_4">Conversation type 4</option>
               </select>
-              <button className="bg-secondary w-1/12 rounded-r-md">
+              <button className="bg-secondary w-3/12 rounded-r-md">
                 Lancer
               </button>
             </div>
@@ -171,23 +170,23 @@ export const Search = () => {
           Découvrez et apprennez en toute liberté.
         </p>
       </div>
-      <div className="flex flex-wrap justify-start mx-auto gap-2 px-2 my-6">
+      <div className="flex flex-wrap justify-around mx-auto gap-y-2 px-2 my-6">
           {dictionaryItems && dictionaryItems.map(item => (
           <div onMouseEnter={()=>{
             setDetailsExpression(item)
-          }} key={item.id} className="my-6 mx-7 w-1/5">
-                <div className="border-none lg:min-w-[350px]  text-lg bg-tert/10 hover:bg-tert/20 duration-300 ease-in-out rounded-md p-3">
+          }} key={item.id} className="my-6 lg:w-1/4 mx-auto px-3 md:w-1/2 sm:w-1/2 w-full">
+                <div className="group border-none lg:min-w-[350px] text-lg bg-tert/10 hover:bg-tert/20 transition-all duration-300 ease-in hover:ring-secondary hover:ring-1 rounded-md p-3">
                   <div className="text-end text-sm cursor-pointer">
                     <p 
                       onClick={()=>{
                         setShow(true)
                         setDetailsExpression(item)
                       }}
-                      className="font-bold text-secondary text-lg">
-                      voir plus
+                      className="text-transparent flex justify-end items-center group-hover:text-secondary text-md">
+                      <FaEye size={20} /> <span className="pl-2">voir plus</span>
                     </p>
                   </div>
-                  <div className="flex justify-start py-1">
+                  <div className="flex justify-start">  
                     <p><span className="font-bold pr-2">Fr:</span>{String(item?.expressions[0]?.contenu).slice(0, 55)}...</p> 
                   </div>
                   <div className="flex justify-start py-1">

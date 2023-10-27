@@ -10,3 +10,84 @@
     font-weight: 400;
     scroll-behavior: smooth;
 }
+
+.test {
+    background: white;
+    animation-direction: alternate;
+}
+
+.test:hover{
+    animation-duration: .5s;
+    animation-name: testimony;
+    animation-fill-mode: forwards;
+}
+
+@keyframes testimony {
+    from {
+        background: linear-gradient(
+            to top right,
+            white 90%,
+            white 0%,
+            green 100%,
+            green 0%
+        );
+    }
+
+    20%{
+        background: linear-gradient(
+            to top right,
+            white 70%,
+            white 0%,
+            green 100%,
+            green 0%
+        );
+    }
+
+    40%{
+        background: linear-gradient(
+            to top right,
+            white 60%,
+            white 0%,
+            green 100%,
+            green 0%
+        );
+    }
+
+    60%{
+        background: linear-gradient(
+            to top right,
+            white 40%,
+            white 0%,
+            green 100%,
+            green 0%
+        );
+    }
+
+    80%{
+        background: linear-gradient(
+            to top right,
+            white 20%,
+            white 0%,
+            green 100%,
+            green 0%
+        );
+    }
+
+    to{
+        background: linear-gradient(
+            to top right,
+            white 10%,
+            white 0%,
+            green 100%,
+            green 100%
+        );
+    }
+}
+
+.card_test{
+    @apply aspect-auto p-8 border-2 border-secondary rounded-3xl shadow-2xl shadow-gray-600 test;
+}
+
+.testimony_card {
+   @apply aspect-auto p-8 border-2 border-secondary rounded-3xl bg-white hover:bg-tert/50 duration-300 ease-in shadow-2xl shadow-gray-600;
+}

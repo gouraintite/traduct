@@ -49,8 +49,8 @@ const DetailsModal = ({ content, calledByAdmin, handlePassPropToParent, handleEd
                 !openEditModal
               })
             }}
-              className="mt-4 relative flex h-11 w-auto items-center justify-center px-6 before:absolute before:inset-0 before:rounded-full before:bg-primary before:transition before:duration-300 hover:before:scale-105 active:after:bg-secondary active:duration-75 active:before:scale-95">
-              <span className="relative text-base font-semibold text-white flex items-center"> <FaPen className="mr-2" /> Modifier cette expression </span>
+              className="mt-4 relative flex h-11 w-1/2 overflow-scroll items-center justify-center px-6 before:absolute before:inset-0 before:rounded-full before:bg-primary before:transition before:duration-300 hover:before:scale-105 active:after:bg-secondary active:duration-75 active:before:scale-95">
+              <span className="relative text-base font-semibold text-white flex items-center"> <FaPen className="mr-2" /> <span className="hidden lg:block">Modifier cette expression</span> </span>
             </button>
             <button onClick={() => {
               handlePassPropToParent((openDeleteModal) => {
@@ -58,8 +58,8 @@ const DetailsModal = ({ content, calledByAdmin, handlePassPropToParent, handleEd
                 //console.log(openDeleteModal, 'delete modal');
               })
             }}
-              className="mt-4 relative flex h-11 w-auto items-center justify-center px-6 before:absolute before:inset-0 before:rounded-full before:bg-red-600 before:transition before:duration-300 hover:before:scale-105 active:after:bg-red-500 active:duration-75 active:before:scale-95">
-              <span className="relative text-base font-semibold text-white flex items-center"> <FaTrash className="mr-2" /> Supprimer cette expression </span>
+              className="mt-4 relative flex h-11 w-1/2 overflow-scroll items-center justify-center px-6 before:absolute before:inset-0 before:rounded-full before:bg-red-600 before:transition before:duration-300 hover:before:scale-105 active:after:bg-red-500 active:duration-75 active:before:scale-95">
+              <span className="relative text-base font-semibold text-white flex items-center"> <FaTrash className="mr-2" /> <span className="hidden lg:block">Supprimer cette expression</span> </span>
             </button>
           </div>
         </>

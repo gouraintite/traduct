@@ -190,20 +190,11 @@ const AddExpressionForm = ({ calledToEdit, autoFill }) => {
     })
   }
 
-  const handleUpdate = ()=>{
-    Promise.all([handleEditFrAndEn, handleEditTranslationsFrAndEn])
-    .then(
-      console.log
-    )
-    .catch(
-      console.log
-    )
-  }
 
   return (<>
-    <form action="" className="space-y-6" onSubmit={(e) => { handleCreateDictionnaryItem(e) }}>
-      <div className='flex justify-center mx-auto items-center w-full space-x-6'>
-        <div className="w-1/2">
+    <form action="" className="space-y-6 overflow-scroll " onSubmit={(e) => { handleCreateDictionnaryItem(e) }}>
+      <div className='flex lg:flex-nowrap  md:flex-nowrap flex-wrap justify-center mx-auto items-center w-full lg:space-x-6 space-x-0 lg:space-y-0 md:space-x-3 md:space-y-0 space-y-4'>
+        <div className="w-2/3 lg:w-1/2">
           <label className="text-gray-600">Français</label>
           <textarea
             onChange={(e) => { handleChangeInput(e, setFormData) }}
@@ -217,7 +208,7 @@ const AddExpressionForm = ({ calledToEdit, autoFill }) => {
           />
         </div>
 
-        <div className="w-1/2">
+        <div className="w-2/3 lg:w-1/2">
           <label className="text-gray-600">English</label>
           <textarea
             onChange={(e) => { handleChangeInput(e, setFormData) }}
@@ -231,9 +222,8 @@ const AddExpressionForm = ({ calledToEdit, autoFill }) => {
           />
         </div>
       </div>
-      <div className='flex justify-center mx-auto items-center w-full space-x-6'>
-
-      <div className="w-1/2">
+      <div className='flex lg:flex-nowrap  md:flex-nowrap flex-wrap justify-center mx-auto items-center w-full lg:space-x-6 space-x-0 lg:space-y-0 md:space-x-3 md:space-y-0 space-y-4'>
+        <div className="w-2/3 lg:w-1/2">
           <label className="text-gray-600">Jô</label>
           <textarea
             onChange={(e) => { handleChangeInput(e, setFormData) }}
@@ -246,7 +236,7 @@ const AddExpressionForm = ({ calledToEdit, autoFill }) => {
             className="focus:outline-none block w-full rounded-md border border-gray-200 bg-transparent px-4 py-3 text-gray-600 transition duration-300 focus:ring-2 focus:ring-secondary/90"
           />
         </div>
-        <div className="w-1/2">
+        <div className="w-2/3 lg:w-1/2">
           <label className="text-gray-600">Ŋgə̂mbà</label>
           <textarea
             onChange={(e) => { handleChangeInput(e, setFormData) }}
@@ -260,8 +250,8 @@ const AddExpressionForm = ({ calledToEdit, autoFill }) => {
           />
         </div>
       </div>
-      <div className='flex justify-center mx-auto items-center w-full space-x-6'>
-        <div className="w-1/2">
+      <div className='flex lg:flex-nowrap  md:flex-nowrap flex-wrap justify-center mx-auto items-center w-full lg:space-x-6 space-x-0 lg:space-y-0 md:space-x-3 md:space-y-0 space-y-4'>
+      <div className="w-2/3 lg:w-1/2">
           <label className="text-gray-600">Exemple Ŋgə̂mbà</label>
           <textarea
             onChange={(e) => { handleChangeInput(e, setFormData) }}
@@ -275,7 +265,7 @@ const AddExpressionForm = ({ calledToEdit, autoFill }) => {
           />
         </div>
 
-        <div className="w-1/2">
+        <div className="w-2/3 lg:w-1/2">
           <label className="text-gray-600">Exemple Jô</label>
           <textarea
             onChange={(e) => { handleChangeInput(e, setFormData) }}
