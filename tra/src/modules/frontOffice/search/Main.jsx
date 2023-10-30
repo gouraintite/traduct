@@ -71,8 +71,10 @@ export const Search = () => {
 
 
   const handleGetData = ()=>{
-    console.log(`${base_url_api2}dictionaryItems/getAll`)
-    axiosInstance.get(`${base_url_api2}/dictionaryItems/getAll?page=0`)
+    const headers = {
+      'ngrok-skip-browser-warning': 'true'
+    };
+    axiosInstance.get(`${base_url_api2}/dictionaryItems/getAll?page=0`, { headers })
     .then(response=>{
       setDictionaryItems(response?.data) 
       console.log(response, 'res peekjk');
