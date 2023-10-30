@@ -18,20 +18,20 @@ const AddExpressionForm = ({ calledToEdit, autoFill }) => {
     audio1: null,
     audio2: null
   })
-  //console.log(autoFill,String(autoFill?.expressions[0]?.contenu), calledToEdit, 'autof');
+  console.log(autoFill,String(autoFill?.expressions[0]?.contenu), calledToEdit, 'autof');
   const [dicos, setDicos] = useState(null)
   const [audioFile, setAudioFile] = useState(null);
   const [audioFile2, setAudioFile2] = useState(null);
 
   const handleFileChange = (e) => {
     const file = e.target.files[0];
-    //console.log(file, 'file 1');
+    console.log(file, 'file 1');
     setAudioFile(file);
   };
 
   const handleFileChange2 = (e) => {
     const file = e.target.files[0];
-    //console.log(file, 'file 2');
+    console.log(file, 'file 2');
     setAudioFile2(file);
   };
 
@@ -46,7 +46,7 @@ const AddExpressionForm = ({ calledToEdit, autoFill }) => {
       .then((response) => {
         new Promise((res)=>{
           setDicos(response?.data?.id)
-          //console.log(dicos, response?.data?.id);
+          console.log(dicos, response?.data?.id);
           res(true)
         }).then(()=>{
           handleAddFrAndEn(response?.data?.id)
@@ -55,7 +55,7 @@ const AddExpressionForm = ({ calledToEdit, autoFill }) => {
         })
       })
       .catch((error) => {
-        //console.log(error, 'this is error');
+        console.log(error, 'this is error');
       })
   }
 
@@ -65,9 +65,9 @@ const AddExpressionForm = ({ calledToEdit, autoFill }) => {
       "langue": "francais",
       "contenu": formData.fr
     }).then((response) => {
-      //console.log(response, 'fr done');
+      console.log(response, 'fr done');
     }).catch(err => {
-      //console.log(err, 'fr failed');
+      console.log(err, 'fr failed');
     })
 
 
@@ -76,9 +76,9 @@ const AddExpressionForm = ({ calledToEdit, autoFill }) => {
       "langue": "englais",
       "contenu": formData.en
     }).then((response) => {
-      //console.log(response, 'eng done');
+      console.log(response, 'eng done');
     }).catch(err => {
-      //console.log(err, 'fr failed');
+      console.log(err, 'fr failed');
     })
   }
 
@@ -97,9 +97,9 @@ const AddExpressionForm = ({ calledToEdit, autoFill }) => {
         'Content-Type': 'multipart/form-data', // Important for sending form data
       },
     }).then((response) => {
-      //console.log(response, 'jô translations done');
+      console.log(response, 'jô translations done');
     }).catch(err => {
-      //console.log(err, 'jô translations failed');
+      console.log(err, 'jô translations failed');
     })
 
 
@@ -110,17 +110,17 @@ const AddExpressionForm = ({ calledToEdit, autoFill }) => {
     formDataContent2.append('contenu', formData.lang1); // Add the name field
     formDataContent2.append('example', formData.exemple_lang1);
     formDataContent2.append('audioFile', audioFile2); // Add the audio file
-    //console.log(audioFile2, 'aud 2');
+    console.log(audioFile2, 'aud 2');
 
     axios.post(`${base_url_api2}/translations/add`, formDataContent2, {
       headers: {
         'Content-Type': 'multipart/form-data', // Important for sending form data
       },
     }).then((response) => {
-      //console.log(response, 'Ŋgə̂mbà translations done');
+      console.log(response, 'Ŋgə̂mbà translations done');
       navigator('/manage_expressions')
     }).catch(err => {
-      //console.log(err, 'Ŋgə̂mbà translations failed');
+      console.log(err, 'Ŋgə̂mbà translations failed');
     })
   }
 
@@ -131,9 +131,9 @@ const AddExpressionForm = ({ calledToEdit, autoFill }) => {
       "langue": "francais",
       "contenu": formData.fr
     }).then((response) => {
-      //console.log(response, 'fr done');
+      console.log(response, 'fr done');
     }).catch(err => {
-      //console.log(err, 'fr failed');
+      console.log(err, 'fr failed');
     })
 
 
@@ -142,9 +142,9 @@ const AddExpressionForm = ({ calledToEdit, autoFill }) => {
       "langue": "englais",
       "contenu": formData.en
     }).then((response) => {
-      //console.log(response, 'eng done');
+      console.log(response, 'eng done');
     }).catch(err => {
-      //console.log(err, 'fr failed');
+      console.log(err, 'fr failed');
     })
   }
 
@@ -163,9 +163,9 @@ const AddExpressionForm = ({ calledToEdit, autoFill }) => {
         'Content-Type': 'multipart/form-data', // Important for sending form data
       },
     }).then((response) => {
-      //console.log(response, 'jô translations done');
+      console.log(response, 'jô translations done');
     }).catch(err => {
-      //console.log(err, 'jô translations failed');
+      console.log(err, 'jô translations failed');
     })
 
 
@@ -176,17 +176,17 @@ const AddExpressionForm = ({ calledToEdit, autoFill }) => {
     formDataContent2.append('contenu', formData.lang2); // Add the name field
     formDataContent2.append('example', formData.exemple_lang2);
     formDataContent2.append('audioFile', audioFile2); // Add the audio file
-    //console.log(audioFile2, 'aud 2');
+    console.log(audioFile2, 'aud 2');
 
     axios.post(`${base_url_api2}/translations/add`, formDataContent2, {
       headers: {
         'Content-Type': 'multipart/form-data', // Important for sending form data
       },
     }).then((response) => {
-      //console.log(response, 'Ŋgə̂mbà translations done');
+      console.log(response, 'Ŋgə̂mbà translations done');
       // navigator('/manage_expressions')
     }).catch(err => {
-      //console.log(err, 'Ŋgə̂mbà translations failed');
+      console.log(err, 'Ŋgə̂mbà translations failed');
     })
   }
 

@@ -30,7 +30,7 @@ const handleLogin = (e)=>{
   e.preventDefault()
   axios.post(`${base_url_api2}/users/login`, data)
     .then((response)=>{
-      //console.log(response, 'this is the response');
+      console.log(response, 'this is the response');
       localStorage.setItem('userToken', response?.data?.acessToKen)
       localStorage.setItem('userId', response?.data?.id)
       navigator('/expressions')

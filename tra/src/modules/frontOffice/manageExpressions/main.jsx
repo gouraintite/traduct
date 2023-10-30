@@ -8,6 +8,7 @@ import AddExpressionForm from "../addExpression/addForm"
 import { RxCrossCircled } from 'react-icons/rx'
 import { useRecoilValue, useRecoilState } from "recoil"
 import { expressionData } from "../../../stores/data"
+import Empty from '../../../assets/empty.svg'
 
 // requests imports
 import { base_url_api2 } from '@/config/constants'
@@ -78,26 +79,26 @@ export const ManageExpressions = () => {
     axiosInstance.get(`${base_url_api2}/dictionaryItems/getAll?page=0`)
       .then(response => {
         setDictionaryItems(response?.data)
-        //console.log(response.data);
+        console.log(response.data);
       })
       .then((response) => {
-        //console.log(dictionaryItems, 'errer');
-        //console.log(response, 'this is the response');
+        console.log(dictionaryItems, 'errer');
+        console.log(response, 'this is the response');
       })
       .catch(err => {
-        //console.log(err, 'this is the error');
+        console.log(err, 'this is the error');
       })
   }
 
   const handleDelete = ()=>{
     axiosInstance.delete(`http://localhost:8080/api/dictionaryItems/delete/${isGoingToBeDeleteId}`)
     .then(response=>{
-      //console.log(response, 'res delete');
+      console.log(response, 'res delete');
       alert('suppression réussie')
       handleGetData()
     })
     .catch((error)=>{
-      //console.log(error, 'while deleting');
+      console.log(error, 'while deleting');
     })
   }
   if (count < 1) {
@@ -107,7 +108,7 @@ export const ManageExpressions = () => {
   }
 
   const handlePassDataFromDetailModalToParent = (value) => {
-    //console.log(value, 'in parent');
+    console.log(value, 'in parent');
     if (value) {
       setShow(false)
       setShowDeleteModal(true)
@@ -116,7 +117,7 @@ export const ManageExpressions = () => {
 
 
   const handlePassDataFromDetailModalToParentShow = (value) => {
-    //console.log(value, 'in parent');
+    console.log(value, 'in parent');
     if (value) {
       setShow(false)
       setShowForm(true)
@@ -133,13 +134,13 @@ export const ManageExpressions = () => {
         </button> 
         {/* {valLog.length} */}
         <div className="my-6 rounded">
-          {dictionaryItems && valLog.map((item) => (
+          {typeof(dictionaryItems) === 'object' && valLog.map((item) => (
             <div key={item.id}>
               <div onMouseEnter={()=>{
                 setIsGoingToBeDeleteId(item.id) 
                 setDetailsExpression(item)
-                //console.log(item, 'on hover');
-                //console.log(isGoingToBeDeleteId, 'hover'); 
+                console.log(item, 'on hover');
+                console.log(isGoingToBeDeleteId, 'hover'); 
               }}
                 className="flex justify-around border my-2 py-4 pl-6 overflow-scroll items-center">
                 <div className={`w-9/12 h-12 flex items-center overflow-hidden`}>
@@ -169,7 +170,7 @@ export const ManageExpressions = () => {
                     onClick={() => {
                       setShowDeleteModal(!showDeleteModal)
                       setIsGoingToBeDeleteId(item.id)
-                      //console.log(isGoingToBeDeleteId, 'click');
+                      console.log(isGoingToBeDeleteId, 'click');
                     }} className="text-tert border cursor-pointer p-2 rounded-lg hover:text-white hover:bg-red-500 duration-300 ease-in-out h-9">
                     <FaTrash size={16} />
                   </div>
@@ -177,6 +178,12 @@ export const ManageExpressions = () => {
               </div>
             </div>
           ))}
+
+        {(typeof(dictionaryItems) !== 'object' || dictionaryItems.length === 0) && <div className="text-center text-md font-bold text-gray-800 md:text-xl">
+          
+          <img src={Empty} className="w-1/2 mx-auto" alt="" />
+          Aucune expréssion disponible pour le moment
+          </div>}
         </div>
       </div>
 

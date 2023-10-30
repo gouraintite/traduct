@@ -7,7 +7,7 @@ const Nav = ({opacity}) => {
   let op = opacity || 5;
   return (
     <>
-      <div className={`fixed border-2 h-auto py-2 bg-white/${op} backdrop-blur-sm w-full z-50`}>
+      <div className={`fixed border-b-2 h-auto py-2 bg-white/${op} backdrop-blur-sm w-full z-50`}>
         <div className="py-2 xl:px-24 px-6 h-auto">
           <div className="flex justify-evenly">
               <div className="flex justify-start mr-auto items-center w-1/4">
@@ -27,21 +27,6 @@ const Nav = ({opacity}) => {
                       </a>
                     </li>
                   )
-                }
-                {
-                  (window.location.pathname === '/' && !localStorage.getItem('userToken')) && (
-                    <>
-                      <li>
-                        <a href='#footer' className='border rounded-full px-3 py-2 duration-200 easy-in-out hover:bg-secondary hover:text-white hover:cursor-pointer'>
-                          Contact
-                        </a>
-                      </li>
-                      <li>
-                        <a href='#start' className='border rounded-full px-3 py-2 duration-200 easy-in-out bg-tert text-white hover:cursor-pointer'>
-                          Commencer
-                        </a>
-                      </li>
-                    </>)
                 }
                 {
                   localStorage.getItem('userToken') && (
@@ -73,7 +58,7 @@ const Nav = ({opacity}) => {
                     <path d="M4,17.2h56c1.2,0,2.3-1,2.3-2.3s-1-2.3-2.3-2.3H4c-1.2,0-2.3,1-2.3,2.3S2.8,17.2,4,17.2z"/>
                   </g>
                   </svg> */}
-                  {!localStorage.getItem('userToken') && <a href='/login' className='rounded-full px-3 py-1 duration-200 easy-in-out bg-primary border-none text-white hover:cursor-pointer'>
+                  {localStorage.getItem('userToken') && <a href='/login' className='rounded-full px-3 py-1 duration-200 easy-in-out bg-primary border-none text-white hover:cursor-pointer'>
                     Connexion
                   </a>}
               </div>

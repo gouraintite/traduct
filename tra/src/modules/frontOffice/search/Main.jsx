@@ -8,6 +8,8 @@ import DetailsModal from "../../../components/details"
 import axiosInstance from '../../../config/axios'
 import { base_url_api2 } from "@/config/constants"
 import { FaEye } from "react-icons/fa"
+import Empty from '../../../assets/empty.svg'
+import axios from "axios"
 
 export const Search = () => {
 
@@ -63,17 +65,17 @@ export const Search = () => {
 
 
   useEffect(()=>{
-    handleGetData();
-
+    handleGetData()
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [count])
 
+
   const handleGetData = ()=>{
-    //console.log(`${base_url_api2}dictionaryItems/getAll`)
+    console.log(`${base_url_api2}dictionaryItems/getAll`)
     axiosInstance.get(`${base_url_api2}/dictionaryItems/getAll?page=0`)
     .then(response=>{
       setDictionaryItems(response?.data) 
-      //console.log(response, 'res peekjk');
+      console.log(response, 'res peekjk');
     })
     .then((response)=>{
       response?.data[0]?.translations[0].audioData.arrayBuffer();
@@ -82,11 +84,11 @@ export const Search = () => {
       setAudioData(new Uint8Array(AudioData));
     })
     .then(()=>{
-      //console.log(dictionaryItems, 'errer');
-      //console.log(response, 'this is the response');
+      console.log(dictionaryItems, 'errer');
+      console.log(response, 'this is the response');
     })
     .catch(()=>{
-      //console.log(err, 'this is the error');
+      console.log(err, 'this is the error');
     })
   }
 
@@ -171,7 +173,7 @@ export const Search = () => {
         </p>
       </div>
       <div className="flex flex-wrap justify-around mx-auto gap-y-2 px-2 my-6">
-          {dictionaryItems && dictionaryItems.map(item => (
+          {typeof(dictionaryItems) ==='object' && dictionaryItems.map(item => (
           <div onMouseEnter={()=>{
             setDetailsExpression(item)
           }} key={item.id} className="my-6 lg:w-1/4 mx-auto px-3 md:w-1/2 sm:w-1/2 w-full">
@@ -207,6 +209,12 @@ export const Search = () => {
                 </div>
           </div>
         ))}
+
+        {(typeof(dictionaryItems) !== 'object' || dictionaryItems.length === 0) && <div className="text-center text-md font-bold text-gray-800 md:text-xl">
+          
+          <img src={Empty} className="w-1/2 mx-auto" alt="" />
+          Aucune expréssion disponible pour le moment
+          </div>}
       </div>
 
       {/* THE MODAL */}

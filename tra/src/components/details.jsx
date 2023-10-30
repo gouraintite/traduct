@@ -15,7 +15,7 @@ const DetailsModal = ({ content, calledByAdmin, handlePassPropToParent, handleEd
     );
   };
 
-  //console.log(calledByAdmin, 'called by admin');
+  console.log(calledByAdmin, 'called by admin');
   return (
     <div className="w-2/3 min-h-1/2 bg-white rounded-xl shadow-xl">
       <div className="p-4">
@@ -45,7 +45,7 @@ const DetailsModal = ({ content, calledByAdmin, handlePassPropToParent, handleEd
           <div className="flex space-x-4">
             <button onClick={() => {
               handleEditMore((openEditModal) => {
-                //console.log(openEditModal, 'deeep');
+                console.log(openEditModal, 'deeep');
                 !openEditModal
               })
             }}
@@ -55,7 +55,7 @@ const DetailsModal = ({ content, calledByAdmin, handlePassPropToParent, handleEd
             <button onClick={() => {
               handlePassPropToParent((openDeleteModal) => {
                 !openDeleteModal
-                //console.log(openDeleteModal, 'delete modal');
+                console.log(openDeleteModal, 'delete modal');
               })
             }}
               className="mt-4 relative flex h-11 w-1/2 overflow-scroll items-center justify-center px-6 before:absolute before:inset-0 before:rounded-full before:bg-red-600 before:transition before:duration-300 hover:before:scale-105 active:after:bg-red-500 active:duration-75 active:before:scale-95">
