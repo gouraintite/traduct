@@ -91,7 +91,7 @@ export const ManageExpressions = () => {
   }
 
   const handleDelete = ()=>{
-    axiosInstance.delete(`http://localhost:8080/api/dictionaryItems/delete/${isGoingToBeDeleteId}`)
+    axiosInstance.delete(`${base_url_api2}/dictionaryItems/delete/${isGoingToBeDeleteId}`)
     .then(response=>{
       console.log(response, 'res delete');
       alert('suppression réussie')
