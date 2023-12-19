@@ -11,7 +11,7 @@ const AddExpressionForm = ({ calledToEdit, autoFill }) => {
   const [formData, setFormData] = useState({
     fr: '',
     en: '',
-    lang1: 'oppp',
+    lang1: '',
     lang2: '',
     exemple_lang1: '',
     exemple_lang2: '',

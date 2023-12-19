@@ -9,7 +9,6 @@ import axiosInstance from '../../../config/axios'
 import { base_url_api2 } from "@/config/constants"
 import { FaEye } from "react-icons/fa"
 import Empty from '../../../assets/empty.svg'
-import axios from "axios"
 
 export const Search = () => {
 
@@ -57,7 +56,8 @@ export const Search = () => {
       ]
 
   })
-
+  const [nextPage, setNextPage] = useState(0)
+  const [nbrPage, setNbrPage] = useState(0)
   // useEffect(()=>{
   //   show(show=>{setShow(!show)})
   // }, [choosed])
@@ -66,17 +66,19 @@ export const Search = () => {
 
   useEffect(()=>{
     handleGetData()
+    handlePagination(nbrPage)
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [count])
+  }, [count, nextPage, nbrPage])
 
 
   const handleGetData = ()=>{
     const headers = {
       'ngrok-skip-browser-warning': 'true'
     };
-    axiosInstance.get(`${base_url_api2}/dictionaryItems/getAll?page=0`, { headers })
+    axiosInstance.get(`${base_url_api2}/dictionaryItems/getAll?page=${nextPage}`, { headers })
     .then(response=>{
-      setDictionaryItems(response?.data) 
+      setDictionaryItems(response?.data?.content)
+      setNbrPage(response?.data?.totalPages)
       console.log(response, 'res peekjk');
     })
     .then((response)=>{
@@ -87,9 +89,8 @@ export const Search = () => {
     })
     .then(()=>{
       console.log(dictionaryItems, 'errer');
-      console.log(response, 'this is the response');
     })
-    .catch(()=>{
+    .catch((err)=>{
       console.log(err, 'this is the error');
     })
   }
@@ -100,6 +101,24 @@ export const Search = () => {
     },100);
   }
 
+  const handlePagination = (pages)=>{
+
+    let tab = [];
+    for (let index = 0; index <pages; index++) {
+      tab[index] = index
+    }
+    return <>
+      {tab.map( i=>(
+                  <div key={i}
+                  onClick={()=>{
+                    setNextPage(i)
+                  }}
+                  className={`${nextPage === i && 'bg-tert text-white'} border-2 w-9 h-9 p-1 text-center m-1 rounded-lg hover:text-white hover:bg-secondary hover:font-semibold cursor-pointer`}>
+                    {i+1}
+                </div>
+      ))}
+    </>
+  }
 
   const Ho = ({byte}) =>{
     const audioData = "data:audio/mpeg;base64," + byte;
@@ -165,7 +184,6 @@ export const Search = () => {
           </form>
         </div>
       </div>
-
       <div className="lg:mb-12 mt-8 space-y-4 px-6 md:px-0">
         <h2 className="text-center text-2xl font-bold text-gray-800 md:text-4xl">
           Expréssions disponibles
@@ -217,6 +235,10 @@ export const Search = () => {
           <img src={Empty} className="w-1/2 mx-auto" alt="" />
           Aucune expréssion disponible pour le moment
           </div>}
+      </div>
+
+      <div className="flex mx-auto justify-center py-6">
+      {handlePagination(nbrPage)}
       </div>
 
       {/* THE MODAL */}

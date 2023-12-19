@@ -82,7 +82,7 @@ export const ManageExpressions = () => {
     };
     axiosInstance.get(`${base_url_api2}/dictionaryItems/getAll?page=0`, { headers })
       .then(response => {
-        setDictionaryItems(response?.data)
+        setDictionaryItems(response?.data?.content)
         console.log(response.data);
       })
       .then((response) => {

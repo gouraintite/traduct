@@ -2,7 +2,7 @@ import Logo from '../assets/logo.png'
 
 const Footer = () => {
     return (
-        <footer id='footer' className="mt-auto w-full max-w-full py-10 px-4 sm:px-6 lg:px-8 mx-auto bg-tert">
+        <footer id='footer' className="w-full max-w-full py-10 px-4 sm:px-6 lg:px-8 mx-auto bg-tert mb-0 absolute">
             <div className="text-center"> 
                 <div>
                     <a className="flex-none text-xl font-semibold text-white" href="#" aria-label="Brand">

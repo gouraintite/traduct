@@ -6,6 +6,7 @@ import Main from "../modules/frontOffice/home/Main"
 import Search  from "../modules/frontOffice/search/Main";
 import AddExpression from "../modules/frontOffice/addExpression/Main";
 import ManageExpressions from "../modules/frontOffice/manageExpressions/main";
+import NewCategorie from "../modules/frontOffice/addCategorie/newCategorie";
 // import Register from "../modules/auth/pages/register/register";
 // import Register from "../modules/auth/pages/register/Main";
 import ErrorPage from "../modules/auth/pages/error-page/Main";
@@ -34,6 +35,10 @@ function Router() {
         {
             path: '/manage_expressions',
             element: <ManageExpressions />
+        },
+        {
+            path: '/add_categorie',
+            element: <NewCategorie />
         },
         {
             path: '*',

@@ -42,7 +42,7 @@ const handleLogin = (e)=>{
 
   return (
     <>
-      <div className="relative py-12 bg-primary/10 lg:h-full h-screen">
+      <div className="relative py-12 bg-primary/10 h-screen">
         <div className="container relative m-auto px-6 text-gray-500 md:px-12 xl:px-40">
           <div className="m-auto space-y-8 md:w-8/12 lg:w-6/12 xl:w-6/12">
             <a href="/">
