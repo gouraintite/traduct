@@ -57,6 +57,7 @@ export const Search = () => {
 
   })
   const [nextPage, setNextPage] = useState(0)
+  const [searchedWord, setSearchedWord] = useState('')
   const [nbrPage, setNbrPage] = useState(0)
   // useEffect(()=>{
   //   show(show=>{setShow(!show)})
@@ -68,14 +69,12 @@ export const Search = () => {
     handleGetData()
     handlePagination(nbrPage)
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [count, nextPage, nbrPage])
+  }, [count, nextPage, nbrPage, searchedWord])
 
 
   const handleGetData = ()=>{
-    const headers = {
-      'ngrok-skip-browser-warning': 'true'
-    };
-    axiosInstance.get(`${base_url_api2}/dictionaryItems/getAll?page=${nextPage}`, { headers })
+
+    axiosInstance.get(`${base_url_api2}/dictionaryItems/search?page=${nextPage}&searchTerm=`)
     .then(response=>{
       setDictionaryItems(response?.data?.content)
       setNbrPage(response?.data?.totalPages)
@@ -184,6 +183,7 @@ export const Search = () => {
           </form>
         </div>
       </div>
+
       <div className="lg:mb-12 mt-8 space-y-4 px-6 md:px-0">
         <h2 className="text-center text-2xl font-bold text-gray-800 md:text-4xl">
           Expréssions disponibles
@@ -242,7 +242,7 @@ export const Search = () => {
       </div>
 
       {/* THE MODAL */}
-      <div className={`${show ? "" : "hidden"} fixed flex mx-auto justify-center items-center backdrop-blur-sm bg-tert/10 h-screen w-screen top-0`}>
+      <div className={`${show ? "" : "hidden"} z-50 fixed flex mx-auto justify-center items-center backdrop-blur-sm bg-tert/10 h-screen w-screen top-0`}>
         <div 
           onClick={()=>{
             setShow(false)

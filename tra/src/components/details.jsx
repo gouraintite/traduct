@@ -20,10 +20,10 @@ const DetailsModal = ({ content, calledByAdmin, handlePassPropToParent, handleEd
     <div className="w-2/3 min-h-1/2 bg-white rounded-xl shadow-xl">
       <div className="p-4">
         <div className="flex justify-start py-1 my-3">
-          <p><span className="font-bold pr-2">Français:</span>{content?.expressions.length > 0 ? String(content?.expressions[0]?.contenu) : '---'}</p>
+          <p><span className="font-bold pr-2">Français:</span>{content?.expressions.length > 0 ? String(content?.expressions[1]?.contenu) : '---'}</p>
         </div>
         <div className="flex justify-start py-1 my-3">
-          <p><span className="font-bold pr-2">English:</span>{content?.expressions.length > 0 ? String(content?.expressions[1]?.contenu) : '---'}</p>
+          <p><span className="font-bold pr-2">English:</span>{content?.expressions.length > 0 ? String(content?.expressions[0]?.contenu) : '---'}</p>
         </div>
         <div className="flex justify-start items-center py-1 my-3">
           <p><span className="font-bold pr-2">Ŋgə̂mbà:</span>{content?.translations.length > 0 ? String(content?.translations[1]?.contenu) : '---'}</p>

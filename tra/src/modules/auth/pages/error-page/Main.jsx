@@ -19,10 +19,10 @@ let navigate = useNavigate();
       <div className="text-center py-10 px-4 sm:px-6 lg:px-8">
         <h1 className="block text-7xl font-bold sm:text-9xl">404</h1>
         <h1 className="block text-2xl font-bold text-white"></h1>
-        <p className="mt-3 text-gray-600 text-2xl">Oops, une erreur s'est produite.</p>
+        <p className="mt-3 text-gray-600 text-2xl">Oops, Une situation inattendue.</p>
         <p className="text-gray-600 mt-9">La page actuelle est introuvable.</p>
         <div className="mt-10 flex flex-col justify-center items-center gap-2 sm:flex-row sm:gap-3">
-          <a className="w-full sm:w-auto inline-flex justify-center items-center gap-x-3 text-center bg-secondary hover:bg-secondary border border-transparent text-white text-sm font-medium rounded-md focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 focus:ring-offset-white transition py-3 px-4 dark:focus:ring-offset-gray-800" href="/" target="_blank">
+          <a href="/" className="w-full sm:w-auto inline-flex justify-center items-center gap-x-3 text-center bg-secondary hover:bg-secondary border border-transparent text-white text-sm font-medium rounded-md focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 focus:ring-offset-white transition py-3 px-4 dark:focus:ring-offset-gray-800" href="/" target="_blank">
             Aller à la page d'accueil
           </a>
           <p onClick={()=>{navigate(-1)}} className="cursor-pointer w-full sm:w-auto inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold text-secondary hover:text-secondary focus:outline-none focus:ring-2 ring-offset-white focus:ring-blue-500 focus:ring-offset-2 transition-all text-sm py-3 px-4 dark:ring-offset-slate-900">

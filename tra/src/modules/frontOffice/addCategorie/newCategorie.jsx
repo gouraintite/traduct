@@ -4,10 +4,8 @@ import React from 'react'
 import { useState, useEffect } from "react"
 import Nav from "../../../components/navBar"
 import Footer from "../../../components/footer"
-import { FaEye, FaTrash, FaPen } from 'react-icons/fa'
-import { useNavigate } from "react-router-dom"
-import DetailsModal from "../../../components/details"
-import AddExpressionForm from "../addExpression/addForm"
+import {FaTrash} from 'react-icons/fa'
+
 import { RxCrossCircled } from 'react-icons/rx'
 import { useRecoilValue, useRecoilState } from "recoil"
 import { expressionData } from "../../../stores/data"
@@ -28,29 +26,7 @@ const NewCategorie = () => {
     const [hideCategorieForm, setHideCategorieForm] = useState(true)
 
     const [count, setCount] = useState(0)
-    const [categorie, setCategorie] = useState([
-        {
-            id: 0,
-            content: 'base'
-        },
-        {
-            id: 1,
-            content: 'market'
-        },
-        {
-            id: 2,
-            content: 'artisanat'
-        },
-        {
-            id: 3,
-            content: 'salutations'
-        },
-        {
-            id: 4,
-            content: 'guerison'
-        }
-
-    ]);
+    const [categorie, setCategorie] = useState([]);
     const [detailsExpression, setDetailsExpression] = useState(
         {
             "id": 10011,
@@ -91,9 +67,7 @@ const NewCategorie = () => {
             ]
 
         })
-    console.log(valLog, 'vallog here');
 
-    let navigator = useNavigate();
 
     useEffect(() => {
         handleGetData();
@@ -103,16 +77,13 @@ const NewCategorie = () => {
 
     const handleGetData = () => {
 
-        const headers = {
-            'ngrok-skip-browser-warning': 'true'
-        };
-        axiosInstance.get(`${base_url_api2}/dictionaryItems/getAll?page=0`, { headers })
+        axiosInstance.get(`${base_url_api2}/categories/get-all`)
             .then(response => {
-                setDictionaryItems(response?.data?.content)
+                setCategorie(response?.data)
                 console.log(response.data);
             })
             .then((response) => {
-                console.log(dictionaryItems, 'errer');
+                console.log(categorie, 'errer');
                 console.log(response, 'this is the response');
             })
             .catch(err => {
@@ -121,7 +92,7 @@ const NewCategorie = () => {
     }
 
     const handleDelete = () => {
-        axiosInstance.delete(`${base_url_api2}/dictionaryItems/delete/${isGoingToBeDeleteId}`)
+        axiosInstance.delete(`${base_url_api2}/categories/delete/${isGoingToBeDeleteId}`)
             .then(response => {
                 console.log(response, 'res delete');
                 alert('suppression réussie')
@@ -157,17 +128,20 @@ const NewCategorie = () => {
     return (
         <>
             <Nav />
-            <div className="h-screen pt-24 px-6">
-                <button onClick={() => { }}
-                    className="mt-4 absolute h-11 w-2/12 items-center justify-center pt-2 before:absolute before:inset-0 before:rounded-full before:bg-primary before:transition before:duration-300 hover:before:scale-105 active:after:bg-secondary active:duration-75 active:before:scale-95">
+            <div className="container mx-auto h-screen pt-24">
+                <button
+                    className="mt-4 lg:mx-12 absolute h-11 w-2/12 items-center justify-center pt-2 before:absolute before:inset-0 before:rounded-full before:bg-primary before:transition before:duration-300 hover:before:scale-105 active:after:bg-secondary active:duration-75 active:before:scale-95">
                     <span onClick={() => { setHideCategorieForm(!hideCategorieForm), console.log('gogog') }} className="relative text-base font-semibold text-white">Ajouter une catégorie</span>
                     <div className={`border border-t-0 bg-tert rounded-lg ${hideCategorieForm ? 'hidden' : ' z-2'}`}>
-                        <AddCategorie />
+                        <AddCategorie afterDone={()=>{
+                            setHideCategorieForm(!hideCategorieForm)
+                        }} />
+                        {console.log(categorie, 'cating')}
                     </div>
                 </button>
                 {/* {valLog.length} */}
-                <div className="my-6 rounded flex space-x-4 lg:mt-24 lg:px-12">
-                    {typeof (categorie) === 'object' && categorie.map((item) => (
+                <div className="my-6 rounded flex space-x-4 lg:mt-28 lg:px-12">
+                    {categorie && categorie.map((item) => (
                         <div key={item.id}>
                             <div onMouseEnter={() => {
                                 setIsGoingToBeDeleteId(item.id)
@@ -175,9 +149,9 @@ const NewCategorie = () => {
                                 console.log(item, 'on hover');
                                 console.log(isGoingToBeDeleteId, 'hover');
                             }}
-                                className="flex rounded-xl bg-primary text-white hover:bg-secondary hover:shadow-lg transition-all duration-150 ease-in-out px-3 justify-around border my-2 overflow-scroll">
+                                className="flex rounded-lg bg-primary text-white hover:bg-secondary hover:shadow-lg transition-all duration-150 ease-in-out px-3 justify-around border my-2 overflow-scroll">
                                 <div className={`auto h-12 flex items-center overflow-hidden`}>
-                                    {item?.content.length > 0 ? String(item?.content) : '---'}
+                                    {item?.name.length > 0 ? String(item?.name) : '---'}
                                 </div>
                                 <div className="flex justify-around items-end space-x-6">
                                    <div

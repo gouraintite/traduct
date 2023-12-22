@@ -1,7 +1,9 @@
 import { useState } from "react"
+import toast, { Toaster } from 'react-hot-toast';
 import { handleChangeInput } from "../../../frontOffice/addExpression/functions"
 import Logo from "../../../../assets/logo.png"
 import axios from 'axios'
+import axiosInstance from "../../../../config/axios";
 import { base_url_api2 } from "@/config/constants"
 import { useNavigate } from "react-router-dom"
 const Main = () => {
@@ -25,18 +27,34 @@ const Main = () => {
 //     // Add other headers as needed
 //   }
 // };
+let message = 'Here is your toast message'
+const notify = () => toast(message);
 
+const handleGetLoggedUserDetails = () =>{
+  axiosInstance.get(`${base_url_api2}/users/get-user`)
+    .then(response=>{
+      localStorage.setItem('userId', response?.data?.userId)
+      localStorage.setItem('userName', response?.data?.username)
+    })
+    .catch((error)=>{
+      console.log(error);
+    })
+} 
 const handleLogin = (e)=>{
   e.preventDefault()
+  console.log('connnect');
   axios.post(`${base_url_api2}/users/login`, data)
     .then((response)=>{
-      console.log(response, 'this is the response');
       localStorage.setItem('userToken', response?.data?.acessToKen)
-      localStorage.setItem('userId', response?.data?.id)
+      handleGetLoggedUserDetails()
       navigator('/expressions')
     })
-    .catch(()=>{
-      // console.log(err, 'this is the error');
+    .catch((error)=>{
+      console.log(error.response.data.exception, 'this is the error');
+      if (error.response.data.exception === "BadCredentialsException") {
+        message = 'Informations de connexion incorrects, vérifiez puis reéssayez à nouveau.'
+        notify()
+      }
     })
 }
 
@@ -50,7 +68,31 @@ const handleLogin = (e)=>{
             </a>
             <div className="rounded-3xl border border-gray-100 bg-white shadow-2xl shadow-gray-600/10 backdrop-blur-2xl">
               <div className="p-8 py-12 sm:p-16">
-                  <h2 className="mb-8 text-2xl font-bold text-gray-800">Connexion </h2>
+                  <h2 className="mb-8 text-2xl font-bold text-gray-800">Connexion </h2> 
+                  <Toaster 
+                      containerStyle={{
+                        textAlign:'center',
+                        fontSize:'larger'
+                      }}
+                      toastOptions={{
+                        // Define default options
+                        className: '',
+                        duration: 4000,
+                        style: {
+                          background: '#72491B',
+                          color: '#fff',
+                        },
+                    
+                        // Default options for specific types
+                        success: {
+                          duration: 3000,
+                          theme: {
+                            primary: 'green',
+                            secondary: 'black',
+                          },
+                        },
+                      }}
+                    />
                   <form action="" className="space-y-8" onSubmit={(e)=>{handleLogin(e)}}>
                     <div className="space-y-2">
                       <label className="text-gray-600">Email</label>

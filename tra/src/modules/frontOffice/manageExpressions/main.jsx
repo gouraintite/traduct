@@ -1,4 +1,6 @@
 import { useState, useEffect } from "react"
+import toast, { Toaster } from 'react-hot-toast';
+
 import Nav from "../../../components/navBar"
 import Footer from "../../../components/footer"
 import { FaEye, FaTrash, FaPen } from 'react-icons/fa'
@@ -65,7 +67,7 @@ export const ManageExpressions = () => {
       ]
 
   })
-  console.log(valLog, 'vallog here');
+  // console.log(valLog, 'vallog here');
 
   let navigator = useNavigate();
 
@@ -80,29 +82,29 @@ export const ManageExpressions = () => {
     const headers = {
       'ngrok-skip-browser-warning': 'true'
     };
-    axiosInstance.get(`${base_url_api2}/dictionaryItems/getAll?page=0`, { headers })
+    axiosInstance.get(`${base_url_api2}/dictionaryItems/get-all`, { headers })
       .then(response => {
         setDictionaryItems(response?.data?.content)
-        console.log(response.data);
+        // console.log(response.data);
       })
       .then((response) => {
-        console.log(dictionaryItems, 'errer');
-        console.log(response, 'this is the response');
-      })
+      //   console.log(dictionaryItems, 'errer');
+      //   console.log(response, 'this is the response');
+       })
       .catch(err => {
-        console.log(err, 'this is the error');
+        // console.log(err, 'this is the error');
       })
   }
 
   const handleDelete = ()=>{
     axiosInstance.delete(`${base_url_api2}/dictionaryItems/delete/${isGoingToBeDeleteId}`)
-    .then(response=>{
-      console.log(response, 'res delete');
-      alert('suppression réussie')
+    .then(()=>{
+      const notify = () => toast('Suppréssion éffectuée avec succès');
+      notify()
       handleGetData()
     })
     .catch((error)=>{
-      console.log(error, 'while deleting');
+      // console.log(error, 'while deleting');
     })
   }
   if (count < 1) {
@@ -112,7 +114,7 @@ export const ManageExpressions = () => {
   }
 
   const handlePassDataFromDetailModalToParent = (value) => {
-    console.log(value, 'in parent');
+    // console.log(value, 'in parent');
     if (value) {
       setShow(false)
       setShowDeleteModal(true)
@@ -121,7 +123,7 @@ export const ManageExpressions = () => {
 
 
   const handlePassDataFromDetailModalToParentShow = (value) => {
-    console.log(value, 'in parent');
+    // console.log(value, 'in parent');
     if (value) {
       setShow(false)
       setShowForm(true)
@@ -131,7 +133,7 @@ export const ManageExpressions = () => {
   return (
     <>
       <Nav />
-      <div className="h-auto pt-24 px-6">
+      <div className="h-screen pt-24 px-6 z-50">
         <button onClick={() => { navigator('/new_expression') }}
           className="mt-4 relative flex h-11 w-auto items-center justify-center px-6 before:absolute before:inset-0 before:rounded-full before:bg-primary before:transition before:duration-300 hover:before:scale-105 active:after:bg-secondary active:duration-75 active:before:scale-95">
           <span className="relative text-base font-semibold text-white">Ajouter une expression</span>
@@ -143,15 +145,20 @@ export const ManageExpressions = () => {
               <div onMouseEnter={()=>{
                 setIsGoingToBeDeleteId(item.id) 
                 setDetailsExpression(item)
-                console.log(item, 'on hover');
-                console.log(isGoingToBeDeleteId, 'hover'); 
+                // console.log(item, 'on hover');
+                // console.log(isGoingToBeDeleteId, 'hover'); 
               }}
-                className="flex justify-around border my-2 py-4 pl-6 overflow-scroll items-center">
+                className="flex justify-around border my-2 py-2 pl-6 overflow-scroll items-center hover:bg-secondary/10 duration-150 ease-in">
                 <div className={`w-9/12 h-12 flex items-center overflow-hidden`}>
-                {item?.expressions.length > 0 ? String(item?.expressions[1].contenu) : '---'}
+                  <div className="w-1/2">
+                    {item?.expressions.length > 0 ? String(item?.expressions[1].contenu) : '---'}
+                  </div>
+                  <div className="w-1/2 border-x-2 py-4 pl-3">
+                    {item?.expressions.length > 0 ? String(item?.expressions[0].contenu) : '---'}
+                  </div>
                 </div>
                 <div className="px-3 text-sm text-emerald-900 italic">
-                  19/20/2023
+                  {String(item?.lastUpdated).slice(0, 10)}
                 </div>
                 <div className="flex justify-around items-end space-x-6">
                   <div
@@ -174,7 +181,7 @@ export const ManageExpressions = () => {
                     onClick={() => {
                       setShowDeleteModal(!showDeleteModal)
                       setIsGoingToBeDeleteId(item.id)
-                      console.log(isGoingToBeDeleteId, 'click');
+                      // console.log(isGoingToBeDeleteId, 'click');
                     }} className="text-tert border cursor-pointer p-2 rounded-lg hover:text-white hover:bg-red-500 duration-300 ease-in-out h-9">
                     <FaTrash size={16} />
                   </div>
@@ -190,9 +197,32 @@ export const ManageExpressions = () => {
           </div>}
         </div>
       </div>
-
+      <Toaster 
+                      containerStyle={{
+                        textAlign:'center',
+                        fontSize:'larger'
+                      }}
+                      toastOptions={{
+                        // Define default options
+                        className: '',
+                        duration: 4000,
+                        style: {
+                          background: '#72491B',
+                          color: '#fff',
+                        },
+                    
+                        // Default options for specific types
+                        success: {
+                          duration: 3000,
+                          theme: {
+                            primary: 'green',
+                            secondary: 'black',
+                          },
+                        },
+                      }}
+                    />
       {/* DETAIL MODAL */}
-      <div className={`${show ? "" : "hidden"} fixed flex mx-auto justify-center items-center backdrop-blur-sm bg-tert/10 h-screen w-screen top-0`}>
+      <div className={`${show ? "" : "hidden"} z-50 fixed flex mx-auto justify-center items-center backdrop-blur-sm bg-tert/10 h-screen w-screen top-0`}>
         <div
           onClick={() => {
             setShow(false)
@@ -205,7 +235,7 @@ export const ManageExpressions = () => {
 
 
       {/* DELETE MODAL */}
-      <div className={`${showDeleteModal ? "" : "hidden"} fixed flex mx-auto justify-center items-center backdrop-blur-sm bg-tert/10 h-screen w-screen top-0`}>
+      <div className={`${showDeleteModal ? "" : "hidden"} z-50 fixed flex mx-auto justify-center items-center backdrop-blur-sm bg-tert/10 h-screen w-screen top-0`}>
         <div
           onClick={() => {
             setShowDeleteModal(false)
@@ -239,7 +269,7 @@ export const ManageExpressions = () => {
       </div>
 
       {/* EDIT MODAL */}
-      <div className={`${showForm ? "" : "hidden"} fixed flex flex-row-reverse mx-auto justify-center items-center backdrop-blur-sm bg-tert/10 h-screen w-screen top-0`}>
+      <div className={`${showForm ? "" : "hidden"} z-50 fixed flex flex-row-reverse mx-auto justify-center items-center backdrop-blur-sm bg-tert/10 h-screen w-screen top-0`}>
         <div
           onClick={() => {
             setShowForm(!showForm)

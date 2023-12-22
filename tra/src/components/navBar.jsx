@@ -52,20 +52,24 @@ const Nav = () => {
                                                 </div>
                                             </NavLink>
                                         </li>
-                                        <li>
-                                            <NavLink to={"/manage_expressions"} className="block md:px-4 group">
-                                                <div className="nav_item">
-                                                    <span className="group-hover:text-yellow-700">Gérer</span>
-                                                </div>
-                                            </NavLink>
-                                        </li>
-                                        <li>
-                                            <NavLink to={"/new_expression"} className="block md:px-4 group">
-                                                <div className="nav_item">
-                                                    <span className="group-hover:text-yellow-700">Ajouter</span>
-                                                </div>
-                                            </NavLink>
-                                        </li>
+                                        {
+                                            localStorage.getItem('userToken') && <>
+                                                <li>
+                                                    <NavLink to={"/manage_expressions"} className="block md:px-4 group">
+                                                        <div className="nav_item">
+                                                            <span className="group-hover:text-yellow-700">Expréssions</span>
+                                                        </div>
+                                                    </NavLink>
+                                                </li>
+                                                <li>
+                                                    <NavLink to={"/add_categorie"} className="block md:px-4 group">
+                                                        <div className="nav_item">
+                                                            <span className="group-hover:text-yellow-700">Catégories</span>
+                                                        </div>
+                                                    </NavLink>
+                                                </li>
+                                            </>
+                                        }
                                     </ul>
                                 </div>
 
@@ -76,7 +80,7 @@ const Nav = () => {
                                             Devenir membre
                                         </span>
                                     </NavLink>
-                                    <NavLink to={'/connexion'} type="button" title="Start buying" className="w-full py-3 px-6 rounded-xl text-center transition bg-secondary hover:bg-yellow-700 active:bg-yellow-800 focus:bg-yellow-700 sm:w-max">
+                                    <NavLink to={'/login'} type="button" title="Start buying" className="w-full py-3 px-6 rounded-xl text-center transition bg-secondary hover:bg-yellow-700 active:bg-yellow-800 focus:bg-yellow-700 sm:w-max">
                                         <span className="block text-white font-semibold">
                                             Connexion
                                         </span>
