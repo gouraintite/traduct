@@ -3,7 +3,7 @@ import toast, { Toaster } from 'react-hot-toast';
 import { handleChangeInput } from "../../../frontOffice/addExpression/functions"
 import Logo from "../../../../assets/logo.png"
 import axios from 'axios'
-import axiosInstance from "../../../../config/axios";
+// import axiosInstance from "../../../../config/axios";
 import { base_url_api2 } from "@/config/constants"
 import { useNavigate } from "react-router-dom"
 const Main = () => {
@@ -20,18 +20,18 @@ const Main = () => {
     "email" : formData.userName
 }
 
-// const config = {
-//   headers: {
-//     'Access-Control-Allow-Origin': '*',
-//     'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept'
-//     // Add other headers as needed
-//   }
-// };
+const config = {
+  headers: {
+    'Access-Control-Allow-Origin': '*',
+    'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept'
+    // Add other headers as needed
+  }
+};
 let message = 'Here is your toast message'
 const notify = () => toast(message);
 
 const handleGetLoggedUserDetails = () =>{
-  axiosInstance.get(`${base_url_api2}/users/get-user`)
+  axios.get(`${base_url_api2}/users/get-user`)
     .then(response=>{
       localStorage.setItem('userId', response?.data?.userId)
       localStorage.setItem('userName', response?.data?.username)
@@ -43,7 +43,7 @@ const handleGetLoggedUserDetails = () =>{
 const handleLogin = (e)=>{
   e.preventDefault()
   console.log('connnect');
-  axios.post(`${base_url_api2}/users/login`, data)
+  axios.post(`http://localhost:8080/api/users/login`, data, config)
     .then((response)=>{
       localStorage.setItem('userToken', response?.data?.acessToKen)
       handleGetLoggedUserDetails()

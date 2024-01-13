@@ -72,9 +72,9 @@ export const Search = () => {
   }, [count, nextPage, nbrPage, searchedWord])
 
 
-  const handleGetData = ()=>{
-
-    axiosInstance.get(`${base_url_api2}/dictionaryItems/search?page=${nextPage}&searchTerm=`)
+  const handleGetData = (search = '')=>{
+     
+    axiosInstance.get(`http://localhost:8080/api/dictionaryItems/search?${searchedWord || search}=testItem&categoriesId=`) 
     .then(response=>{
       setDictionaryItems(response?.data?.content)
       setNbrPage(response?.data?.totalPages)
@@ -135,13 +135,17 @@ export const Search = () => {
   return (
     <div className="">
       <Nav opacity={40} />
-      <div className="w-screen min-h-[400px] bg-exp bg-cover bg-no-repeat bg-center text-center flex justify-center mx-auto items-center">
+      <div className="w-screen min-h-[400px] bg-cover bg-no-repeat bg-center text-center flex justify-center mx-auto items-center">
         <div className="h-1/2 w-full">
           <p className="text-white text-4xl font-bold mb-6">Apprenez en ecourtant ou en lisant avec A-frilang</p>
 
           <form action="" className="mt-9">
             <div className="flex justify-center bg-white w-11/12 md:w-2/3 mx-auto rounded-md">
               <input type="text"
+                onChange={(e)=>{
+                  console.log(e.target.value, 'vqqq');
+                  handleGetData(e.target.value)               
+                }}
                 className="w-7/12 py-3 px-3 mt-0 outline-none rounded-l-md"
               />
               <select name="" id="" className="px-4 w-3/12">
@@ -192,11 +196,11 @@ export const Search = () => {
           Découvrez et apprennez en toute liberté.
         </p>
       </div>
-      <div className="flex flex-wrap justify-around mx-auto gap-y-2 px-2 my-6">
+      <div className="grid lg:grid-cols-4 md:grid-cols-3 gap-x-5 mx-auto gap-y-2 px-2 my-6 ring">
           {typeof(dictionaryItems) ==='object' && dictionaryItems.map(item => (
           <div onMouseEnter={()=>{
             setDetailsExpression(item)
-          }} key={item.id} className="my-6 lg:w-1/4 mx-auto px-3 md:w-1/2 sm:w-1/2 w-full">
+          }} key={item.id} className="my-6 mx-auto px-3 w-full">
                 <div className="group border-none lg:min-w-[350px] text-lg bg-tert/10 hover:bg-tert/20 transition-all duration-300 ease-in hover:ring-secondary hover:ring-1 rounded-md p-3">
                   <div className="text-end text-sm cursor-pointer">
                     <p 
