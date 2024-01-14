@@ -196,7 +196,7 @@ export const Search = () => {
           Découvrez et apprennez en toute liberté.
         </p>
       </div>
-      <div className="grid lg:grid-cols-4 md:grid-cols-3 gap-x-5 mx-auto gap-y-2 px-2 my-6 ring">
+      <div className="grid lg:grid-cols-4 md:grid-cols-3 gap-x-5 mx-auto gap-y-2 px-2 my-6">
           {typeof(dictionaryItems) ==='object' && dictionaryItems.map(item => (
           <div onMouseEnter={()=>{
             setDetailsExpression(item)
