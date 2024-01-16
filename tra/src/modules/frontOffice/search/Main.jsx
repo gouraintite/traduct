@@ -6,6 +6,7 @@ import Footer from "../../../components/footer"
 import DetailsModal from "../../../components/details"
 //import for requests
 import axiosInstance from '../../../config/axios'
+import axios from "axios"
 import { base_url_api2 } from "@/config/constants"
 import { FaEye } from "react-icons/fa"
 import Empty from '../../../assets/empty.svg'
@@ -59,22 +60,39 @@ export const Search = () => {
   const [nextPage, setNextPage] = useState(0)
   const [searchedWord, setSearchedWord] = useState('')
   const [nbrPage, setNbrPage] = useState(0)
-  // useEffect(()=>{
-  //   show(show=>{setShow(!show)})
-  // }, [choosed])
-
+  const [categories, setCategories] = useState([])
+  const [getCategories, setGetCategories] = useState(null)
 
 
   useEffect(()=>{
-    handleGetData()
+    handleGetData(searchedWord)
+    handleGetCategories()
     handlePagination(nbrPage)
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [count, nextPage, nbrPage, searchedWord])
+  }, [count, nextPage, nbrPage, searchedWord, categories])
 
+  const handleGetCategories = () => {
+    axiosInstance.get(`${base_url_api2}/categories/get-all`)
+      .then(response => {
+        setGetCategories(response?.data)
+        console.log(response.data);
+      })
+      .then((response) => {
+        console.log(getCategories, 'errer');
+        console.log(response, 'this is the response');
+      })
+      .catch(err => {
+        console.log(err, 'this is the error');
+      })
+  }
 
   const handleGetData = (search = '')=>{
+
+    let searchEndPoint = `http://localhost:8080/api/dictionaryItems/search?searchTerm=${searchedWord}&categoriesId=${categories}`
+    let getEndPoint = `http://localhost:8080/api/dictionaryItems/get-all`
+    console.log(((searchedWord || categories)? searchEndPoint : getEndPoint), search, 'hereee');
      
-    axiosInstance.get(`http://localhost:8080/api/dictionaryItems/search?${searchedWord || search}=testItem&categoriesId=`) 
+    axios.get(search? searchEndPoint : getEndPoint) 
     .then(response=>{
       setDictionaryItems(response?.data?.content)
       setNbrPage(response?.data?.totalPages)
@@ -135,7 +153,7 @@ export const Search = () => {
   return (
     <div className="">
       <Nav opacity={40} />
-      <div className="w-screen min-h-[400px] bg-cover bg-no-repeat bg-center text-center flex justify-center mx-auto items-center">
+      <div className="w-screen min-h-[400px] bg-exp bg-cover bg-no-repeat bg-center text-center flex justify-center mx-auto items-center">
         <div className="h-1/2 w-full">
           <p className="text-white text-4xl font-bold mb-6">Apprenez en ecourtant ou en lisant avec A-frilang</p>
 
@@ -144,13 +162,23 @@ export const Search = () => {
               <input type="text"
                 onChange={(e)=>{
                   console.log(e.target.value, 'vqqq');
+                  setSearchedWord(e.target.value)
                   handleGetData(e.target.value)               
                 }}
                 className="w-7/12 py-3 px-3 mt-0 outline-none rounded-l-md"
               />
               <select name="" id="" className="px-4 w-3/12">
-                <option value="">Catégories</option>
-                <option value="base">Basique</option>
+                {getCategories && getCategories.map(item=>(
+                  <option 
+                    value={item.id} 
+                    key={item.id}
+                    onClick={()=>{
+                      setCategories(item.id)
+                      console.log(categories, 'cat after add', item.id);
+                    }}
+                    >{item.name}</option>
+                ))}
+                {/* <option value="base">Basique</option>
                 <option value="week_day">Jour de la semaine</option>
                 <option value="months">Mois</option>
                 <option value="pronons">Pronons</option>
@@ -178,9 +206,13 @@ export const Search = () => {
                 <option value="conversation_1">Conversation type 1</option>
                 <option value="conversation_2">Conversation type 2</option>
                 <option value="conversation_3">Conversation type 3</option>
-                <option value="conversation_4">Conversation type 4</option>
+                <option value="conversation_4">Conversation type 4</option> */}
               </select>
-              <button className="bg-secondary w-3/12 rounded-r-md">
+              <button 
+              onClick={()=>{
+                handleGetData(searchedWord)
+              }}
+              className="bg-secondary w-3/12 rounded-r-md">
                 Lancer
               </button>
             </div>
@@ -196,38 +228,40 @@ export const Search = () => {
           Découvrez et apprennez en toute liberté.
         </p>
       </div>
-      <div className="grid lg:grid-cols-4 md:grid-cols-3 gap-x-5 mx-auto gap-y-2 px-2 my-6 ring">
+      <div className="flex flex-wrap mx-auto gap-y-2 px-2 my-6">
           {typeof(dictionaryItems) ==='object' && dictionaryItems.map(item => (
           <div onMouseEnter={()=>{
             setDetailsExpression(item)
-          }} key={item.id} className="my-6 mx-auto px-3 w-full">
-                <div className="group border-none lg:min-w-[350px] text-lg bg-tert/10 hover:bg-tert/20 transition-all duration-300 ease-in hover:ring-secondary hover:ring-1 rounded-md p-3">
-                  <div className="text-end text-sm cursor-pointer">
-                    <p 
-                      onClick={()=>{
-                        setShow(true)
-                        setDetailsExpression(item)
-                      }}
-                      className="text-transparent flex justify-end items-center group-hover:text-secondary text-md">
-                      <FaEye size={20} /> <span className="pl-2">voir plus</span>
-                    </p>
-                  </div>
-                  <div className="flex justify-start">  
-                    <p><span className="font-bold pr-2">Fr:</span>{String(item?.expressions[0]?.contenu).slice(0, 55)}...</p> 
-                  </div>
-                  <div className="flex justify-start py-1">
-                    <p><span className="font-bold pr-2">En:</span>{String(item?.expressions[1]?.contenu).slice(0, 55)}...</p>
-                  </div>
-                  <div className="flex justify-between items-center w-full py-1">
-                    <p className="w-10/12 overflow-scroll"><span className="font-bold pr-2">Ŋgə̂mbà:</span>{String(item.translations[1]?.contenu).slice(0, 55)}...</p>
-                    <div className="w-2/12">
-                      <Ho byte={String(item?.translations[0]?.audioData)} />
+          }} key={item.id} className="my-6 mx-auto lg:w-1/4 md:w-1/3 w-1/2 p-6">
+                <div className="w-full">
+                  <div className="group border-none lg:min-w-[350px] text-lg bg-tert/10 hover:bg-tert/20 transition-all duration-300 ease-in hover:ring-secondary hover:ring-1 rounded-md p-3">
+                    <div className="text-end text-sm cursor-pointer">
+                      <p 
+                        onClick={()=>{
+                          setShow(true)
+                          setDetailsExpression(item)
+                        }}
+                        className="text-transparent flex justify-end items-center group-hover:text-secondary text-md">
+                        <FaEye size={20} /> <span className="pl-2">voir plus</span>
+                      </p>
                     </div>
-                  </div>
-                  <div className="flex justify-between items-center w-full py-1">
-                    <p className="w-10/12 overflow-scroll"><span className="font-bold pr-2">Jô:</span>{String(item.translations[0]?.contenu).slice(0, 55)}...</p>
-                    <div className="w-2/12">
-                      <Ho byte={String(item?.translations[1]?.audioData)} />
+                    <div className="flex justify-start">  
+                      <p><span className="font-bold pr-2">Fr:</span>{String(item?.expressions[0]?.contenu).slice(0, 55)}...</p> 
+                    </div>
+                    <div className="flex justify-start py-1">
+                      <p><span className="font-bold pr-2">En:</span>{String(item?.expressions[1]?.contenu).slice(0, 55)}...</p>
+                    </div>
+                    <div className="flex justify-between items-center w-full py-1">
+                      <p className="w-10/12 overflow-scroll"><span className="font-bold pr-2">Ŋgə̂mbà:</span>{String(item.translations[1]?.contenu).slice(0, 55)}...</p>
+                      <div className="w-2/12">
+                        <Ho byte={String(item?.translations[0]?.audioData)} />
+                      </div>
+                    </div>
+                    <div className="flex justify-between items-center w-full py-1">
+                      <p className="w-10/12 overflow-scroll"><span className="font-bold pr-2">Jô:</span>{String(item.translations[0]?.contenu).slice(0, 55)}...</p>
+                      <div className="w-2/12">
+                        <Ho byte={String(item?.translations[1]?.audioData)} />
+                      </div>
                     </div>
                   </div>
                 </div>
