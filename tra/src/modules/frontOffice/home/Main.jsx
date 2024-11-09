@@ -7,7 +7,7 @@ import HowToUse from "../../../components/howToUse"
 const Login = () => {
   return (
     <>
-      <div className="w-full">
+      <div className="w-full container mx-auto">
       <Nav />
       <HeaderSection />
       <HowToUse />
@@ -130,8 +130,9 @@ const Login = () => {
         </div>
       </div>
       <Testimonials />
-      <Footer />
       </div>
+      <Footer />
+
     </>
   )
 }

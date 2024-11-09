@@ -93,9 +93,30 @@
 }
 
 .active {
-    @apply relative text-yellow-600 dark:text-yellow-800 w-auto before:-left-0.5 before:absolute before:-bottom-2 md:before:-bottom-7 before:w-full before:h-1 before:mx-auto before:mt-auto before:rounded-t-full before:bg-yellow-700
+    @apply relative text-yellow-600 dark:text-yellow-800 w-auto before:-left-0.5 before:absolute before:-bottom-1 md:before:-bottom-3 before:w-full before:h-1 before:mx-auto before:mt-auto before:rounded-t-full before:bg-yellow-700
 }
 
 .nav_item {
-    @apply relative before:absolute before:-bottom-2 md:before:-bottom-7 before:w-full before:h-1 before:origin-left before:mt-auto before:rounded-full before:bg-yellow-800 before:transition before:scale-x-0 group-hover:before:scale-x-100
+    @apply relative before:absolute before:-bottom-1 md:before:-bottom-3 before:w-full before:h-1 before:origin-left before:mt-auto before:rounded-full before:bg-yellow-800 before:transition before:scale-x-0 group-hover:before:scale-x-100
+}
+
+/* width */
+::-webkit-scrollbar {
+    width: 7px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 5px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
 }

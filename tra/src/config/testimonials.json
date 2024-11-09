@@ -1,0 +1,31 @@
+
+{
+     "title": "Frontend Developer",
+     "description": "This is a simple example of using JSON in a React app.",
+     "items": [
+       {
+         "testimony": "A-friLang m'a permis d'apprendre le jó, ma langue maternelle, de manière beaucoup plus efficace. Les ressources dans ma langue et les audios m'ont vraiment aidé à progresser rapidement.",
+         "name": "Kamogne Justin, 32 ans"
+       },
+       {
+         "testimony": "Grâce à A-friLang, j'ai pu enfin comprendre en profondeur les subtilités de la grammaire ŋgə̂mbà. les audios adaptés m'ont fait gagner un temps considérable dans mon apprentissage. Je suis vraiment très content de m’approprier tout seul ma langue ",
+         "name": "Suffeu Alain, 27 ans"
+       },
+       {
+         "testimony": "A-friLang est une véritable aubaine pour quelqu'un comme moi qui voulait approfondir mes connaissances du jó et du ŋgə̂mbà, deux variétés de la langue ghɔmálá'. Ceci me permet de mieux apprécier les nuances qui existent entre ces deux variétés de notre langue. C’est très intéressant. ",
+         "name": "Sah Mathias, 41 ans"
+       },
+       {
+         "testimony": "A-friLang m'a donné confiance en moi pour pratiquer le jó au quotidien. Les ressources audio sont vraiment top! Je peux maintenant m’essayer à échanger quelques mots et phrases avec les gens de ma communauté. Ce n’est plus un mystère d’apprendre ma langue et en plus toute seule.",
+         "name": "Kegne Marlyse, 29 ans"
+       },
+       {
+         "testimony": "Grâce à A-friLang, j'ai pu transmettre la richesse du ŋgə̂mbà à mes enfants de manière ludique et interactive. Nous apprenons tous ensemble chaque fois en associant le texte à l’audio. C’est quelque de chose de très pratique pour moi et mes enfants. Je dirais que c'est un outil indispensable pour préserver nos langues africaines et qu’il faudrait étendre à d’autres langues.",
+         "name": "Matcheu Berthe, 45 ans"
+       },
+       {
+         "testimony": "En tant que mère de famille, j'apprécie énormément la flexibilité d'A-friLang qui me permet d'apprendre le jó et le ŋgə̂mbà à mon rythme, même pendant mes moments libres. Ce qui n’était pas le cas avant car je n’ai pas pu bénéficier de la transmission de la langue via mes parents. J’apprécie vraiment cette initiative qui vient aider les gens comme nous. ",
+         "name": "Carine Matou, 35 ans"
+       }
+     ]
+   }

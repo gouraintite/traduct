@@ -30,7 +30,7 @@ const DetailsModal = ({ content, calledByAdmin, handlePassPropToParent, handleEd
           <Ho byte={String(content?.translations[0]?.audioData) || "---"} />
         </div>
         <div className="flex justify-start items-center py-1 my-3">
-          <p><span className="font-bold pr-2">Jô:</span>{content?.translations.length > 0 ? String(content?.translations[0]?.contenu) : '---'}</p>
+          <p><span className="font-bold pr-2">Jó:</span>{content?.translations.length > 0 ? String(content?.translations[0]?.contenu) : '---'}</p>
         <Ho byte={String(content?.translations[1]?.audioData) || "---"} />
 
         </div>
@@ -39,7 +39,7 @@ const DetailsModal = ({ content, calledByAdmin, handlePassPropToParent, handleEd
           <p><span className="font-bold pr-2">Exemple/Example Ŋgə̂mbà:</span>{String(content?.translations[1]?.example) || '---'}</p>
         </div>
         <div className="flex justify-start py-1 my-3">
-          <p><span className="font-bold pr-2">Exemple/Example Jô:</span>{String(content?.translations[0]?.example) || '---'}</p>
+          <p><span className="font-bold pr-2">Exemple/Example Jó:</span>{String(content?.translations[0]?.example) || '---'}</p>
         </div>
         {calledByAdmin && <>
           <div className="flex space-x-4">
@@ -49,7 +49,7 @@ const DetailsModal = ({ content, calledByAdmin, handlePassPropToParent, handleEd
                 !openEditModal
               })
             }}
-              className="mt-4 relative flex h-11 w-1/2 overflow-scroll items-center justify-center px-6 before:absolute before:inset-0 before:rounded-full before:bg-primary before:transition before:duration-300 hover:before:scale-105 active:after:bg-secondary active:duration-75 active:before:scale-95">
+              className="mt-4 relative flex h-11 w-1/2 overflow-hidden items-center justify-center px-6 before:absolute before:inset-0 before:rounded-full before:bg-primary before:transition before:duration-300 hover:before:scale-105 active:after:bg-secondary active:duration-75 active:before:scale-95">
               <span className="relative text-base font-semibold text-white flex items-center"> <FaPen className="mr-2" /> <span className="hidden lg:block">Modifier cette expression</span> </span>
             </button>
             <button onClick={() => {
@@ -58,7 +58,7 @@ const DetailsModal = ({ content, calledByAdmin, handlePassPropToParent, handleEd
                 console.log(openDeleteModal, 'delete modal');
               })
             }}
-              className="mt-4 relative flex h-11 w-1/2 overflow-scroll items-center justify-center px-6 before:absolute before:inset-0 before:rounded-full before:bg-red-600 before:transition before:duration-300 hover:before:scale-105 active:after:bg-red-500 active:duration-75 active:before:scale-95">
+              className="mt-4 relative flex h-11 w-1/2 overflow-hidden items-center justify-center px-6 before:absolute before:inset-0 before:rounded-full before:bg-red-600 before:transition before:duration-300 hover:before:scale-105 active:after:bg-red-500 active:duration-75 active:before:scale-95">
               <span className="relative text-base font-semibold text-white flex items-center"> <FaTrash className="mr-2" /> <span className="hidden lg:block">Supprimer cette expression</span> </span>
             </button>
           </div>

@@ -14,6 +14,7 @@ const AddCategorie = ({afterDone}) => {
       }).then(() => {
         afterDone()
         setCategorie('')
+        window.location.reload()
       }).catch(err => {
         console.log(err, 'fr failed');
       })

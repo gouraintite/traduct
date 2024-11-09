@@ -157,9 +157,9 @@ const AddExpressionForm = ({ calledToEdit, autoFill }) => {
         'Content-Type': 'multipart/form-data', // Important for sending form data
       },
     }).then((response) => {
-      console.log(response, 'jô translations done');
+      console.log(response, 'Jó translations done');
     }).catch(err => {
-      console.log(err, 'jô translations failed');
+      console.log(err, 'Jó translations failed');
     })
 
 
@@ -213,7 +213,7 @@ const AddExpressionForm = ({ calledToEdit, autoFill }) => {
     let formDataContent = new FormData();
 
     formDataContent.append('dictionaryItemId', dicos); // Add the name field
-    formDataContent.append('langue', "jô"); // Add the audio file
+    formDataContent.append('langue', "Jó"); // Add the audio file
     formDataContent.append('contenu', formData.lang1); // Add the name field
     formDataContent.append('example', formData.exemple_lang1);
     formDataContent.append('audioFile', audioFile); // Add the audio file
@@ -223,9 +223,9 @@ const AddExpressionForm = ({ calledToEdit, autoFill }) => {
         'Content-Type': 'multipart/form-data', // Important for sending form data
       },
     }).then((response) => {
-      console.log(response, 'jô translations done');
+      console.log(response, 'Jó translations done');
     }).catch(err => {
-      console.log(err, 'jô translations failed');
+      console.log(err, 'Jó translations failed');
     })
 
 
@@ -250,17 +250,20 @@ const AddExpressionForm = ({ calledToEdit, autoFill }) => {
     })
   }
 
+  console.log(autoFill, 'autooooo', formData);
+  
 
   return (<>
-    <form action="" className="space-y-6 overflow-scroll px-2" onSubmit={(e) => { handleCreateDictionnaryItem(e) }}>
+    <form action="" className="space-y-6 overflow-hidden px-2" onSubmit={(e) => { handleCreateDictionnaryItem(e) }}>
       <div className='flex lg:flex-nowrap md:flex-nowrap flex-wrap justify-center mx-auto items-center w-full lg:space-x-6 space-x-0 lg:space-y-0 md:space-x-3 md:space-y-0 space-y-4'>
         <div className="w-2/3 lg:w-1/2">
           <label className="text-gray-600">Français</label>
           <textarea
             onChange={(e) => { handleChangeInput(e, setFormData) }}
-            value={calledToEdit ? String(autoFill?.expressions[0]?.contenu) : formData.fr}
             name="fr"
             id="fr"
+            value={calledToEdit ? String(autoFill?.expressions[autoFill?.expressions[0]?.language === 10012 ? 0 : 1]?.contenu).slice(0, 55) : formData.fr}
+
             required
             cols="3"
             rows="1"
@@ -272,7 +275,7 @@ const AddExpressionForm = ({ calledToEdit, autoFill }) => {
           <label className="text-gray-600">English</label>
           <textarea
             onChange={(e) => { handleChangeInput(e, setFormData) }}
-            value={calledToEdit ? String(autoFill?.expressions[1]?.contenu) : formData.en}
+            value={calledToEdit ? String(autoFill?.expressions[autoFill?.expressions[1]?.language === 10013 ? 1 : 0]?.contenu).slice(0, 55) : formData.fr}
             name="en"
             id="en"
             required
@@ -284,10 +287,10 @@ const AddExpressionForm = ({ calledToEdit, autoFill }) => {
       </div>
       <div className='flex lg:flex-nowrap  md:flex-nowrap flex-wrap justify-center mx-auto items-center w-full lg:space-x-6 space-x-0 lg:space-y-0 md:space-x-3 md:space-y-0 space-y-4'>
         <div className="w-2/3 lg:w-1/2">
-          <label className="text-gray-600">Jô</label>
+          <label className="text-gray-600">Jó</label>
           <textarea
             onChange={(e) => { handleChangeInput(e, setFormData) }}
-            value={formData.lang2}
+            value={calledToEdit ? String(autoFill?.translations[autoFill?.translations[0]?.language === 10010 ? 0 : 1]?.contenu).slice(0, 55) : formData.fr}
             name="lang2"
             id="lang2"
             required
@@ -300,7 +303,7 @@ const AddExpressionForm = ({ calledToEdit, autoFill }) => {
           <label className="text-gray-600">Ŋgə̂mbà</label>
           <textarea
             onChange={(e) => { handleChangeInput(e, setFormData) }}
-            value={formData.lang1}
+            value={calledToEdit ? String(autoFill?.translations[autoFill?.translations[1]?.language === 10011 ? 1 : 0]?.contenu).slice(0, 55) : formData.fr}
             name="lang1"
             id="lang1"
             required
@@ -312,24 +315,10 @@ const AddExpressionForm = ({ calledToEdit, autoFill }) => {
       </div>
       <div className='flex lg:flex-nowrap  md:flex-nowrap flex-wrap justify-center mx-auto items-center w-full lg:space-x-6 space-x-0 lg:space-y-0 md:space-x-3 md:space-y-0 space-y-4'>
         <div className="w-2/3 lg:w-1/2">
-          <label className="text-gray-600">Exemple Ŋgə̂mbà</label>
+          <label className="text-gray-600">Exemple Jó</label>
           <textarea
             onChange={(e) => { handleChangeInput(e, setFormData) }}
-            value={calledToEdit ? String(autoFill?.translations[1]?.example) : formData.exemple_lang1}
-            name="exemple_lang1"
-            id="exemple_lang1"
-            required
-            cols="3"
-            rows="1"
-            className="focus:outline-none block w-full rounded-md border border-gray-200 bg-transparent px-4 py-3 text-gray-600 transition duration-300 focus:ring-2 focus:ring-secondary/90"
-          />
-        </div>
-
-        <div className="w-2/3 lg:w-1/2">
-          <label className="text-gray-600">Exemple Jô</label>
-          <textarea
-            onChange={(e) => { handleChangeInput(e, setFormData) }}
-            value={calledToEdit ? String(autoFill?.translations[0]?.example) : formData.exemple_lang2}
+            value={calledToEdit ? String(autoFill?.translations[autoFill?.translations[0]?.language === 10010 ? 0 : 1]?.example).slice(0, 55) : formData.fr}
             name="exemple_lang2"
             id="exemple_lang2"
             required
@@ -338,6 +327,19 @@ const AddExpressionForm = ({ calledToEdit, autoFill }) => {
             className="focus:outline-none block w-full rounded-md border border-gray-200 bg-transparent px-4 py-3 text-gray-600 transition duration-300 focus:ring-2 focus:ring-secondary/90"
           />
         </div>
+        <div className="w-2/3 lg:w-1/2">
+          <label className="text-gray-600">Exemple Ŋgə̂mbà</label>
+          <textarea
+            onChange={(e) => { handleChangeInput(e, setFormData) }}
+            value={calledToEdit ? String(autoFill?.translations[autoFill?.translations[1]?.language === 10011 ? 1 : 0]?.example).slice(0, 55) : formData.fr}
+            name="exemple_lang1"
+            id="exemple_lang1"
+            required
+            cols="3"
+            rows="1"
+            className="focus:outline-none block w-full rounded-md border border-gray-200 bg-transparent px-4 py-3 text-gray-600 transition duration-300 focus:ring-2 focus:ring-secondary/90"
+          />
+        </div>  
       </div>
       <div className='flex justify-center mx-auto items-center w-full space-x-6'>
         <div className="w-1/2">
@@ -363,7 +365,7 @@ const AddExpressionForm = ({ calledToEdit, autoFill }) => {
         </div>
 
         <div className="w-1/2">
-          <label className="text-gray-600">Audio Jô</label>
+          <label className="text-gray-600">Audio Jó</label>
           <input
             type="file"
             accept='.aac, .ogg, .mpga, .mp3'

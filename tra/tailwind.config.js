@@ -14,6 +14,12 @@ export default {
         primary: '#A96F25',
         secondary: '#E4A34A',
         tert: '#72491B'
+      },
+      screens: {
+        // 'sm': {'max': '639px'},
+        // 'md': {'max': '767px'},
+        // 'lg': {'max': '1023px'},
+        // 'xl': {'max': '6279px', 'raw': '4000px'},
       }
     },
   },
