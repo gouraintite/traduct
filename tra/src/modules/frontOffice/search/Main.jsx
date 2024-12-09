@@ -16,7 +16,7 @@ export const Search = () => {
   const [show, setShow] = useState(false)
   const [count, setCount] = useState(0)
   const [dictionaryItems, setDictionaryItems] = useRecoilState(expressionData);
-  const [audioData, setAudioData] = useState('')
+  // const [audioData, setAudioData] = useState('')
   const [detailsExpression, setDetailsExpression] = useState(
     {
       "id": 10011,
@@ -62,7 +62,7 @@ export const Search = () => {
   const [nbrPage, setNbrPage] = useState(0)
   const [categories, setCategories] = useState('')
   const [getCategories, setGetCategories] = useState(null)
-
+  const [goToPage, setgoToPage] = useState(null)
 
   useEffect(() => {
     handleGetData(searchedWord)
@@ -73,11 +73,12 @@ export const Search = () => {
 
 
   useEffect(() => {
+    nextPage !== nbrPage ? setNextPage(0) : null
     handleGetData(searchedWord)
   }, [categories])
 
   const handleGetCategories = () => {
-    axiosInstance.get(`${base_url_api2}/categories/get-all`)
+    axios.get(`${base_url_api2}/categories/get-all`)
       .then(response => {
         setGetCategories(response?.data)
         console.log(response.data);
@@ -92,7 +93,7 @@ export const Search = () => {
   }
 
   const handleGetData = (search = '') => {
-    let searchEndPoint = `http://localhost:8080/api/dictionaryItems/search?searchTerm=${searchedWord}${categories && `&categoriesId=${categories}`}`
+    let searchEndPoint = `http://localhost:8080/api/dictionaryItems/search?page=${nextPage || 0}&searchTerm=${searchedWord}${categories && `&categoriesId=${categories}`}`
     let getEndPoint = `http://localhost:8080/api/dictionaryItems/get-all?page=${nextPage || 0}`
     console.log(((searchedWord || categories) ? searchEndPoint : getEndPoint), search, 'hereee');
 
@@ -106,7 +107,7 @@ export const Search = () => {
         response?.data[0]?.translations[0].audioData.arrayBuffer();
       })
       .then((AudioData) => {
-        setAudioData(new Uint8Array(AudioData));
+        // setAudioData(new Uint8Array(AudioData));
       })
       .then(() => {
         console.log(dictionaryItems, 'errer');
@@ -122,24 +123,108 @@ export const Search = () => {
     }, 100);
   }
 
-  const handlePagination = (pages) => {
 
-    let tab = [];
+  const handlePagination = (pages) => {
+    const tab = [];
     for (let index = 0; index < pages; index++) {
-      tab[index] = index
+      tab[index] = index;
     }
-    return <>
-      {tab.map(i => (
-        <div key={i}
-          onClick={() => {
-            setNextPage(i)
-          }}
-          className={`${nextPage === i && 'bg-tert text-white'} border-2 w-9 h-9 p-1 text-center m-1 rounded-lg hover:text-white hover:bg-secondary hover:font-semibold cursor-pointer`}>
-          {i + 1}
+  
+    const maxVisiblePages = 5; // Number of visible page numbers
+    const isDotsNeeded = pages > maxVisiblePages;
+  
+    // Calculate the range of pages to display
+    const getVisiblePages = () => {
+      if (!isDotsNeeded) {
+        return tab;
+      }
+  
+      const visiblePages = [];
+      const firstPage = 0;
+      const lastPage = pages - 1;
+  
+      if (nextPage <= 2) {
+        visiblePages.push(...tab.slice(0, 3), "...", lastPage);
+      } else if (nextPage >= pages - 3) {
+        visiblePages.push(firstPage, "...", ...tab.slice(pages - 3));
+      } else {
+        visiblePages.push(firstPage, "...", nextPage - 1, nextPage, nextPage + 1, "...", lastPage);
+      }
+  
+      return visiblePages;
+    };
+  
+    const handlePageChange = (page) => {
+      if (page === "...") return; // Ignore clicks on dots
+      setNextPage(page);
+    };
+  
+    return (
+      <>
+        {/* "<< Go to First" */}
+        <div
+          onClick={() => setNextPage(0)}
+          className="border-2 w-9 h-9 p-1 text-center m-1 rounded-lg hover:text-white hover:bg-secondary hover:font-semibold cursor-pointer"
+        >
+          {"<<"}
         </div>
-      ))}
-    </>
-  }
+  
+        {/* "< Go to Previous" */}
+        <div
+          onClick={() => setNextPage((prev) => Math.max(0, prev - 1))}
+          className="border-2 w-9 h-9 p-1 text-center m-1 rounded-lg hover:text-white hover:bg-secondary hover:font-semibold cursor-pointer"
+        >
+          {"<"}
+        </div>
+  
+        {/* Page Numbers */}
+        {getVisiblePages().map((page, i) => (
+          <div
+            key={i}
+            onClick={() => handlePageChange(page)}
+            className={`${
+              nextPage === page && page !== "..." ? "bg-tert text-white" : ""
+            } border-2 w-9 h-9 p-1 text-center m-1 rounded-lg hover:text-white hover:bg-secondary hover:font-semibold cursor-pointer`}
+          >
+            {page === "..." ? "..." : page + 1}
+          </div>
+        ))}
+  
+        {/* "> Go to Next" */}
+        <div
+          onClick={() => setNextPage((prev) => Math.min(pages - 1, prev + 1))}
+          className="border-2 w-9 h-9 p-1 text-center m-1 rounded-lg hover:text-white hover:bg-secondary hover:font-semibold cursor-pointer"
+        >
+          {">"}
+        </div>
+  
+        {/* ">> Go to Last" */}
+        <div
+          onClick={() => setNextPage(pages - 1)}
+          className="border-2 w-9 h-9 p-1 text-center m-1 rounded-lg hover:text-white hover:bg-secondary hover:font-semibold cursor-pointer"
+        >
+          {">>"}
+        </div>
+        {/* <div>
+          <p>Aller à la page:</p>
+          <div className="border w-auto flex justify-start">
+            <input type="text"
+            className="border-none focus:outline-none w-20"
+            value={goToPage}
+            max={nbrPage}
+            onChange={(e)=>{
+         
+              setgoToPage()
+            }} />
+            <div onClick={()=>{
+              
+              !isNaN(goToPage) && setNextPage(goToPage)
+            }} className=" border-l-2 w-12 h-full text-center p-1 hover:text-white hover:bg-secondary hover:font-semibold cursor-pointer">Aller</div>
+          </div>
+        </div> */}
+      </>
+    );
+  };
 
   const Ho = ({ byte }) => {
     const audioData = "data:audio/mpeg;base64," + byte;
@@ -158,23 +243,25 @@ export const Search = () => {
     <div className="">
       <Nav opacity={40} />
       <div className="max-w-screen min-h-[400px] bg-exp bg-cover bg-no-repeat bg-center text-center flex justify-center mx-auto items-center">
-        <div className="h-1/2 w-full">
-          <p className="text-white text-4xl font-bold mb-6">Apprenez en ecourtant ou en lisant avec A-frilang</p>
+        <div className="h-1/2 w-9/12">
+          <p className="text-white text-4xl font-bold mb-6">Apprenez en écoutant ou en lisant avec A-frilang</p>
 
           <form action="" className="mt-9">
             <div className="flex justify-center bg-white w-11/12 md:w-2/3 mx-auto rounded-md">
-              <input type="text"
+              <input type="search"
                 onChange={(e) => {
-                  console.log(e.target.value, 'vqqq');
                   setSearchedWord(e.target.value)
                   handleGetData(e.target.value)
                 }}
-                className="w-7/12 py-3 px-3 mt-0 outline-none rounded-l-md"
+                className="w-full py-3 px-3 mt-0 outline-none rounded-l-md"
+                placeholder="Recherchez ici..."
               />
-              <select name="" id="" className="px-4 w-3/12">
+              <select name="" id="" className="px-4 w-3/12 rounded-r-md">
+              <option value={null}>
+                  Filtrez par catégorie
+                </option>
                 <option value={null} onClick={() => {
                   setCategories('')
-                  alert('cat after add');
                 }}>
                   Tout
                 </option>
@@ -184,18 +271,14 @@ export const Search = () => {
                     key={item.id}
                     onClick={() => {
                       setCategories(item.id)
-                      alert('cat after add', item.id);
                     }}
                   >{item.name}</option>
                 ))}
               </select>
-              <button
-                onClick={() => {
-                  handleGetData(searchedWord)
-                }}
-                className="bg-secondary w-3/12 rounded-r-md">
-                Lancer
-              </button>
+              {/* <div
+                className="bg-secondary w-3/12 rounded-r-md cursor-pointer flex text-center items-center">
+                <p className="w-full">Lancer</p>
+              </div> */}
             </div>
           </form>
         </div>
@@ -227,21 +310,21 @@ export const Search = () => {
                   </p>
                 </div>
                 <div className="flex justify-start">
-                  <p><span className="font-bold pr-2">Fr:</span>{String(item?.expressions[item?.expressions[0]?.language === 10012 ? 0 : 1]?.contenu).slice(0, 55)}...</p>
+                  <p><span className="font-bold pr-2">Fr:</span>{String(item?.expressions[1]?.contenu).slice(0, 55)}...</p>
                 </div>
                 <div className="flex justify-start py-1">
-                  <p><span className="font-bold pr-2">En:</span>{String(item?.expressions[item?.expressions[1]?.language === 10013 ? 1 : 0]?.contenu).slice(0, 55)}...</p>
+                  <p><span className="font-bold pr-2">En:</span>{String(item?.expressions[0]?.contenu).slice(0, 55)}...</p>
                 </div>
                 <div className="flex justify-between items-center w-full py-1">
                   <p className="w-9/12 overflow-hidden"><span className="font-bold pr-2">Ŋgə̂mbà:</span>{String(item.translations[1]?.contenu).slice(0, 55)}...</p>
                   <div className="w-3/12">
-                    <Ho byte={String(item?.translations[0]?.audioData)} />
+                    <Ho byte={String(item?.translations[1]?.audioData)} />
                   </div>
                 </div>
                 <div className="flex justify-between items-center w-full py-1">
                   <p className="w-9/12 overflow-hidden"><span className="font-bold pr-2">Jó:</span>{String(item.translations[0]?.contenu).slice(0, 55)}...</p>
                   <div className="w-3/12">
-                    <Ho byte={String(item?.translations[1]?.audioData)} />
+                    <Ho byte={String(item?.translations[0]?.audioData)} />
                   </div>
                 </div>
               </div>

@@ -10,7 +10,7 @@ const HeaderSection = () => {
                 J’apprends facilement  <br /> le ghɔmálá’ <span className='text-primary font-bold'>(jó & ŋgə̂mbà)</span> 
                 </p>
                 <p className='text-xl'>
-                <br /> de façon simple et éfficace, apprenez le jó et ŋgə̂mbà. Par des textes, des audios et des exemples qui facilite la compréhension.
+                <br /> de façon simple et éfficace, apprenez le jó et ŋgə̂mbà. Par des textes, des audios et des exemples qui facilitent la compréhension.
                 </p>
                 <br />
                 <p className='border-none bg-primary/10 rounded p-2 lg:text-md text-md'>bandjoun – Bafoussam – Baleng – bayangam – Baham – Badenkop – Batié – Bapa – Bahouan – Bamendjou – Bameka – Bansoa – Bamougoum – Bafounda</p>

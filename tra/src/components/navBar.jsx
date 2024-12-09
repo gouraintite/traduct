@@ -1,8 +1,15 @@
 // import { useState } from 'react'
+import { useState } from 'react'
 import Logo from '../assets/logo.png'
 import { NavLink } from 'react-router-dom'
+import { RxCrossCircled } from 'react-icons/rx'
+import { FaDoorOpen } from 'react-icons/fa'
+
+
+
 const Nav = () => {
 
+    const [showDeleteModal, setShowDeleteModal] = useState(false)
     var navTextColor = window.location.pathname == '/expressions' ? 'text-gray-200' : 'text-gray-700'
 
     return (
@@ -54,11 +61,11 @@ const Nav = () => {
                                                     </NavLink>
                                                 </li>
                                                 {
-                                                    localStorage.getItem('userToken') && <>
+                                                    localStorage.userToken && <>
                                                         <li>
                                                             <NavLink to={"/manage_expressions"} className="block md:px-4 group">
                                                                 <div className="nav_item">
-                                                                    <span className="group-hover:text-yellow-700">Expréssions</span>
+                                                                    <span className="group-hover:text-yellow-700">Expressions</span>
                                                                 </div>
                                                             </NavLink>
                                                         </li>
@@ -73,9 +80,19 @@ const Nav = () => {
                                                 }
                                             </ul>
                                         </div>
+                                        <div className={`w-full pl-2 sm:w-max gap-4 flex min-w-max flex-col sm:flex-row cursor-pointer`}
+                                            onClick={() => {
+                                                setShowDeleteModal(!showDeleteModal)
+                                            }}>
+                                            {localStorage.userToken && <div title="Déconnectez-vous de votre compte existant" className="w-full py-3 px-6 rounded-xl text-center transition bg-red-400 hover:bg-red-700 active:bg-yellow-800 focus:bg-yellow-700 sm:w-max">
+                                                <span className="block text-white font-semibold">
+                                                    Deconnexion
+                                                </span>
+                                            </div>
 
-                                        <div className="w-full pl-2
-                                sm:w-max gap-4 flex min-w-max flex-col sm:flex-row">
+                                            }
+                                        </div>
+                                        <div className={`w-full pl-2 sm:w-max gap-4 flex min-w-max flex-col sm:flex-row ${localStorage.userToken ? 'hidden' : ''}`} >
                                             <NavLink to={'/go'} type="button" title="Devenir membre" className="w-full py-3 px-6 rounded-xl text-center transition dark:active:bg-yellow-900 dark:focus:bg-gray-800 active:bg-yellow-200 focus:bg-yellow-100 sm:w-max">
                                                 <span className="block text-yellow-600 dark:text-yellow-700 font-semibold">
                                                     Devenir membre
@@ -95,93 +112,39 @@ const Nav = () => {
                 </header>
             </div>
 
-            {/* <nav className="fixed z-40 w-full border-b-2 bg-white/75 md:absolute">
-            <div className="container m-auto px-2 md:px-12 lg:px-7">
-                <div className="flex px-6 md:px-0 z-20 flex-wrap items-center justify-between py-3 gap-6 md:py-4 md:gap-0">
-                    <input type="checkbox" name="" id="toggleNav" className="peer hidden" />
-                    <label for="toggleNav" role="overlaynav" className="fixed left-0 top-0 transition-all 
-                    md:peer-checked:hidden md:hidden opacity-0 hidden peer-checked:z-0 
-                    peer-checked:opacity-75 peer-checked:block w-full h-screen
-                    bg-gray-200 bg-opacity-75"></label>
-                    <div className="relative z-40 py-0">
-                        <NavLink href="/" aria-label="logo">
-                            <img src={Logo} className="w-9 sm:w-12" alt="tailus logo" width="44" height="6" />
-                        </NavLink>
-                    </div>
-                    
-                    <div id="navlinks"
-                        className="fixed h-full w-4/5 max-w-sm top-0 -left-full peer-checked:-left-0 md:relative md:top-0 md:left-0 transition-all z-30 md:flex items-center p-8 bg-white md:space-y-0 md:p-0 md:flex-nowrap md:bg-transparent md:w-max">
-                        <div className="z-20 flex gap-8 md:gap-0 flex-col md:flex-row md:items-center w-full">
-                            <ul className="pt-28  lg:pt-0 gap-8 tracking-wide font-medium flex-col flex md:flex-row md:gap-0">
-                                <li className="max-w-max">
-                                    <NavLink to="/expressions" active className="block md:px-3 group">
-                                        <div
-                                            className="relative text-white px-3 rounded-md
-                                                    before:absolute before:-bottom-2 md:before:-bottom-7 before:origin-left before:w-full before:h-0.5 before:mx-auto before:mt-auto before:rounded-full before:bg-tert before:transition before:scale-x-0 group-hover:before:scale-x-100">
-                                            <span className="transition">Trouver</span>
-                                          </div>
-                                    </NavLink>
-                                </li>
-                                <li className="max-w-max">
-                                    <NavLink to="/eesions" className="block md:px-3 group">
-                                        <div
-                                            className="hidden sm:block w-full py-3 px-6 text-center rounded-md text-white transition bg-secondary hover:bg-tert active:bg-tert focus:bg-tert sm:w-max">
-                                            <span className="transition">Tester tab</span>
-                                          </div>
-                                    </NavLink>
-                                </li>
-                                {localStorage.getItem('userToken') && <>
-                                <li className="max-w-max">
-                                    <NavLink to="/manage_expressions" className="block md:px-3 group">
-                                        <div
-                                            className="relative text-gray-600
-                                                    before:absolute before:-bottom-2 md:before:-bottom-7 before:origin-left before:w-full before:h-0.5 before:mx-auto before:mt-auto before:rounded-full before:bg-tert before:transition before:scale-x-0 group-hover:before:scale-x-100">
-                                            <span className="transition">Gérer</span>
-                                        </div>
-                                    </NavLink>
-                                </li>
-                                <li className="max-w-max">
-                                    <NavLink to="/new_expression" className="block md:px-3 group">
-                                        <div
-                                            className="relative text-gray-600
-                                                    before:absolute before:-bottom-2 md:before:-bottom-7 before:origin-left before:w-full before:h-0.5 before:mx-auto before:mt-auto before:rounded-full before:bg-tert before:transition before:scale-x-0 group-hover:before:scale-x-100">
-                                            <span className="transition">Ajouter</span>
-                                        </div>
-                                    </NavLink>
-                                </li>
-                                </> }
-                            </ul>
-                            {!localStorage.getItem('userToken') && <div className="flex sm:hidden pt-4 w-full">
-                                <button type="button" title="Start buying"
-                                    className=" flex justify-center items-center w-full py-3 px-6 text-center rounded-full transition bg-primary hover:bg-secondary active:bg-secondary focus:bg-tert">
-                                    <NavLink href='/login' className="block text-white text-sm">
-                                        Connexion
-                                    </NavLink>
-                                </button>
-                            </div>}
+            {/* LOGOUT MODAL */}
+            <div className={`${showDeleteModal ? "" : "hidden"} z-50 fixed flex mx-auto justify-center items-center backdrop-blur-sm bg-tert/10 h-screen w-screen top-0`}>
+                <div
+                    onClick={() => {
+                        setShowDeleteModal(false)
+                    }}
+                    className="backdrop-blur-sm bg-tert/40 z-50 text-white w-9 h-9 text-center p-2 rounded-full absolute top-64 right-96 cursor-pointer" >
+                    X
+                </div>
+                <div className="shadow-md bg-white p-4 rounded-lg text-center">
+                    <FaDoorOpen color="red" size={64} className="text-center mx-auto mb-4" />
+                    <p className="text-xl">
+                        Voulez-vous vraiment vous déconnecter?
+                    </p>
+                    <div className="flex justify-evenly mx-auto space-x-4 mt-6">
+                        <div
+                            onClick={() => {
+                                setShowDeleteModal(false)
+                            }}
+                            className="border px-6 bg-red-600 text-white py-2 rounded-lg cursor-pointer font-bold">
+                            Non
                         </div>
-                    </div>
-                    <div className="block-endnav w-max flex items-center gap-4">
-                        {!localStorage.getItem('userToken') && <button type="button" title="Start buying"
-                            className="hidden sm:block w-full py-3 px-6 text-center rounded-full transition bg-primary hover:bg-secondary active:bg-secondary focus:bg-tert sm:w-max">
-                            <NavLink href='/login' className="block text-white text-sm">
-                                        Connexion
-                                    </NavLink>
-                        </button>}
-
-                        <div className="flex items-center md:hidden max-h-10">
-                            <label role="button" for="toggleNav" aria-label="humburger" id="hamburger" className="relative  p-6 -mr-6">
-                                <div role="hidden" id="line"Gérer
-                                    className="m-auto h-0.5 w-6 rounded bg-sky-900 transition duration-300"></div>
-                                <div role="hidden" id="line2"
-                                    className="m-auto mt-2 h-0.5 w-6 rounded bg-sky-900 transition duration-300">
-                                </div>
-                            </label>
+                        <div
+                            onClick={() => {
+                                localStorage.clear()
+                                window.location.replace('/')
+                            }}
+                            className="border px-6 bg-green-600 text-white py-2 rounded-lg cursor-pointer font-bold">
+                            Oui
                         </div>
                     </div>
                 </div>
             </div>
-        </nav> */}
         </>
     )
 }

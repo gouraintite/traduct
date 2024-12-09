@@ -24,7 +24,7 @@ const Testimonials = () => {
             Ils ont éssayé A-frilang
           </h2>
           <p className="text-center">
-            Découvrez ce qui les a fait accrocher à A-frilang.
+            Découvrez ce qui les a fait s'accrocher à A-frilang.
           </p>
         </div>
         <div className="md:columns-2 columns-1 gap-8 space-y-8 h-auto">

@@ -55,6 +55,8 @@ const handleLogin = (e)=>{
         message = 'Informations de connexion incorrects, vérifiez puis reéssayez à nouveau.'
         notify()
       }
+      message = 'Votre session a probablement expiré, veuillez vous inscrire à nouveau!'
+      notify()
     })
 }
 
